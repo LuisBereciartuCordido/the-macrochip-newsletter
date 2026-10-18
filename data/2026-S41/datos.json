@@ -1,0 +1,93 @@
+{
+  "bce_tipo_deposito": {
+    "fecha": "2026-10-11",
+    "fuente": "BCE",
+    "unidad": "% anual",
+    "url": "https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV",
+    "valor": 2.5
+  },
+  "brent": {
+    "fecha": "2026-10-06",
+    "fuente": "FRED",
+    "unidad": "USD/barril",
+    "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+    "valor": 125.44
+  },
+  "eur_usd": {
+    "fecha": "2026-10-09",
+    "fuente": "BCE",
+    "unidad": "USD por EUR",
+    "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A",
+    "valor": 1.1206
+  },
+  "fed_tipo": {
+    "fecha": "2026-09-01",
+    "fuente": "FRED",
+    "unidad": "% anual",
+    "url": "https://fred.stlouisfed.org/series/FEDFUNDS",
+    "valor": 3.75
+  },
+  "ipc_eeuu": {
+    "fecha": "2026-08-01",
+    "fuente": "FRED",
+    "unidad": "% interanual",
+    "url": "https://fred.stlouisfed.org/series/CPIAUCSL",
+    "valor": 3.35302
+  },
+  "ipc_espana": {
+    "fecha": "2025-12-01",
+    "fuente": "INE",
+    "unidad": "% interanual",
+    "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_SERIE/IPC251856",
+    "valor": 2.9
+  },
+  "ipca_eurozona": {
+    "fecha": "2025-12-01",
+    "fuente": "Eurostat",
+    "unidad": "% interanual",
+    "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/prc_hicp_manr/M.RCH_A.CP00.EA20",
+    "valor": 2.0
+  },
+  "msci_em": {
+    "fecha": "2026-10-09",
+    "fuente": "Yahoo Finance (no oficial)",
+    "unidad": "USD",
+    "url": "https://finance.yahoo.com/quote/IEMG",
+    "valor": 81.4000015258789
+  },
+  "msci_europe": {
+    "fecha": "2026-10-09",
+    "fuente": "Yahoo Finance (no oficial)",
+    "unidad": "USD",
+    "url": "https://finance.yahoo.com/quote/IEUR",
+    "valor": 73.0999984741211
+  },
+  "msci_world": {
+    "fecha": "2026-10-09",
+    "fuente": "Yahoo Finance (no oficial)",
+    "unidad": "USD",
+    "url": "https://finance.yahoo.com/quote/URTH",
+    "valor": 209.13999938964844
+  },
+  "nikkei225": {
+    "fecha": "2026-10-09",
+    "fuente": "Yahoo Finance (no oficial)",
+    "unidad": "puntos",
+    "url": "https://finance.yahoo.com/quote/^N225",
+    "valor": 69030.921875
+  },
+  "oro": {
+    "fecha": "2026-10-09",
+    "fuente": "Yahoo Finance (no oficial)",
+    "unidad": "USD/onza",
+    "url": "https://finance.yahoo.com/quote/GC=F",
+    "valor": 4216.2998046875
+  },
+  "sp500": {
+    "fecha": "2026-10-09",
+    "fuente": "FRED",
+    "unidad": "puntos",
+    "url": "https://fred.stlouisfed.org/series/SP500",
+    "valor": 7811.54
+  }
+}

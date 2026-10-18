@@ -1,0 +1,19 @@
+{
+  "validacion": {
+    "errores": [],
+    "avisos": [
+      "Módulo 'eeuu': 152 palabras, supera el límite de 110",
+      "https://www.bloomberg.com/news/articles/2026-10-02/euro-zone-inflation-tops-estimates-to-hit-three-year-high devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bloomberg.com/news/articles/2026-10-08/us-stock-futures-slip-on-mounting-energy-shock-ai-bubble-fears devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bloomberg.com/news/articles/2026-10-09/china-allows-provinces-to-draw-on-82-billion-to-shore-up-growth devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bloomberg.com/news/newsletters/2026-10-08/china-s-stimulus-may-shore-up-gdp-while-reinforcing-imbalances devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bls.gov/news.release/empsit.nr0.htm devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/02/jobs-report-september-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/06/crude-oil-tanker-strait-hormuz-iran-attack.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/06/treasury-yields-fed-fomc-minutes.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/07/fed-officials-see-another-hike-coming-but-no-sign-as-to-when-minutes-show.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/07/india-rbi-interest-rates-inflation.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+    ]
+  }
+}
