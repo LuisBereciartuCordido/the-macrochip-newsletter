@@ -27,14 +27,14 @@ _Semana del 12 al 18 de octubre de 2026_
 
 ## Mercados esta semana
 
-- **S&P 500:** 7,659 puntos (—)
-- **MSCI World (ETF):** 206.34 USD (—)
-- **MSCI Emerging Markets (ETF):** 76.79 USD (—)
-- **MSCI Europe (ETF):** 74.09 USD (—)
-- **Nikkei 225:** 65,324 puntos (—)
-- **Oro:** 4,181.10 USD/onza (—)
-- **Brent:** 126.55 USD/barril (—)
-- **EUR/USD:** 1.1253 USD (—)
+- **S&P 500:** 7,659 puntos (<span style="color:#C23B2E">-1.95 %</span>)
+- **MSCI World (ETF):** 206.34 USD (<span style="color:#C23B2E">-1.34 %</span>)
+- **MSCI Emerging Markets (ETF):** 76.79 USD (<span style="color:#C23B2E">-5.66 %</span>)
+- **MSCI Europe (ETF):** 74.09 USD (<span style="color:#0A7D3C">+1.35 %</span>)
+- **Nikkei 225:** 65,324 puntos (<span style="color:#C23B2E">-5.37 %</span>)
+- **Oro:** 4,181.10 USD/onza (<span style="color:#C23B2E">-0.83 %</span>)
+- **Brent:** 126.55 USD/barril (<span style="color:#0A7D3C">+0.88 %</span>)
+- **EUR/USD:** 1.1253 USD (<span style="color:#0A7D3C">+0.42 %</span>)
 
 
 ## Macro global
