@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime
+from urllib.parse import quote
 
 from briefing.modelos import MODULOS_IDS, todas_las_noticias
 
@@ -23,7 +24,10 @@ MESES_ES = {
 
 AVISO_LEGAL = "Contenido informativo. No es asesoramiento financiero."
 
-INSTRUCCION_CONTEXTO_IA = "Copia este bloque y pégalo en tu asistente de IA para profundizar."
+INSTRUCCION_CONTEXTO_IA = (
+    "Toca uno de los enlaces para abrirlo directamente con el mensaje ya puesto, "
+    "o copia el bloque de abajo y pégalo en tu asistente de IA preferido."
+)
 
 PROMPT_SUGERIDO_IA = (
     "Este es el contexto del briefing semanal de The Macrochip. Antes de nada, "
@@ -33,7 +37,18 @@ PROMPT_SUGERIDO_IA = (
     "cuáles son."
 )
 
-LIMITE_CONTEXTO_IA_CARACTERES = 6000
+LIMITE_CONTEXTO_IA_CARACTERES = 10000
+
+# claude.ai/new?q=... y chat.openai.com/?q=... precargan ese texto en un
+# chat nuevo (sin enviarlo solo, por seguridad: el lector sigue teniendo
+# que darle a enviar) — son enlaces normales, sin JavaScript, así que
+# funcionan dentro de un email a diferencia de un botón de "copiar al
+# portapapeles" (eso sí necesita JavaScript, y los clientes de correo lo
+# bloquean siempre). Gemini no tiene nada equivalente de forma nativa —
+# solo funciona con una extensión de Chrome de terceros que casi nadie
+# tiene instalada, así que no se incluye un enlace falso para él.
+URL_BASE_CLAUDE = "https://claude.ai/new?q="
+URL_BASE_CHATGPT = "https://chat.openai.com/?q="
 
 EMOJI_CONFIANZA = {
     "confirmado": "✅",
@@ -259,19 +274,36 @@ def renderizar_contexto_ia(
             f"(confianza: {noticia['confianza']}; fuentes: {fuentes})"
         )
 
-    cuerpo = "\n".join(lineas)
-    nota_recorte = ""
-    if len(cuerpo) > limite_caracteres:
-        # Mejor un contexto algo más corto que un email roto: se recorta y
-        # se avisa dentro del propio bloque, en vez de fallar.
-        cuerpo = cuerpo[:limite_caracteres].rstrip()
+    cuerpo_completo = "\n".join(lineas)
+    if len(cuerpo_completo) <= limite_caracteres:
+        cuerpo = cuerpo_completo
+        nota_recorte = ""
+    else:
+        # Recorta por línea completa (cada "- ..." es un dato o una noticia
+        # entera), no por conteo de caracteres a lo bruto: lo que queda
+        # dentro del límite está siempre completo, nunca una frase a medias.
+        acumuladas: list[str] = []
+        longitud = 0
+        for linea in lineas:
+            longitud_con_esta = longitud + len(linea) + 1  # +1 por el salto de línea
+            if longitud_con_esta > limite_caracteres:
+                break
+            acumuladas.append(linea)
+            longitud = longitud_con_esta
+        cuerpo = "\n".join(acumuladas).rstrip()
         nota_recorte = "\n\n[...contexto recortado por tamaño...]"
+
+    texto_completo = f"{cuerpo}{nota_recorte}"
+    enlace_claude = URL_BASE_CLAUDE + quote(texto_completo)
+    enlace_chatgpt = URL_BASE_CHATGPT + quote(texto_completo)
 
     return (
         "## Paquete de contexto para IA\n\n"
+        f"[Abrir directamente en Claude →]({enlace_claude}) · "
+        f"[Abrir directamente en ChatGPT →]({enlace_chatgpt})\n\n"
         f"{INSTRUCCION_CONTEXTO_IA}\n\n"
         "```\n"
-        f"{cuerpo}{nota_recorte}\n"
+        f"{texto_completo}\n"
         "```\n"
     )
 
