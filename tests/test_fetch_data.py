@@ -5,55 +5,8 @@ import fetch_data
 from briefing.modelos import Dato
 
 
-def test_fecha_conocida_mas_reciente_sin_historial_devuelve_none(
-    tmp_path: Path, monkeypatch
-) -> None:
-    monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
-    assert fetch_data._fecha_conocida_mas_reciente("ipc_espana", "2026-S41") is None
-
-
-def test_fecha_conocida_mas_reciente_lee_la_semana_inmediatamente_anterior(
-    tmp_path: Path, monkeypatch
-) -> None:
-    monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
-    (tmp_path / "2026-S40").mkdir()
-    (tmp_path / "2026-S40" / "datos.json").write_text(json.dumps({"ipc_espana": {"fecha": "x"}}))
-
-    assert fetch_data._fecha_conocida_mas_reciente("ipc_espana", "2026-S41") == "x"
-
-
-def test_fecha_conocida_mas_reciente_busca_varias_semanas_atras_si_hace_falta(
-    tmp_path: Path, monkeypatch
-) -> None:
-    # Reproduce el bug real que encontró /code-review: si la clave se omitió
-    # en la semana 41 (por no haber cambiado desde la 40), su archivo no la
-    # tiene — hay que seguir buscando hasta la 40 para no tratarla como
-    # "nueva" otra vez en la semana 42.
-    monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
-    (tmp_path / "2026-S40").mkdir()
-    (tmp_path / "2026-S40" / "datos.json").write_text(json.dumps({"ipc_espana": {"fecha": "x"}}))
-    (tmp_path / "2026-S41").mkdir()
-    (tmp_path / "2026-S41" / "datos.json").write_text(json.dumps({}))  # omitida esa semana
-
-    assert fetch_data._fecha_conocida_mas_reciente("ipc_espana", "2026-S42") == "x"
-
-
 def _dato(fecha: str = "2026-09-01") -> Dato:
     return Dato(valor=1.0, unidad="%", fecha=fecha, fuente="test", url="https://x")
-
-
-def test_incluir_si_es_nuevo_sin_fecha_conocida_incluye_el_dato() -> None:
-    assert fetch_data.incluir_si_es_nuevo("ipc_espana", _dato(), None) is not None
-
-
-def test_incluir_si_es_nuevo_misma_fecha_se_omite() -> None:
-    dato = _dato(fecha="2026-09-01")
-    assert fetch_data.incluir_si_es_nuevo("ipc_espana", dato, "2026-09-01") is None
-
-
-def test_incluir_si_es_nuevo_fecha_distinta_se_incluye() -> None:
-    dato = _dato(fecha="2026-10-01")
-    assert fetch_data.incluir_si_es_nuevo("ipc_espana", dato, "2026-09-01") is dato
 
 
 def _parchear_fuentes(monkeypatch) -> None:
@@ -82,7 +35,7 @@ def test_descargar_junta_los_13_instrumentos(tmp_path: Path, monkeypatch) -> Non
     monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
     _parchear_fuentes(monkeypatch)
 
-    datos = fetch_data.descargar("2026-S41")
+    datos = fetch_data.descargar()
 
     assert set(datos) == {
         "bce_tipo_deposito",
@@ -101,40 +54,24 @@ def test_descargar_junta_los_13_instrumentos(tmp_path: Path, monkeypatch) -> Non
     }
 
 
-def test_descargar_omite_mensuales_sin_cambios(tmp_path: Path, monkeypatch) -> None:
-    monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
-    (tmp_path / "2026-S40").mkdir()
-    (tmp_path / "2026-S40" / "datos.json").write_text(
-        json.dumps({"ipc_espana": {"fecha": "2026-09-01"}})
-    )
-    _parchear_fuentes(monkeypatch)
-
-    datos = fetch_data.descargar("2026-S41")
-
-    assert "ipc_espana" not in datos
-
-
-def test_descargar_sigue_omitiendo_mensuales_sin_cambios_varias_semanas_seguidas(
+def test_descargar_incluye_mensuales_aunque_no_hayan_cambiado(
     tmp_path: Path, monkeypatch
 ) -> None:
-    # Regresión del bug real de /code-review: si la semana 41 ya omitió
-    # ipc_espana (sin cambios desde la 40), la semana 42 debe seguir
-    # omitiéndolo — no tratarlo como "nuevo" solo porque el archivo de la
-    # semana 41 no lo tiene.
+    # Hallazgo real (semana 2026-S42): si el IPC/IPCA se omitía por no ser
+    # "nuevo", el redactor se quedaba sin ningún dato oficial estructurado
+    # al que citar y acababa citando un medio externo en su lugar. Ahora se
+    # incluye siempre, con su fecha real — la frescura la juzga el redactor
+    # mirando esa fecha, no la presencia o ausencia del dato.
     monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
     (tmp_path / "2026-S40").mkdir()
     (tmp_path / "2026-S40" / "datos.json").write_text(
         json.dumps({"ipc_espana": {"fecha": "2026-09-01"}})
     )
-    _parchear_fuentes(monkeypatch)  # fred.ipc_eeuu etc. siguen devolviendo "2026-09-01"
+    _parchear_fuentes(monkeypatch)  # ine.ipc_espana sigue devolviendo "2026-09-01"
 
-    datos_41 = fetch_data.descargar("2026-S41")
-    assert "ipc_espana" not in datos_41
-    (tmp_path / "2026-S41").mkdir()
-    (tmp_path / "2026-S41" / "datos.json").write_text(json.dumps(datos_41))
+    datos = fetch_data.descargar()
 
-    datos_42 = fetch_data.descargar("2026-S42")
-    assert "ipc_espana" not in datos_42
+    assert datos["ipc_espana"]["fecha"] == "2026-09-01"
 
 
 def test_main_escribe_datos_json(tmp_path: Path, monkeypatch) -> None:
