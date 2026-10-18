@@ -1,0 +1,21 @@
+{
+  "validacion": {
+    "errores": [],
+    "avisos": [
+      "Módulo 'asia_china': 148 palabras, supera el límite de 110",
+      "Módulo 'energia_materias_primas': 184 palabras, supera el límite de 110",
+      "'CNBC' es el 68% de todas las fuentes del informe (umbral: 50%)",
+      "https://cnbc.com/2026/10/16/kevin-warsh-fed-october-rate-hike-interest-rates-markets.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/02/eurozone-inflation-ecb.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/12/imf-world-bank-annual-meetings-october-bangkok-asia-.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/14/chinas-exports-likely-grew-by-double-digits-in-september.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/15/gold-rebounds-from-one-week-low-as-dollar-slips.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/15/sk-hynix-samsung-softbank-stocks-asia-tech-rout-ai-funding-worries.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/15/stock-market-today-live-updates.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/16/cnbc-daily-open-ai-inflation-coreweave-.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/16/oil-eases-small-weekly-gain-middle-east-supply.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/16/us-treasury-yields-investors-hot-inflation-data-.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/amp/2026/10/17/ecbs-lagarde-says-bond-selloff-will-slow-inflation.html devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+    ]
+  }
+}
