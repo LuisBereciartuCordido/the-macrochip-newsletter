@@ -208,6 +208,42 @@ def test_renderizar_contexto_ia_recorta_si_supera_el_limite() -> None:
     assert "[...contexto recortado por tamaño...]" in salida
 
 
+def test_renderizar_contexto_ia_recorta_por_linea_completa_no_a_mitad_de_frase() -> None:
+    # Hallazgo real: antes recortaba por conteo de caracteres a lo bruto y
+    # dejaba una frase cortada a mitad de palabra. Ahora descarta la última
+    # línea entera si no cabe completa, en vez de dejarla a medias.
+    informe = _informe_minimo_valido()
+    informe["macro_global"].append(
+        {
+            **informe["macro_global"][0],
+            "id": "2026-S41-macro-02",
+            "hilo_id": "otro-hilo",
+            "titulo": "Segunda noticia con un titulo bastante largo para forzar el recorte",
+            "texto": "Texto de la segunda noticia que no debería aparecer cortado a medias.",
+        }
+    )
+    sin_limite = render.renderizar_contexto_ia(informe, datos={}, limite_caracteres=10**9)
+    # limite_caracteres se mide sobre el cuerpo (empieza en "PROMPT
+    # SUGERIDO:"), no sobre la salida completa (que lleva cabecera y
+    # enlace delante) — hay que descontar ese desplazamiento.
+    inicio_cuerpo = sin_limite.index("PROMPT SUGERIDO:")
+    limite_justo = sin_limite.index("\n- [otro-hilo]") - inicio_cuerpo
+
+    salida = render.renderizar_contexto_ia(informe, datos={}, limite_caracteres=limite_justo)
+
+    assert "Segunda noticia" not in salida  # se descarta entera, no a medias
+    assert "[...contexto recortado por tamaño...]" in salida
+
+
+def test_renderizar_contexto_ia_incluye_enlaces_a_claude_y_chatgpt() -> None:
+    informe = _informe_minimo_valido()
+    salida = render.renderizar_contexto_ia(informe, datos={})
+    assert "https://claude.ai/new?q=" in salida
+    assert "Abrir directamente en Claude" in salida
+    assert "https://chat.openai.com/?q=" in salida
+    assert "Abrir directamente en ChatGPT" in salida
+
+
 def test_renderizar_transparencia_cuenta_fuentes_por_nivel() -> None:
     informe = _informe_minimo_valido()  # una fuente de nivel 1
     salida = render.renderizar_transparencia(informe)
