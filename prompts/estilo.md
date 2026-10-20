@@ -8,3 +8,4 @@
 - Frases cortas. Párrafos de 2 o 3 líneas como máximo.
 - Prohibido el sensacionalismo: nada de "desplome histórico", "pánico" o "lo que nadie te cuenta" salvo que los datos lo justifiquen literalmente. Interesante no es alarmante.
 - Etiquetas de confianza al final de la frase: ✅ confirmado, ⚠️ una sola fuente, 💬 interpretación u opinión.
+- Si citas una cifra de mercado o de datos duros junto a otra cifra de un día distinto (por ejemplo, el dato oficial de `datos.json` frente a una cifra de prensa más reciente sobre el mismo tema), aclara ambas fechas en el texto. No es una contradicción a resolver en silencio ni a ignorar: son dos fotos de momentos distintos, y decirlo evita que parezca un error.
