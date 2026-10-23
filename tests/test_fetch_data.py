@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 import fetch_data
 from briefing.modelos import Dato
 
@@ -83,6 +85,44 @@ def test_main_escribe_datos_json(tmp_path: Path, monkeypatch) -> None:
     assert codigo == 0
     contenido = json.loads((tmp_path / "2026-S41" / "datos.json").read_text())
     assert contenido["sp500"]["valor"] == 1.0
+
+
+def test_descargar_con_variacion_semanal_plausible_no_lanza(monkeypatch) -> None:
+    _parchear_fuentes(monkeypatch)  # msci_world queda en 1.0 (ver _parchear_fuentes)
+    datos_previos = {"msci_world": {"valor": 1.01}}
+
+    fetch_data.descargar(datos_semana_anterior=datos_previos)  # no debe lanzar
+
+
+def test_descargar_con_variacion_semanal_sospechosa_lanza(monkeypatch) -> None:
+    _parchear_fuentes(monkeypatch)
+    datos_previos = {"msci_world": {"valor": 100.0}}  # 1.0 vs 100.0: variación absurda
+
+    with pytest.raises(fetch_data.VariacionSospechosa):
+        fetch_data.descargar(datos_semana_anterior=datos_previos)
+
+
+def test_descargar_sin_semana_anterior_no_comprueba_variacion(monkeypatch) -> None:
+    _parchear_fuentes(monkeypatch)
+    # Sin dato de la semana anterior (primera semana, o se borró el
+    # histórico), no hay nada contra lo que comparar — no debe lanzar.
+    fetch_data.descargar(datos_semana_anterior=None)
+
+
+def test_main_lee_la_semana_anterior_y_para_si_la_variacion_es_sospechosa(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
+    _parchear_fuentes(monkeypatch)  # msci_world queda en 1.0
+    (tmp_path / "2026-S40").mkdir()
+    (tmp_path / "2026-S40" / "datos.json").write_text(
+        json.dumps({"msci_world": {"valor": 100.0}})
+    )
+
+    codigo = fetch_data.main(["--semana", "2026-S41"])
+
+    assert codigo == 1
+    assert not (tmp_path / "2026-S41" / "datos.json").exists()
 
 
 def test_main_no_escribe_nada_si_falla_una_fuente(tmp_path: Path, monkeypatch) -> None:
