@@ -30,16 +30,17 @@ DATA_DIR = RAIZ / "data"
 # 35%: generoso a propósito. Ningún instrumento de mercados.INSTRUMENTOS
 # debería moverse tanto en una semana sin que ya fuera, de por sí, la
 # noticia principal — este umbral existe para pillar errores de datos
-# (decimal desplazado, ticker equivocado, endpoint devolviendo otra cosa),
-# no movimientos de mercado reales por grandes que sean.
+# (decimal desplazado, ticker equivocado, endpoint devolviendo otra cosa).
+# No aborta la descarga: un movimiento real así, aunque rarísimo, es
+# posible (un crash de mercado es justo cuando más falta hace el
+# newsletter), así que en vez de bloquear se escribe como "aviso" en la
+# propia entrada de datos.json — el redactor lo ve al investigar ese
+# módulo y, contrastando con las noticias reales, decide si el dato tiene
+# sentido o es probablemente un fallo del endpoint.
 UMBRAL_VARIACION_SEMANAL_SOSPECHOSA = 0.35
 
 
-class VariacionSospechosa(ValueError):
-    """Un instrumento de mercado cambió más de lo plausible en una semana."""
-
-
-def _comprobar_variaciones_plausibles(
+def _avisar_variaciones_sospechosas(
     datos_mercado: dict[str, dict], datos_semana_anterior: dict | None
 ) -> None:
     if not datos_semana_anterior:
@@ -50,11 +51,14 @@ def _comprobar_variaciones_plausibles(
             continue
         variacion = abs(dato["valor"] - anterior["valor"]) / abs(anterior["valor"])
         if variacion > UMBRAL_VARIACION_SEMANAL_SOSPECHOSA:
-            raise VariacionSospechosa(
-                f"{clave}: {anterior['valor']} -> {dato['valor']} es un cambio del "
-                f"{variacion:.0%} en una semana, por encima del "
-                f"{UMBRAL_VARIACION_SEMANAL_SOSPECHOSA:.0%} esperado"
+            aviso = (
+                f"variación del {variacion:.0%} en una semana ({anterior['valor']} -> "
+                f"{dato['valor']}), por encima del {UMBRAL_VARIACION_SEMANAL_SOSPECHOSA:.0%} "
+                "esperado — contrasta con las noticias reales antes de citarla; Yahoo "
+                "Finance no es una fuente oficial y podría ser un error de datos"
             )
+            log.warning("%s: %s", clave, aviso)
+            dato["aviso"] = aviso
 
 
 def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
@@ -73,9 +77,10 @@ def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
     Si se pasa `datos_semana_anterior` (el datos.json de la semana ISO
     anterior), los instrumentos de Yahoo Finance (mercados.INSTRUMENTOS) se
     comprueban contra esa semana: una variación por encima de
-    UMBRAL_VARIACION_SEMANAL_SOSPECHOSA aborta la descarga en vez de dejar
-    pasar en silencio lo que probablemente sea un error de datos (sección
-    6: Yahoo es un endpoint no oficial y sin fuente de respaldo).
+    UMBRAL_VARIACION_SEMANAL_SOSPECHOSA no aborta la descarga, pero añade
+    un campo "aviso" a esa entrada de datos.json para que el redactor lo
+    vea al investigar (sección 6: Yahoo es un endpoint no oficial y sin
+    fuente de respaldo).
     """
     datos: dict[str, Dato] = {}
 
@@ -100,7 +105,7 @@ def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
     datos.update(datos_yahoo)
 
     resultado = {clave: dato.to_dict() for clave, dato in datos.items()}
-    _comprobar_variaciones_plausibles(
+    _avisar_variaciones_sospechosas(
         {clave: resultado[clave] for clave in datos_yahoo}, datos_semana_anterior
     )
     return resultado
