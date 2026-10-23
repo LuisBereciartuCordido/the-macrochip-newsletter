@@ -49,11 +49,10 @@ def _comprobar_que_el_informe_es_valido(carpeta: Path) -> None:
         raise InformeNoValidado(f"no existe {ruta_log}; ejecuta validate.py antes de publicar")
     log_contenido = json.loads(ruta_log.read_text())
     validacion = log_contenido.get("validacion")
-    if validacion is None or validacion.get("errores"):
-        raise InformeNoValidado(
-            "log.json no confirma que el informe sea válido "
-            f"(errores: {validacion.get('errores') if validacion else 'sin clave \"validacion\"'})"
-        )
+    if validacion is None:
+        raise InformeNoValidado("log.json no tiene la clave 'validacion'")
+    if validacion.get("errores"):
+        raise InformeNoValidado(f"log.json tiene errores de validación: {validacion['errores']}")
 
 
 def main(argv: list[str] | None = None) -> int:
