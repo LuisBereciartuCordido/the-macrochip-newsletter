@@ -1,7 +1,14 @@
 # Lista configurable de palabras/frases de sensacionalismo y recomendación
 # que bloquean la publicación (sección 12 de CLAUDE.md). Se busca cada
-# entrada sin distinguir mayúsculas/minúsculas en el título, el texto y el
-# "por qué importa" de cada noticia.
+# entrada sin distinguir mayúsculas/minúsculas ni tildes, con límites de
+# palabra (no como subcadena suelta), en todo el texto público del informe:
+# noticias, titular, lo esencial, concepto de la semana y perspectiva de
+# largo plazo.
+#
+# Cada entrada es, por defecto, una frase exacta (coincide por límites de
+# palabra). Para que una entrada coincida por raíz/subcadena en vez de
+# palabra exacta (por ejemplo, para pillar conjugaciones), escríbela como
+# `- raiz: "texto"` en vez de una cadena suelta.
 #
 # Amplía esta lista sin tocar código: validate.py la lee directamente.
 

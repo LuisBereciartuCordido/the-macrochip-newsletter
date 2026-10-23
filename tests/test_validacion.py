@@ -54,6 +54,10 @@ FUENTES_CFG = {
         ("7.700,5 puntos", 7700.5),  # español: punto de miles, coma decimal
         ("7,700.5 USD", 7700.5),  # inglés: coma de miles, punto decimal
         ("-3,2 %", -3.2),
+        ("cayó −2,3 % en el mes", -2.3),  # signo menos tipográfico (U+2212)
+        ("cayó –2,3 % en el mes", -2.3),  # en dash (U+2013)
+        ("cayó —2,3 % en el mes", -2.3),  # em dash (U+2014)
+        ("bajó a 2,3.", 2.3),  # punto final de frase, no parte del número
     ],
 )
 def test_parsear_numero(texto: str, esperado: float) -> None:
@@ -224,6 +228,25 @@ def test_nivel_catalogado_coincide_tambien_por_subdominio() -> None:
     assert validacion.validar_nivel_de_fuentes(informe, FUENTES_CFG) == []
 
 
+def test_nivel_catalogado_elige_el_sufijo_mas_especifico() -> None:
+    # "ecb.europa.eu" coincide con "europa.eu" (nivel 1, genérico) y con
+    # "ecb.europa.eu" (nivel 3, exacto y más específico). Antes, recorrer
+    # los niveles en orden (1, 2, 3...) devolvía el primero que coincidiera
+    # — nivel 1 — sin importar que hubiera una coincidencia más específica
+    # en un nivel posterior. Ahora debe ganar el sufijo más largo.
+    cfg = {
+        "niveles": {
+            1: {"dominios": ["europa.eu"]},
+            3: {"dominios": ["ecb.europa.eu"]},
+        }
+    }
+    assert validacion._nivel_catalogado("ecb.europa.eu", cfg) == 3
+
+
+def test_dominio_normaliza_mayusculas_y_quita_puerto() -> None:
+    assert validacion._dominio("https://WWW.Reuters.com:443/a") == "reuters.com"
+
+
 # --- avisos_fuentes_no_catalogadas -------------------------------------------
 
 
@@ -348,6 +371,57 @@ def test_texto_con_palabra_prohibida_da_error() -> None:
     assert len(validacion.validar_palabras_prohibidas(informe, PALABRAS)) == 1
 
 
+def test_palabra_prohibida_en_titular_da_error() -> None:
+    # Antes solo se miraba título/texto/por_qué_importa de cada noticia:
+    # titular, lo_esencial, concepto_semana y perspectiva_largo_plazo
+    # pasaban sin comprobar.
+    informe = _informe_con(macro_global=[_noticia(id_="2026-S41-macro-01")])
+    informe["titular"] = {"texto": "Cunde el pánico en Wall Street", "noticia_id": "2026-S41-macro-01"}
+    assert len(validacion.validar_palabras_prohibidas(informe, PALABRAS)) == 1
+
+
+def test_palabra_prohibida_en_lo_esencial_da_error() -> None:
+    informe = _informe_con(lo_esencial=["Cunde el pánico en los mercados."])
+    assert len(validacion.validar_palabras_prohibidas(informe, PALABRAS)) == 1
+
+
+def test_palabra_prohibida_en_concepto_semana_da_error() -> None:
+    informe = _informe_con()
+    informe["concepto_semana"] = {
+        "id": "x",
+        "titulo": "Pánico bursátil",
+        "texto": "Explicación.",
+    }
+    assert len(validacion.validar_palabras_prohibidas(informe, PALABRAS)) == 1
+
+
+def test_palabra_prohibida_en_perspectiva_largo_plazo_da_error() -> None:
+    informe = _informe_con()
+    informe["perspectiva_largo_plazo"] = {
+        "estructural": ["Cunde el pánico estructural."],
+        "ruido": [],
+    }
+    assert len(validacion.validar_palabras_prohibidas(informe, PALABRAS)) == 1
+
+
+def test_palabra_prohibida_sin_tildes_igualmente_se_detecta() -> None:
+    informe = _informe_con(macro_global=[_noticia(texto="Cunde el panico en los mercados.")])
+    assert len(validacion.validar_palabras_prohibidas(informe, PALABRAS)) == 1
+
+
+def test_palabra_prohibida_dentro_de_otra_palabra_no_da_error() -> None:
+    # Límite de palabra: "panico" no debería saltar dentro de otra palabra
+    # que simplemente la contenga como subcadena.
+    informe = _informe_con(macro_global=[_noticia(texto="Esto no es paniconomía real.")])
+    assert validacion.validar_palabras_prohibidas(informe, PALABRAS) == []
+
+
+def test_entrada_marcada_como_raiz_coincide_por_subcadena() -> None:
+    palabras_raiz = {"sensacionalismo": [{"raiz": "hund"}]}
+    informe = _informe_con(macro_global=[_noticia(texto="El mercado se hundió ayer.")])
+    assert len(validacion.validar_palabras_prohibidas(informe, palabras_raiz)) == 1
+
+
 # --- avisos_limite_palabras --------------------------------------------------
 
 MODULOS_CFG = [{"id": "eeuu", "limite_palabras": 5}]
@@ -421,6 +495,26 @@ def test_un_medio_mayoritario_avisa() -> None:
     assert len(validacion.avisos_concentracion_medios(informe)) == 1
 
 
+def test_concentracion_es_por_noticia_no_por_informe() -> None:
+    # CLAUDE.md dice "more than 50% of a story's sources from a single
+    # outlet" — por noticia, no por el conjunto del informe. Dos noticias,
+    # cada una con sus fuentes repartidas al 50/50, no deberían avisar aunque
+    # un medio sea mayoritario al sumar las de todo el informe.
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                id_="2026-S41-macro-01",
+                fuentes=[_fuente(medio="Reuters"), _fuente(medio="BCE")],
+            ),
+            _noticia(
+                id_="2026-S41-macro-02",
+                fuentes=[_fuente(medio="Reuters"), _fuente(medio="FMI")],
+            ),
+        ]
+    )
+    assert validacion.avisos_concentracion_medios(informe) == []
+
+
 # --- avisos_modulo_sin_fuentes_fiables ---------------------------------------
 
 
@@ -440,3 +534,81 @@ def test_modulo_solo_con_fuentes_nivel_3_avisa() -> None:
         "noticias": [_noticia(fuentes=[_fuente(nivel=3)])],
     }
     assert len(validacion.avisos_modulo_sin_fuentes_fiables(informe)) == 1
+
+
+# --- avisos_cifras_sin_verificar ---------------------------------------------
+
+
+def test_sin_cifras_sueltas_no_avisa() -> None:
+    informe = _informe_con(
+        macro_global=[_noticia(cifras=[{"valor": "2,9%", "ref_datos": "ipc_espana"}])]
+    )
+    assert validacion.avisos_cifras_sin_verificar(informe) == []
+
+
+def test_cifras_sin_ref_datos_se_cuentan() -> None:
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                id_="2026-S41-macro-01",
+                cifras=[{"valor": "3,8%", "ref_datos": None}],
+            ),
+            _noticia(
+                id_="2026-S41-macro-02",
+                cifras=[{"valor": "1,2%", "ref_datos": None}],
+            ),
+        ]
+    )
+    avisos = validacion.avisos_cifras_sin_verificar(informe)
+    assert len(avisos) == 1
+    assert "2 cifra" in avisos[0]
+
+
+# --- validar_ids_de_noticia_unicos -------------------------------------------
+
+
+def test_ids_unicos_no_da_error() -> None:
+    informe = _informe_con(
+        macro_global=[_noticia(id_="2026-S41-macro-01"), _noticia(id_="2026-S41-macro-02")]
+    )
+    assert validacion.validar_ids_de_noticia_unicos(informe) == []
+
+
+def test_id_duplicado_entre_modulos_da_error() -> None:
+    informe = _informe_con(macro_global=[_noticia(id_="2026-S41-x-01")])
+    informe["modulos"]["eeuu"] = {
+        "sin_novedades": False,
+        "noticias": [_noticia(id_="2026-S41-x-01")],
+    }
+    assert len(validacion.validar_ids_de_noticia_unicos(informe)) == 1
+
+
+# --- validar_periodo_coherente_con_semana ------------------------------------
+
+
+def test_periodo_coherente_con_semana_no_da_error() -> None:
+    informe = _informe_minimo_valido()  # semana 2026-S41, periodo 2026-10-05 a 2026-10-11
+    assert validacion.validar_periodo_coherente_con_semana(informe) == []
+
+
+def test_periodo_que_no_coincide_con_la_semana_da_error() -> None:
+    informe = _informe_minimo_valido()
+    informe["periodo"] = {"inicio": "2026-10-12", "fin": "2026-10-18"}  # es la semana 2026-S42
+    assert len(validacion.validar_periodo_coherente_con_semana(informe)) == 1
+
+
+# --- validar_cambios_verificador_referencian_noticias_reales -----------------
+
+
+def test_cambio_verificador_con_noticia_real_no_da_error() -> None:
+    informe = _informe_con(macro_global=[_noticia(id_="2026-S41-macro-01")])
+    informe["cambios_verificador"] = [
+        {"noticia_id": "2026-S41-macro-01", "cambio": "x", "motivo": "y"}
+    ]
+    assert validacion.validar_cambios_verificador_referencian_noticias_reales(informe) == []
+
+
+def test_cambio_verificador_con_noticia_inexistente_da_error() -> None:
+    informe = _informe_con(macro_global=[_noticia(id_="2026-S41-macro-01")])
+    informe["cambios_verificador"] = [{"noticia_id": "no-existe", "cambio": "x", "motivo": "y"}]
+    assert len(validacion.validar_cambios_verificador_referencian_noticias_reales(informe)) == 1
