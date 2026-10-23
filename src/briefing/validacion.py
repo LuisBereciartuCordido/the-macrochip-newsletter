@@ -11,10 +11,13 @@ from __future__ import annotations
 
 import datetime
 import re
+import unicodedata
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
 
 from briefing.modelos import MODULOS_IDS, todas_las_noticias
+from briefing.semanas import periodo_de_semana
 
 
 @dataclass
@@ -28,7 +31,14 @@ class ResultadoValidacion:
 
 
 def _dominio(url: str) -> str:
-    return urlparse(url).netloc.removeprefix("www.")
+    """Dominio de una URL, en minúsculas y sin puerto ni prefijo "www.".
+
+    Usa `.hostname` (no `.netloc`): netloc conserva el puerto si la URL lo
+    lleva y no normaliza mayúsculas, lo que podría hacer que un dominio con
+    mayúsculas o puerto no coincidiera con fuentes.yaml pese a ser el mismo
+    dominio.
+    """
+    return (urlparse(url).hostname or "").removeprefix("www.")
 
 
 def _nivel_catalogado(dominio: str, fuentes_cfg: dict) -> int | None:
@@ -37,12 +47,21 @@ def _nivel_catalogado(dominio: str, fuentes_cfg: dict) -> int | None:
     Coincide también por subdominio: "ecb.europa.eu" coincide con el
     catalogado "europa.eu", no solo por igualdad exacta (config/fuentes.yaml
     documenta por qué: europa.eu cubre todas las instituciones de la UE).
+
+    Si un dominio coincidiera con entradas catalogadas en más de un nivel,
+    se queda con el sufijo más largo (más específico), no con el primero que
+    aparezca en el YAML: el orden de los niveles en el fichero no debería
+    decidir el resultado.
     """
+    mejor_nivel: int | None = None
+    mejor_longitud = -1
     for nivel, datos_nivel in fuentes_cfg["niveles"].items():
         for catalogado in datos_nivel["dominios"]:
-            if dominio == catalogado or dominio.endswith("." + catalogado):
-                return nivel
-    return None
+            coincide = dominio == catalogado or dominio.endswith("." + catalogado)
+            if coincide and len(catalogado) > mejor_longitud:
+                mejor_nivel = nivel
+                mejor_longitud = len(catalogado)
+    return mejor_nivel
 
 
 def validar_confianza_y_fuentes(informe: dict, fuentes_cfg: dict) -> list[str]:
@@ -156,10 +175,20 @@ def _parsear_numero(texto: str) -> float:
     preferible que validate.py señale una cifra para revisar a mano que
     adivinar en silencio.
     """
+    # Normaliza los guiones tipográficos de signo negativo (−, – y —, que un
+    # redactor o un editor de texto pueden escribir en vez del guion ASCII)
+    # al guion normal: sin esto, "−2,3" se leía como +2,3 porque el regex
+    # solo reconoce "-" (hallazgo real de revisión externa, confirmado con
+    # una prueba contra las tres variantes).
+    texto = texto.replace("−", "-").replace("–", "-").replace("—", "-")
+
     coincidencia = re.search(r"-?\d[\d.,]*", texto)
     if not coincidencia:
         raise ValueError(f"no se encontró ningún número en «{texto}»")
-    numero = coincidencia.group()
+    # Quita puntuación final de frase ("2,3." al final de una oración no es
+    # "veintitrés", el punto es solo el punto final — hallazgo real de
+    # revisión externa, confirmado con una prueba).
+    numero = coincidencia.group().rstrip(".,")
 
     if "," in numero and "." in numero:
         if numero.rindex(",") > numero.rindex("."):
@@ -232,23 +261,68 @@ def validar_fechas_fuente(informe: dict, antiguedad_maxima_dias: int = 10) -> li
     return errores
 
 
-def validar_palabras_prohibidas(informe: dict, palabras: dict[str, list[str]]) -> list[str]:
-    """Bloquea noticias con sensacionalismo o recomendaciones de inversión."""
-    todas_las_palabras = [
-        (categoria, palabra.lower())
-        for categoria, lista in palabras.items()
-        for palabra in lista
+def _normalizar(texto: str) -> str:
+    """Minúsculas y sin tildes, para que "pánico" y "PANICO" se traten igual."""
+    sin_tildes = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii")
+    return sin_tildes.lower()
+
+
+def _textos_publicos(informe: dict) -> list[tuple[str, str]]:
+    """[(ubicacion, texto), ...] de todo lo que llega al email, no solo las noticias.
+
+    `validar_palabras_prohibidas` solo miraba título/texto/por_qué_importa de
+    cada noticia — un sensacionalismo o una recomendación de inversión en
+    `titular.texto`, `lo_esencial`, `concepto_semana` o
+    `perspectiva_largo_plazo` pasaba sin comprobar (hallazgo real de
+    revisión externa, verificado contra el código).
+    """
+    textos = [
+        (f"{ubicacion}:{noticia['id']}", " ".join([noticia["titulo"], noticia["texto"], noticia["por_que_importa"]]))
+        for ubicacion, noticia in todas_las_noticias(informe)
     ]
+    textos.append(("titular", informe["titular"]["texto"]))
+    textos.extend(("lo_esencial", linea) for linea in informe["lo_esencial"])
+    concepto = informe["concepto_semana"]
+    textos.append(("concepto_semana", f"{concepto['titulo']} {concepto['texto']}"))
+    perspectiva = informe["perspectiva_largo_plazo"]
+    textos.extend(("perspectiva_largo_plazo.estructural", linea) for linea in perspectiva["estructural"])
+    textos.extend(("perspectiva_largo_plazo.ruido", linea) for linea in perspectiva["ruido"])
+    return textos
+
+
+EntradaPalabra = str | dict[str, str]
+
+
+def validar_palabras_prohibidas(
+    informe: dict, palabras: Mapping[str, Sequence[EntradaPalabra]]
+) -> list[str]:
+    """Bloquea contenido con sensacionalismo o recomendaciones de inversión.
+
+    Cada entrada de `palabras` (config/validacion.yaml) es, por defecto, una
+    frase exacta que debe coincidir por límites de palabra tras normalizar
+    tildes y mayúsculas — así "estallido" no haría saltar un "reestallido"
+    por simple subcadena. Una entrada puede marcarse explícitamente para
+    coincidir por raíz (subcadena, sin límites) con `{"raiz": "texto"}`, para
+    los casos donde sí interese pillar variantes o conjugaciones.
+    """
+    todas_las_palabras = []
+    for categoria, lista in palabras.items():
+        for entrada in lista:
+            if isinstance(entrada, dict):
+                todas_las_palabras.append((categoria, _normalizar(entrada["raiz"]), True))
+            else:
+                todas_las_palabras.append((categoria, _normalizar(entrada), False))
+
     errores = []
-    for ubicacion, noticia in todas_las_noticias(informe):
-        texto = " ".join(
-            [noticia["titulo"], noticia["texto"], noticia["por_que_importa"]]
-        ).lower()
-        for categoria, palabra in todas_las_palabras:
-            if palabra in texto:
-                errores.append(
-                    f"[{ubicacion}] {noticia['id']}: contiene «{palabra}» ({categoria})"
-                )
+    for ubicacion, texto in _textos_publicos(informe):
+        texto_normalizado = _normalizar(texto)
+        for categoria, palabra, es_raiz in todas_las_palabras:
+            if es_raiz:
+                encontrada = palabra in texto_normalizado
+            else:
+                encontrada = re.search(rf"\b{re.escape(palabra)}\b", texto_normalizado) is not None
+            if encontrada:
+                errores.append(f"[{ubicacion}] contiene «{palabra}» ({categoria})")
     return errores
 
 
@@ -290,26 +364,77 @@ def avisos_concepto_semana_largo(informe: dict, limite_palabras: int = 120) -> l
 
 
 def avisos_concentracion_medios(informe: dict, umbral: float = 0.5) -> list[str]:
-    """Avisa si más de `umbral` de las fuentes del informe son del mismo medio."""
-    medios: dict[str, int] = {}
-    total = 0
-    for _, noticia in todas_las_noticias(informe):
+    """Avisa si más de `umbral` de las fuentes de UNA noticia son del mismo medio.
+
+    Antes se calculaba sobre el total de fuentes de todo el informe, pero
+    CLAUDE.md (sección 10) siempre dijo "more than 50% of a story's sources
+    from a single outlet" — por historia, no por informe. El código no
+    coincidía con lo documentado (hallazgo real de revisión externa,
+    verificado contra CLAUDE.md).
+    """
+    avisos = []
+    for ubicacion, noticia in todas_las_noticias(informe):
+        medios: dict[str, int] = {}
+        total = 0
         for fuente in noticia["fuentes"]:
             medios[fuente["medio"]] = medios.get(fuente["medio"], 0) + 1
             total += 1
-
-    if total == 0:
-        return []
-
-    avisos = []
-    for medio, cuenta in medios.items():
-        proporcion = cuenta / total
-        if proporcion > umbral:
-            avisos.append(
-                f"'{medio}' es el {proporcion:.0%} de todas las fuentes del informe "
-                f"(umbral: {umbral:.0%})"
-            )
+        if total == 0:
+            continue
+        for medio, cuenta in medios.items():
+            proporcion = cuenta / total
+            if proporcion > umbral:
+                avisos.append(
+                    f"[{ubicacion}] {noticia['id']}: '{medio}' es el {proporcion:.0%} de sus "
+                    f"fuentes (umbral: {umbral:.0%})"
+                )
     return avisos
+
+
+def avisos_cifras_sin_verificar(informe: dict) -> list[str]:
+    """Avisa con el recuento de cifras con `ref_datos: null`, que validar_cifras
+    nunca comprueba contra datos.json (son números sueltos de prensa, no de
+    datos.json) — para poder revisar a ojo cuántas hay cada semana.
+    """
+    sin_verificar = sum(
+        1
+        for _, noticia in todas_las_noticias(informe)
+        for cifra in noticia.get("cifras", [])
+        if cifra["ref_datos"] is None
+    )
+    if sin_verificar:
+        return [f"{sin_verificar} cifra(s) sin ref_datos, no comprobadas contra datos.json"]
+    return []
+
+
+def validar_ids_de_noticia_unicos(informe: dict) -> list[str]:
+    """Cada id de noticia debe aparecer una sola vez en todo el informe."""
+    ids = [noticia["id"] for _, noticia in todas_las_noticias(informe)]
+    duplicados = sorted({id_ for id_ in ids if ids.count(id_) > 1})
+    return [f"id de noticia duplicado: '{id_}'" for id_ in duplicados]
+
+
+def validar_periodo_coherente_con_semana(informe: dict) -> list[str]:
+    """periodo.inicio/fin debe ser exactamente el lunes y el domingo de `semana`."""
+    lunes, domingo = periodo_de_semana(informe["semana"])
+    inicio = datetime.date.fromisoformat(informe["periodo"]["inicio"])
+    fin = datetime.date.fromisoformat(informe["periodo"]["fin"])
+    if (inicio, fin) != (lunes, domingo):
+        return [
+            f"periodo ({inicio.isoformat()} a {fin.isoformat()}) no coincide con la semana "
+            f"{informe['semana']} ({lunes.isoformat()} a {domingo.isoformat()})"
+        ]
+    return []
+
+
+def validar_cambios_verificador_referencian_noticias_reales(informe: dict) -> list[str]:
+    """Cada cambios_verificador[].noticia_id debe ser una noticia real del informe."""
+    ids_existentes = {noticia["id"] for _, noticia in todas_las_noticias(informe)}
+    return [
+        f"cambios_verificador: noticia_id '{cambio['noticia_id']}' no corresponde a ninguna noticia del informe"
+        for cambio in informe.get("cambios_verificador", [])
+        if cambio["noticia_id"] not in ids_existentes
+    ]
 
 
 def avisos_modulo_sin_fuentes_fiables(informe: dict) -> list[str]:

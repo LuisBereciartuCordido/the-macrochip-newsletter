@@ -47,11 +47,34 @@ INSTRUMENTOS: dict[str, tuple[str, str]] = {
 }
 
 
+MAX_DIAS_ANTIGUEDAD = 7
+
+
 class SinCotizacion(ValueError):
     """Yahoo Finance no devolvió ningún cierre válido para el ticker pedido."""
 
 
-def _ultimo_cierre(ticker: str) -> tuple[str, float]:
+class CotizacionDemasiadoAntigua(ValueError):
+    """El último cierre disponible es más antiguo de lo esperado.
+
+    Con "range": "5d" siempre debería haber un cierre reciente salvo que el
+    endpoint esté devolviendo datos obsoletos o cacheados — algo que, dado
+    que es un endpoint no documentado (sección 6 de CLAUDE.md), conviene
+    detectar con un error explícito en vez de publicar en silencio un precio
+    viejo como si fuera el de esta semana.
+    """
+
+
+def _comprobar_frescura(ticker: str, fecha: str, hoy: datetime.date) -> None:
+    antiguedad = (hoy - datetime.date.fromisoformat(fecha)).days
+    if antiguedad > MAX_DIAS_ANTIGUEDAD:
+        raise CotizacionDemasiadoAntigua(
+            f"{ticker}: el último cierre disponible es del {fecha}, hace {antiguedad} días "
+            f"(más de los {MAX_DIAS_ANTIGUEDAD} esperados)"
+        )
+
+
+def _ultimo_cierre(ticker: str, *, hoy: datetime.date | None = None) -> tuple[str, float]:
     url = f"{BASE_URL}/{ticker}"
     log.info("Consultando Yahoo Finance: %s", ticker)
     respuesta = requests.get(
@@ -80,16 +103,17 @@ def _ultimo_cierre(ticker: str) -> tuple[str, float]:
             fecha = (
                 datetime.datetime.fromtimestamp(marca, tz=datetime.timezone.utc).date().isoformat()
             )
+            _comprobar_frescura(ticker, fecha, hoy or datetime.date.today())
             return fecha, float(cierre)
 
     raise SinCotizacion(f"Yahoo Finance no devolvió ningún cierre válido para {ticker}")
 
 
-def cierres_semanales() -> dict[str, Dato]:
+def cierres_semanales(*, hoy: datetime.date | None = None) -> dict[str, Dato]:
     """Último cierre disponible de cada instrumento de INSTRUMENTOS."""
     resultado: dict[str, Dato] = {}
     for id_, (ticker, unidad) in INSTRUMENTOS.items():
-        fecha, valor = _ultimo_cierre(ticker)
+        fecha, valor = _ultimo_cierre(ticker, hoy=hoy)
         resultado[id_] = Dato(
             valor=valor,
             unidad=unidad,

@@ -31,6 +31,31 @@ def construir_asunto(informe: dict, nombre_newsletter: str) -> str:
     return f"{nombre_newsletter}: {informe['titular']['texto']}"
 
 
+class InformeNoValidado(RuntimeError):
+    """log.json no confirma que informe.json haya pasado validate.py sin errores."""
+
+
+def _comprobar_que_el_informe_es_valido(carpeta: Path) -> None:
+    """Se niega a crear el borrador si log.json no dice explícitamente que
+    el informe es válido.
+
+    Antes, publish.py confiaba en que nadie lo llamara si validate.py había
+    fallado — una garantía solo en TAREA_SEMANAL.md, no en el código: nada
+    impedía ejecutar publish.py suelto tras una validación fallida
+    (hallazgo real de revisión externa).
+    """
+    ruta_log = carpeta / "log.json"
+    if not ruta_log.exists():
+        raise InformeNoValidado(f"no existe {ruta_log}; ejecuta validate.py antes de publicar")
+    log_contenido = json.loads(ruta_log.read_text())
+    validacion = log_contenido.get("validacion")
+    if validacion is None or validacion.get("errores"):
+        raise InformeNoValidado(
+            "log.json no confirma que el informe sea válido "
+            f"(errores: {validacion.get('errores') if validacion else 'sin clave \"validacion\"'})"
+        )
+
+
 def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
@@ -39,6 +64,13 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     carpeta = DATA_DIR / args.semana
+
+    try:
+        _comprobar_que_el_informe_es_valido(carpeta)
+    except InformeNoValidado:
+        log.exception("No se crea el borrador: el informe no está validado")
+        return 1
+
     informe = json.loads((carpeta / "informe.json").read_text())
     markdown = (carpeta / "informe.md").read_text()
     general_cfg = yaml.safe_load((CONFIG_DIR / "general.yaml").read_text())

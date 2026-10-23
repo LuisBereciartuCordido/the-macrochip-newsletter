@@ -85,6 +85,53 @@ def test_main_escribe_datos_json(tmp_path: Path, monkeypatch) -> None:
     assert contenido["sp500"]["valor"] == 1.0
 
 
+def test_descargar_con_variacion_semanal_plausible_no_avisa(monkeypatch) -> None:
+    _parchear_fuentes(monkeypatch)  # msci_world queda en 1.0 (ver _parchear_fuentes)
+    datos_previos = {"msci_world": {"valor": 1.01}}
+
+    datos = fetch_data.descargar(datos_semana_anterior=datos_previos)
+
+    assert "aviso" not in datos["msci_world"]
+
+
+def test_descargar_con_variacion_semanal_sospechosa_no_aborta_pero_avisa(monkeypatch) -> None:
+    # No debe abortar: un movimiento real así, aunque rarísimo, es posible
+    # — y sería justo la semana en la que más falta hace el newsletter.
+    _parchear_fuentes(monkeypatch)
+    datos_previos = {"msci_world": {"valor": 100.0}}  # 1.0 vs 100.0: variación absurda
+
+    datos = fetch_data.descargar(datos_semana_anterior=datos_previos)
+
+    assert "aviso" in datos["msci_world"]
+    assert "100.0%" in datos["msci_world"]["aviso"] or "variación" in datos["msci_world"]["aviso"]
+
+
+def test_descargar_sin_semana_anterior_no_comprueba_variacion(monkeypatch) -> None:
+    _parchear_fuentes(monkeypatch)
+    # Sin dato de la semana anterior (primera semana, o se borró el
+    # histórico), no hay nada contra lo que comparar — no debe avisar.
+    datos = fetch_data.descargar(datos_semana_anterior=None)
+
+    assert "aviso" not in datos["msci_world"]
+
+
+def test_main_lee_la_semana_anterior_y_escribe_el_aviso_en_datos_json(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
+    _parchear_fuentes(monkeypatch)  # msci_world queda en 1.0
+    (tmp_path / "2026-S40").mkdir()
+    (tmp_path / "2026-S40" / "datos.json").write_text(
+        json.dumps({"msci_world": {"valor": 100.0}})
+    )
+
+    codigo = fetch_data.main(["--semana", "2026-S41"])
+
+    assert codigo == 0
+    contenido = json.loads((tmp_path / "2026-S41" / "datos.json").read_text())
+    assert "aviso" in contenido["msci_world"]
+
+
 def test_main_no_escribe_nada_si_falla_una_fuente(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
 

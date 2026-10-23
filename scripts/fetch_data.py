@@ -20,15 +20,48 @@ from pathlib import Path
 
 from briefing.fuentes import ecb, eurostat, fred, ine, mercados
 from briefing.modelos import Dato
-from briefing.semanas import semana_iso
+from briefing.semanas import semana_anterior, semana_iso
 
 log = logging.getLogger("fetch_data")
 
 RAIZ = Path(__file__).resolve().parent.parent
 DATA_DIR = RAIZ / "data"
 
+# 35%: generoso a propósito. Ningún instrumento de mercados.INSTRUMENTOS
+# debería moverse tanto en una semana sin que ya fuera, de por sí, la
+# noticia principal — este umbral existe para pillar errores de datos
+# (decimal desplazado, ticker equivocado, endpoint devolviendo otra cosa).
+# No aborta la descarga: un movimiento real así, aunque rarísimo, es
+# posible (un crash de mercado es justo cuando más falta hace el
+# newsletter), así que en vez de bloquear se escribe como "aviso" en la
+# propia entrada de datos.json — el redactor lo ve al investigar ese
+# módulo y, contrastando con las noticias reales, decide si el dato tiene
+# sentido o es probablemente un fallo del endpoint.
+UMBRAL_VARIACION_SEMANAL_SOSPECHOSA = 0.35
 
-def descargar() -> dict[str, dict]:
+
+def _avisar_variaciones_sospechosas(
+    datos_mercado: dict[str, dict], datos_semana_anterior: dict | None
+) -> None:
+    if not datos_semana_anterior:
+        return
+    for clave, dato in datos_mercado.items():
+        anterior = datos_semana_anterior.get(clave)
+        if not anterior or not anterior.get("valor"):
+            continue
+        variacion = abs(dato["valor"] - anterior["valor"]) / abs(anterior["valor"])
+        if variacion > UMBRAL_VARIACION_SEMANAL_SOSPECHOSA:
+            aviso = (
+                f"variación del {variacion:.0%} en una semana ({anterior['valor']} -> "
+                f"{dato['valor']}), por encima del {UMBRAL_VARIACION_SEMANAL_SOSPECHOSA:.0%} "
+                "esperado — contrasta con las noticias reales antes de citarla; Yahoo "
+                "Finance no es una fuente oficial y podría ser un error de datos"
+            )
+            log.warning("%s: %s", clave, aviso)
+            dato["aviso"] = aviso
+
+
+def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
     """Descarga todos los datos duros y devuelve el dict listo para datos.json.
 
     Las series mensuales (IPC/IPCA) se incluyen siempre, con su fecha real
@@ -40,6 +73,14 @@ def descargar() -> dict[str, dict]:
     sea "noticia nueva" o "la última cifra oficial disponible" lo decide
     el criterio del redactor mirando la fecha (`prompts/redactor.md`), no
     la ausencia del dato.
+
+    Si se pasa `datos_semana_anterior` (el datos.json de la semana ISO
+    anterior), los instrumentos de Yahoo Finance (mercados.INSTRUMENTOS) se
+    comprueban contra esa semana: una variación por encima de
+    UMBRAL_VARIACION_SEMANAL_SOSPECHOSA no aborta la descarga, pero añade
+    un campo "aviso" a esa entrada de datos.json para que el redactor lo
+    vea al investigar (sección 6: Yahoo es un endpoint no oficial y sin
+    fuente de respaldo).
     """
     datos: dict[str, Dato] = {}
 
@@ -60,9 +101,14 @@ def descargar() -> dict[str, dict]:
     datos["brent"] = fred.brent()
 
     log.info("Descargando mercados vía Yahoo Finance...")
-    datos.update(mercados.cierres_semanales())
+    datos_yahoo = mercados.cierres_semanales()
+    datos.update(datos_yahoo)
 
-    return {clave: dato.to_dict() for clave, dato in datos.items()}
+    resultado = {clave: dato.to_dict() for clave, dato in datos.items()}
+    _avisar_variaciones_sospechosas(
+        {clave: resultado[clave] for clave in datos_yahoo}, datos_semana_anterior
+    )
+    return resultado
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -76,8 +122,13 @@ def main(argv: list[str] | None = None) -> int:
 
     semana = args.semana or semana_iso(datetime.date.today())
 
+    ruta_semana_anterior = DATA_DIR / semana_anterior(semana) / "datos.json"
+    datos_semana_anterior = (
+        json.loads(ruta_semana_anterior.read_text()) if ruta_semana_anterior.exists() else None
+    )
+
     try:
-        datos = descargar()
+        datos = descargar(datos_semana_anterior=datos_semana_anterior)
     except Exception:
         log.exception("Fallo al descargar los datos duros; no se escribe datos.json")
         return 1
