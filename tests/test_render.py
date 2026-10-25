@@ -235,6 +235,82 @@ def test_renderizar_contexto_ia_recorta_por_linea_completa_no_a_mitad_de_frase()
     assert "[...contexto recortado por tamaño...]" in salida
 
 
+def test_renderizar_contexto_ia_incluye_variacion_semanal_y_mensual_con_fechas() -> None:
+    # Hallazgo real (semana 2026-S43): una noticia de prensa hablaba de
+    # "tres semanas seguidas al alza" cuando la serie real de Brent había
+    # caído la última semana — sin la variación explícita en el paquete de
+    # contexto, no había forma de que una IA (o el lector) lo detectara.
+    informe = _informe_minimo_valido()
+    datos = {"brent": {"valor": 115.22, "unidad": "USD/barril", "fecha": "2026-10-20", "fuente": "FRED"}}
+    datos_semana_anterior = {"brent": {"valor": 126.55, "fecha": "2026-10-14"}}
+    datos_mes_anterior = {"brent": {"valor": 97.59, "fecha": "2026-09-02"}}
+
+    salida = render.renderizar_contexto_ia(
+        informe,
+        datos,
+        datos_semana_anterior=datos_semana_anterior,
+        datos_mes_anterior=datos_mes_anterior,
+    )
+
+    assert "semana: 2026-10-14 -> 2026-10-20" in salida
+    assert "mes: 2026-09-02 -> 2026-10-20" in salida
+    assert "-8,95 %" in salida or "-8.95 %" in salida  # formateo de coma/punto decimal
+
+
+def test_renderizar_contexto_ia_sin_dato_anterior_no_muestra_variacion() -> None:
+    informe = _informe_minimo_valido()
+    datos = {"brent": {"valor": 115.22, "unidad": "USD/barril", "fecha": "2026-10-20", "fuente": "FRED"}}
+
+    salida = render.renderizar_contexto_ia(informe, datos)
+
+    assert "semana:" not in salida
+    assert "mes:" not in salida
+
+
+def test_renderizar_contexto_ia_marca_dato_desfasado() -> None:
+    informe = _informe_minimo_valido()  # periodo.fin = 2026-10-11
+    datos = {
+        "ipc_espana": {
+            "valor": 2.9,
+            "unidad": "% interanual",
+            "fecha": "2025-12-01",  # más de 45 días antes del cierre del periodo
+            "fuente": "INE",
+        }
+    }
+
+    salida = render.renderizar_contexto_ia(informe, datos)
+
+    assert "[DATO DESFASADO]" in salida
+
+
+def test_renderizar_contexto_ia_dato_reciente_no_se_marca_desfasado() -> None:
+    informe = _informe_minimo_valido()  # periodo.fin = 2026-10-11
+    datos = {
+        "sp500": {"valor": 7700.0, "unidad": "puntos", "fecha": "2026-10-09", "fuente": "FRED"}
+    }
+
+    salida = render.renderizar_contexto_ia(informe, datos)
+
+    assert "[DATO DESFASADO]" not in salida
+
+
+def test_renderizar_contexto_ia_muestra_el_aviso_de_un_dato() -> None:
+    informe = _informe_minimo_valido()
+    datos = {
+        "msci_world": {
+            "valor": 1.0,
+            "unidad": "USD",
+            "fecha": "2026-10-11",
+            "fuente": "Yahoo Finance (no oficial)",
+            "aviso": "variación del 99% en una semana, por encima del 35% esperado",
+        }
+    }
+
+    salida = render.renderizar_contexto_ia(informe, datos)
+
+    assert "aviso: variación del 99%" in salida
+
+
 def test_renderizar_contexto_ia_incluye_enlaces_a_claude_y_chatgpt() -> None:
     informe = _informe_minimo_valido()
     salida = render.renderizar_contexto_ia(informe, datos={})

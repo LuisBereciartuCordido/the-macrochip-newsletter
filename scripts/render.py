@@ -43,6 +43,12 @@ def main(argv: list[str] | None = None) -> int:
     ruta_anterior = DATA_DIR / semana_anterior(args.semana) / "datos.json"
     datos_semana_anterior = json.loads(ruta_anterior.read_text()) if ruta_anterior.exists() else None
 
+    semana_mes_atras = args.semana
+    for _ in range(4):
+        semana_mes_atras = semana_anterior(semana_mes_atras)
+    ruta_mes_atras = DATA_DIR / semana_mes_atras / "datos.json"
+    datos_mes_anterior = json.loads(ruta_mes_atras.read_text()) if ruta_mes_atras.exists() else None
+
     mercados_cfg = yaml.safe_load((CONFIG_DIR / "mercados.yaml").read_text())
     modulos_cfg = yaml.safe_load((CONFIG_DIR / "modulos.yaml").read_text())
     general_cfg = yaml.safe_load((CONFIG_DIR / "general.yaml").read_text())
@@ -55,6 +61,7 @@ def main(argv: list[str] | None = None) -> int:
         modulos_cfg=modulos_cfg,
         nombre_newsletter=general_cfg["nombre_newsletter"],
         logo_url=general_cfg["logo_url"],
+        datos_mes_anterior=datos_mes_anterior,
     )
 
     ruta_salida = carpeta / "informe.md"

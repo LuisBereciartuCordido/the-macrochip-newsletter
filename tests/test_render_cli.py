@@ -44,3 +44,27 @@ def test_main_usa_datos_de_la_semana_anterior_si_existen(tmp_path: Path, monkeyp
 
     contenido = (carpeta / "informe.md").read_text()
     assert "+10.00 %" in contenido  # variación calculada contra la semana anterior
+
+
+def test_main_usa_datos_de_cuatro_semanas_atras_para_la_variacion_mensual(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(render, "DATA_DIR", tmp_path)
+
+    def _dato(valor: float, fecha: str) -> dict:
+        return {"valor": valor, "unidad": "USD/barril", "fecha": fecha, "fuente": "FRED", "url": "https://x"}
+
+    (tmp_path / "2026-S37").mkdir()  # 4 semanas ISO antes de 2026-S41
+    (tmp_path / "2026-S37" / "datos.json").write_text(
+        json.dumps({"brent": _dato(100.0, "2026-09-11")})
+    )
+
+    carpeta = tmp_path / "2026-S41"
+    carpeta.mkdir()
+    (carpeta / "informe.json").write_text(json.dumps(_informe_minimo_valido()))
+    (carpeta / "datos.json").write_text(json.dumps({"brent": _dato(110.0, "2026-10-09")}))
+
+    render.main(["--semana", "2026-S41"])
+
+    contenido = (carpeta / "informe.md").read_text()
+    assert "mes: 2026-09-11 -> 2026-10-09: +10.00 %" in contenido

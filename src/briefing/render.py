@@ -31,16 +31,31 @@ INSTRUCCION_CONTEXTO_IA = (
 
 PROMPT_SUGERIDO_IA = (
     "Este es el contexto del briefing semanal de The Macrochip. Cada dato duro "
-    "lleva su fecha y fuente exactas: si no coincide con otra fecha, con una "
-    "noticia o con lo que ya sabes, no es una incoherencia que señalar — es una "
-    "foto de ese día concreto, normal en datos de mercado e inflación que se "
-    "publican con ritmos distintos. Antes de nada, pregúntame sobre qué tema "
-    "de los incluidos quiero profundizar. Cuando te lo diga, explícamelo en "
-    "detalle y qué significa para alguien que vive en España. Si algo no está "
-    "en el contexto, búscalo en fuentes fiables y dime cuáles son."
+    "lleva su fecha, fuente y variación semanal/mensual con las dos fechas de "
+    "cada comparación. Una diferencia de fecha entre una cifra y una noticia "
+    "es normal SOLO si, alineando esas fechas, los números no se contradicen "
+    "— no asumas que sí por defecto. Antes de descartar cualquier diferencia "
+    "como \"normal\", compara los números: si una noticia afirma una tendencia "
+    "o una magnitud (\"varias semanas seguidas al alza\", \"máximo de N meses\") "
+    "que la serie de datos duros no respalda, es una contradicción real, no una "
+    "simple diferencia de fecha — señálala, explica qué mide cada cifra (p. ej. "
+    "un precio oficial spot frente a un futuro que cita la prensa, que son "
+    "instrumentos distintos) y di cuál te parece más fiable y por qué. Nunca "
+    "descartes una posible incoherencia sin haber hecho esa comparación "
+    "numérica primero. Antes de nada, pregúntame sobre qué tema de los "
+    "incluidos quiero profundizar. Cuando te lo diga, explícamelo en detalle y "
+    "qué significa para alguien que vive en España. Si algo no está en el "
+    "contexto, búscalo en fuentes fiables y dime cuáles son."
 )
 
 LIMITE_CONTEXTO_IA_CARACTERES = 10000
+
+# Sección 10 de CLAUDE.md: misma antigüedad que validate.py usa como "demasiado
+# vieja" para una fuente, aplicada aquí a los propios datos duros — si al
+# cierre del periodo un dato tiene más días que esto, se marca como
+# "dato desfasado" en el paquete de contexto en vez de dejar que parezca
+# tan actual como el resto.
+ANTIGUEDAD_DATO_DESFASADO_DIAS = 45
 
 # claude.ai/new?q=... y chat.openai.com/?q=... precargan ese texto en un
 # chat nuevo (sin enviarlo solo, por seguridad: el lector sigue teniendo
@@ -94,6 +109,35 @@ def _formatear_variacion_coloreada(actual: float, anterior: float | None) -> str
         return variacion_fmt
     color = COLOR_VARIACION_POSITIVA if variacion_fmt.startswith("+") else COLOR_VARIACION_NEGATIVA
     return f'<span style="color:{color}">{variacion_fmt}</span>'
+
+
+def _variaciones_dato(clave: str, dato: dict, semana_anterior: dict | None, mes_anterior: dict | None) -> str:
+    """"semana: 2026-10-14 -> 2026-10-20: -8,95 %; mes: ..." o "" si no hay con qué comparar.
+
+    Deja explícitas las dos fechas de cada comparación (no solo el
+    porcentaje): un lector o una IA que lea el paquete de contexto necesita
+    saber qué dos días está comparando, no solo "bajó un 9 %" (hallazgo
+    real: una noticia de prensa hablando de "tres semanas seguidas al alza"
+    resultó incoherente con la serie real de datos duros, y la regla previa
+    del prompt sugerido no dejaba margen para detectarlo).
+    """
+    partes = []
+    for etiqueta, referencia in (("semana", semana_anterior), ("mes", mes_anterior)):
+        anterior = (referencia or {}).get(clave)
+        if not anterior or not anterior.get("valor"):
+            continue
+        variacion = _formatear_variacion(dato["valor"], anterior["valor"])
+        if variacion == "—":
+            continue
+        partes.append(f"{etiqueta}: {anterior['fecha']} -> {dato['fecha']}: {variacion}")
+    return "; ".join(partes)
+
+
+def _es_dato_desfasado(fecha_dato: str, fecha_fin_periodo: str) -> bool:
+    antiguedad = (
+        datetime.date.fromisoformat(fecha_fin_periodo) - datetime.date.fromisoformat(fecha_dato)
+    ).days
+    return antiguedad > ANTIGUEDAD_DATO_DESFASADO_DIAS
 
 
 def renderizar_lo_esencial(informe: dict) -> str:
@@ -247,14 +291,23 @@ def renderizar_titulo(informe: dict, nombre_newsletter: str, logo_url: str) -> s
 
 
 def renderizar_contexto_ia(
-    informe: dict, datos: dict, *, limite_caracteres: int = LIMITE_CONTEXTO_IA_CARACTERES
+    informe: dict,
+    datos: dict,
+    *,
+    datos_semana_anterior: dict | None = None,
+    datos_mes_anterior: dict | None = None,
+    limite_caracteres: int = LIMITE_CONTEXTO_IA_CARACTERES,
 ) -> str:
     """Bloque de código copiable con el contexto en bruto (sección 11).
 
     Solo usa resúmenes propios (ya están en informe.json, nunca texto
     copiado de un artículo) y datos con su fecha y fuente — nunca un
-    número suelto sin de dónde sale.
+    número suelto sin de dónde sale. Cada dato lleva también su variación
+    semanal y mensual con las fechas de ambos puntos (si hay con qué
+    comparar), y se marca como "dato desfasado" si tiene más de
+    ANTIGUEDAD_DATO_DESFASADO_DIAS respecto al cierre del periodo.
     """
+    fecha_fin_periodo = informe["periodo"]["fin"]
     lineas = [
         f"PROMPT SUGERIDO: {PROMPT_SUGERIDO_IA}",
         "",
@@ -263,9 +316,16 @@ def renderizar_contexto_ia(
         "DATOS DUROS:",
     ]
     for clave, dato in sorted(datos.items()):
+        variaciones = _variaciones_dato(clave, dato, datos_semana_anterior, datos_mes_anterior)
+        sufijo_variaciones = f"; {variaciones}" if variaciones else ""
+        sufijo_desfase = (
+            " [DATO DESFASADO]" if _es_dato_desfasado(dato["fecha"], fecha_fin_periodo) else ""
+        )
+        sufijo_aviso = f"; aviso: {dato['aviso']}" if dato.get("aviso") else ""
         lineas.append(
             f"- {clave}: {dato['valor']} {dato['unidad']} "
-            f"({dato['fecha']}, fuente: {dato['fuente']})"
+            f"({dato['fecha']}, fuente: {dato['fuente']}{sufijo_variaciones}"
+            f"{sufijo_aviso}){sufijo_desfase}"
         )
 
     lineas.append("")
@@ -362,6 +422,7 @@ def renderizar_informe(
     modulos_cfg: list[dict],
     nombre_newsletter: str,
     logo_url: str,
+    datos_mes_anterior: dict | None = None,
 ) -> str:
     """Ensambla el Markdown **público** del email, en el orden de la sección 5.
 
@@ -380,7 +441,12 @@ def renderizar_informe(
         renderizar_concepto_semana(informe),
         renderizar_perspectiva(informe),
         renderizar_para_profundizar(informe, modulos_cfg),
-        renderizar_contexto_ia(informe, datos),
+        renderizar_contexto_ia(
+            informe,
+            datos,
+            datos_semana_anterior=datos_semana_anterior,
+            datos_mes_anterior=datos_mes_anterior,
+        ),
         renderizar_aviso_legal(),
     ]
     return "\n\n".join(secciones) + "\n"
