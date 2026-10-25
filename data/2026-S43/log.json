@@ -27,6 +27,29 @@
         "https://www.fxstreet.com/news/eurozone-hcob-composite-pmi-declines-to-519-in-october-vs-527-expected-202610230806 devolvió HTTP 403 (posible bloqueo de bots o paywall)",
         "https://www.gramercy.com/2026/10/em-weekly-october-24-2026/ devolvió HTTP 403 (posible bloqueo de bots o paywall)"
       ]
+    },
+    {
+      "errores": [],
+      "avisos": [
+        "Módulo 'eeuu': 124 palabras, supera el límite de 110",
+        "Módulo 'europa': 259 palabras, supera el límite de 110",
+        "Módulo 'asia_china': 119 palabras, supera el límite de 110",
+        "Módulo 'emergentes': 118 palabras, supera el límite de 110",
+        "Módulo 'energia_materias_primas': 187 palabras, supera el límite de 110",
+        "[macro_global] 2026-S43-macro-01: 'Rio Times' es el 100% de sus fuentes (umbral: 50%)",
+        "[eeuu] 2026-S43-eeuu-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+        "[europa] 2026-S43-europa-02: 'FXStreet' es el 100% de sus fuentes (umbral: 50%)",
+        "[emergentes] 2026-S43-emergentes-01: 'Gramercy' es el 100% de sus fuentes (umbral: 50%)",
+        "[energia_materias_primas] 2026-S43-energia-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+        "[tecnologia_ia] 2026-S43-tecnologia-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+        "Módulo 'emergentes': ninguna fuente de nivel 1 o 2",
+        "riotimesonline.com: dominio no catalogado en fuentes.yaml",
+        "fxstreet.com: dominio no catalogado en fuentes.yaml",
+        "commerzbank.de: dominio no catalogado en fuentes.yaml",
+        "gramercy.com: dominio no catalogado en fuentes.yaml",
+        "themedialine.org: dominio no catalogado en fuentes.yaml",
+        "gulfnews.com: dominio no catalogado en fuentes.yaml"
+      ]
     }
   ],
   "validacion": {
@@ -36,7 +59,7 @@
       "Módulo 'europa': 259 palabras, supera el límite de 110",
       "Módulo 'asia_china': 119 palabras, supera el límite de 110",
       "Módulo 'emergentes': 118 palabras, supera el límite de 110",
-      "Módulo 'energia_materias_primas': 125 palabras, supera el límite de 110",
+      "Módulo 'energia_materias_primas': 187 palabras, supera el límite de 110",
       "[macro_global] 2026-S43-macro-01: 'Rio Times' es el 100% de sus fuentes (umbral: 50%)",
       "[eeuu] 2026-S43-eeuu-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
       "[europa] 2026-S43-europa-02: 'FXStreet' es el 100% de sus fuentes (umbral: 50%)",
@@ -49,12 +72,7 @@
       "commerzbank.de: dominio no catalogado en fuentes.yaml",
       "gramercy.com: dominio no catalogado en fuentes.yaml",
       "themedialine.org: dominio no catalogado en fuentes.yaml",
-      "gulfnews.com: dominio no catalogado en fuentes.yaml",
-      "https://themedialine.org/headlines/president-trump-says-iran-outcome-coming-fairly-soon devolvió HTTP 403 (posible bloqueo de bots o paywall)",
-      "https://www.cnbc.com/2026/10/15/sk-hynix-samsung-softbank-stocks-asia-tech-rout-ai-funding-worries.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
-      "https://www.cnbc.com/2026/10/22/stock-market-today-live-update.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
-      "https://www.fxstreet.com/news/eurozone-hcob-composite-pmi-declines-to-519-in-october-vs-527-expected-202610230806 devolvió HTTP 403 (posible bloqueo de bots o paywall)",
-      "https://www.gramercy.com/2026/10/em-weekly-october-24-2026/ devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+      "gulfnews.com: dominio no catalogado en fuentes.yaml"
     ]
   }
 }

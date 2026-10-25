@@ -5,11 +5,11 @@
     "fin": "2026-10-25"
   },
   "titular": {
-    "texto": "El Brent sube a máximos de seis meses ante el riesgo de Irán",
+    "texto": "El Brent cae un 9 % pese al riesgo de ataques a Irán",
     "noticia_id": "2026-S43-energia-01"
   },
   "lo_esencial": [
-    "El Brent roza los 116 dólares, su nivel más alto desde abril, por el riesgo de nuevos ataques a Irán.",
+    "El Brent oficial cae casi un 9 % en la semana (115,22 $), aunque la prensa cita un precio mayor por el riesgo en Irán.",
     "La inflación del euro subió al 3,8 % en septiembre (España, 5,0 %).",
     "Wall Street cerró la semana a la baja con el bono a 10 años cerca del 5 %.",
     "China creció un 4,5 % en el tercer trimestre, empujada por las exportaciones.",
@@ -188,9 +188,9 @@
         {
           "id": "2026-S43-energia-01",
           "hilo_id": "petroleo-ormuz-2026",
-          "titulo": "El Brent sube a máximos de seis meses ante el riesgo de Irán",
-          "texto": "El Brent (el crudo de referencia en Europa) valía 115,22 dólares el barril el 20 de octubre según FRED; la prensa lo sitúa por encima de 116 al cierre de la semana, su nivel más alto desde abril, con tres semanas seguidas de subidas. Se asocia con las informaciones sobre posibles nuevos ataques de EE. UU. e Israel a Irán y con el bloqueo del estrecho de Ormuz, por donde pasa cerca del 20 % del crudo marítimo mundial. Son dos fechas distintas: el dato oficial y el de prensa no se contradicen. ⚠️",
-          "por_que_importa": "Un petróleo caro encarece la gasolina y el transporte, y alimenta la inflación que el BCE intenta frenar.",
+          "titulo": "El Brent cae un 9 % en la semana pese al riesgo en Ormuz",
+          "texto": "El Brent (el crudo de referencia en Europa) cerró el 20 de octubre en 115,22 dólares el barril según FRED, un 8,95 % menos que los 126,55 de la semana anterior — la serie oficial cae, no sube. La prensa (CNBC) habla de un precio por encima de 116 y de una racha alcista, una cifra que no coincide con el dato oficial de esta semana: probablemente se refiere al futuro de Brent del mercado ICE, un instrumento distinto al precio spot que publica FRED y que puede moverse de forma diferente. Nos quedamos con el dato oficial, verificable y de fuente primaria. El trasfondo sigue siendo el riesgo de nuevos ataques de EE. UU. e Israel a Irán y un posible bloqueo del estrecho de Ormuz, por donde pasa cerca del 20 % del crudo marítimo mundial. ⚠️",
+          "por_que_importa": "Un petróleo volátil, al alza o a la baja según la fuente, complica la planificación de la gasolina y el transporte, y es justo lo que vigila el BCE de cara a la inflación.",
           "confianza": "una_fuente",
           "relevancia_espana_ue": "alta",
           "fuentes": [
@@ -204,7 +204,7 @@
           ],
           "cifras": [
             {
-              "valor": "115,22 USD/barril (20-oct)",
+              "valor": "115,22 USD/barril (20-oct), -8,95 % semanal",
               "ref_datos": "brent"
             }
           ]
@@ -307,6 +307,11 @@
       "noticia_id": "2026-S43-energia-01",
       "cambio": "Se pasó de confirmado a una_fuente y se separaron las dos fechas (20-oct oficial, prensa al cierre).",
       "motivo": "Solo una fuente de prensa respalda la cifra de cierre."
+    },
+    {
+      "noticia_id": "2026-S43-energia-01",
+      "cambio": "Corrección manual posterior: el titular, lo_esencial y el texto decían que el Brent subía a máximos de seis meses citando solo la prensa, cuando la serie oficial de datos duros cae un 8,95 % esa semana (126,55 -> 115,22). Se reescribió para reflejar la caída real y explicar que la cifra de prensa probablemente corresponde al futuro ICE Brent, no al spot oficial.",
+      "motivo": "El verificador automático descartó la diferencia como \"solo una fecha distinta\" sin comparar los números — detectado y corregido por revisión humana antes de enviar."
     }
   ]
 }
