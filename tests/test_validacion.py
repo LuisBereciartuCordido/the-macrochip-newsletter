@@ -536,6 +536,104 @@ def test_modulo_solo_con_fuentes_nivel_3_avisa() -> None:
     assert len(validacion.avisos_modulo_sin_fuentes_fiables(informe)) == 1
 
 
+# --- avisos_tendencias_inconsistentes ----------------------------------------
+
+
+def _historial(*pares: tuple[str, float]) -> dict[str, dict]:
+    """Semanas ANTERIORES a la actual (la actual va aparte, en `datos`)."""
+    return {semana: {"brent": {"valor": valor}} for semana, valor in pares}
+
+
+def _datos_brent(valor: float) -> dict[str, dict]:
+    return {"brent": {"valor": valor}}
+
+
+def test_tres_semanas_seguidas_al_alza_que_no_cuadra_con_la_serie_avisa() -> None:
+    # Reproduce el caso real de la semana 2026-S43: la noticia dice "tres
+    # semanas seguidas de subidas" sobre el Brent, pero la serie real cae
+    # la última semana.
+    historial = _historial(("2026-S40", 125.44), ("2026-S41", 126.00), ("2026-S42", 126.55))
+    datos = _datos_brent(115.22)  # S43: cae, no sigue subiendo
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                texto="El Brent sube, con tres semanas seguidas de subidas.",
+                cifras=[{"valor": "115,22", "ref_datos": "brent"}],
+            )
+        ]
+    )
+    avisos = validacion.avisos_tendencias_inconsistentes(informe, datos, historial)
+    assert len(avisos) == 1
+    assert "brent" in avisos[0]
+
+
+def test_semanas_seguidas_al_alza_que_si_cuadra_no_avisa() -> None:
+    historial = _historial(("2026-S41", 100.0), ("2026-S42", 110.0))
+    datos = _datos_brent(120.0)  # sigue subiendo
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                texto="Dos semanas seguidas de subidas en el Brent.",
+                cifras=[{"valor": "120", "ref_datos": "brent"}],
+            )
+        ]
+    )
+    assert validacion.avisos_tendencias_inconsistentes(informe, datos, historial) == []
+
+
+def test_maximo_de_meses_que_no_es_el_maximo_real_avisa() -> None:
+    historial = _historial(("2026-S41", 130.0), ("2026-S42", 126.55))
+    datos = _datos_brent(115.22)  # no es el máximo del historial
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                texto="El Brent toca máximos de seis meses esta semana.",
+                cifras=[{"valor": "115,22", "ref_datos": "brent"}],
+            )
+        ]
+    )
+    avisos = validacion.avisos_tendencias_inconsistentes(informe, datos, historial)
+    assert len(avisos) == 1
+
+
+def test_maximo_de_meses_que_si_es_el_maximo_real_no_avisa() -> None:
+    historial = _historial(("2026-S41", 100.0), ("2026-S42", 105.0))
+    datos = _datos_brent(110.0)  # sí es el máximo
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                texto="El Brent toca máximos de tres meses esta semana.",
+                cifras=[{"valor": "110", "ref_datos": "brent"}],
+            )
+        ]
+    )
+    assert validacion.avisos_tendencias_inconsistentes(informe, datos, historial) == []
+
+
+def test_sin_cifras_con_ref_datos_no_avisa() -> None:
+    historial = _historial(("2026-S42", 126.55))
+    datos = _datos_brent(115.22)
+    informe = _informe_con(
+        macro_global=[_noticia(texto="Tres semanas seguidas de subidas en el Brent.")]
+    )
+    assert validacion.avisos_tendencias_inconsistentes(informe, datos, historial) == []
+
+
+def test_sin_historial_no_avisa() -> None:
+    # Con un único punto (la semana actual) no hay serie con la que
+    # comparar — ni se afirma ni se descarta nada.
+    datos = _datos_brent(115.22)
+    informe = _informe_con(
+        macro_global=[
+            _noticia(
+                texto="Tres semanas seguidas de subidas.",
+                cifras=[{"valor": "115,22", "ref_datos": "brent"}],
+            )
+        ]
+    )
+    assert validacion.avisos_tendencias_inconsistentes(informe, datos, {}) == []
+
+
 # --- avisos_cifras_sin_verificar ---------------------------------------------
 
 
