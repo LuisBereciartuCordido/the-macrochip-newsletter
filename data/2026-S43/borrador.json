@@ -1,0 +1,312 @@
+{
+  "semana": "2026-S43",
+  "periodo": {
+    "inicio": "2026-10-19",
+    "fin": "2026-10-25"
+  },
+  "titular": {
+    "texto": "El Brent sube a máximos de seis meses ante el riesgo de Irán",
+    "noticia_id": "2026-S43-energia-01"
+  },
+  "lo_esencial": [
+    "El Brent roza los 116 dólares, su nivel más alto desde abril, por el riesgo de nuevos ataques a Irán.",
+    "La inflación del euro subió al 3,8 % en septiembre (España, 5,0 %).",
+    "Wall Street cerró la semana a la baja con el bono a 10 años cerca del 5 %.",
+    "China creció un 4,5 % en el tercer trimestre, empujada por las exportaciones.",
+    "El 29 de octubre decide el BCE; la actividad de la eurozona se enfría y Francia entra en contracción."
+  ],
+  "macro_global": [
+    {
+      "id": "2026-S43-macro-01",
+      "hilo_id": "bancos-centrales-tipos-2026",
+      "titulo": "Semana de bancos centrales: Fed, BCE y Banco de Japón",
+      "texto": "En los próximos días deciden sobre tipos de interés la Reserva Federal de EE. UU., el BCE (el 29 de octubre) y el Banco de Japón. El tipo de depósito del BCE está en el 2,5 % y el euro cotizaba a 1,1193 dólares el 23 de octubre. Es un calendario, no una predicción de lo que decidirán. ⚠️",
+      "por_que_importa": "Los tipos de los bancos centrales acaban determinando lo que pagas por una hipoteca y lo que te rinde un depósito.",
+      "confianza": "una_fuente",
+      "relevancia_espana_ue": "alta",
+      "fuentes": [
+        {
+          "url": "https://www.riotimesonline.com/key-market-events-for-the-week-of-october-26-30-2026",
+          "medio": "Rio Times",
+          "nivel": 2,
+          "fecha": "2026-10-24",
+          "idioma": "en"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "1,1193 USD por EUR (23-oct)",
+          "ref_datos": "eur_usd"
+        }
+      ]
+    }
+  ],
+  "modulos": {
+    "eeuu": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-eeuu-01",
+          "hilo_id": "bolsa-eeuu-2026",
+          "titulo": "Wall Street cede un 0,5 % en la semana con el bono a 10 años rozando el 5 %",
+          "texto": "El S&P 500 (el índice de las 500 mayores empresas de EE. UU.) perdió cerca de un 0,5 % en la semana y el Nasdaq (más tecnológico) un 0,7 %, según la cobertura de CNBC. Pudo influir la subida del petróleo y que el bono a 10 años de EE. UU. —lo que cobra el Estado por pedir prestado a 10 años— ronda el 5 %. Como referencia, el 21 de octubre el S&P 500 cerró en 7.757 puntos. ⚠️",
+          "por_que_importa": "Esa rentabilidad es el precio de referencia del dinero: cuando sube, hipotecas y préstamos tienden a encarecerse y las acciones resultan menos atractivas en comparación.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/10/22/stock-market-today-live-update.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-10-22",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "7.757,17 puntos (21-oct)",
+              "ref_datos": "sp500"
+            }
+          ]
+        }
+      ]
+    },
+    "europa": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-europa-01",
+          "hilo_id": "inflacion-eurozona-2026",
+          "titulo": "La inflación del euro llega al 3,8 % y en España al 5,0 %",
+          "texto": "Los precios en la eurozona subieron un 3,8 % en septiembre sobre el año anterior, frente al 3,2 % de agosto. La energía, que cuesta un 18,9 % más que hace un año, explica casi la mitad de esa cifra. En España, la inflación armonizada (la que permite comparar entre países) fue del 5,0 %. El dato es el definitivo de septiembre, publicado el 16 de octubre; la cifra de España coincide con la estimación del INE (el instituto de estadística español) del 29 de septiembre. ✅",
+          "por_que_importa": "Si los precios suben más rápido que tu sueldo o tus ahorros, cada euro compra menos. Y una inflación alta es lo que el BCE (el banco central del euro) intenta frenar subiendo los tipos.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-16102026-ap",
+              "medio": "Eurostat",
+              "nivel": 1,
+              "fecha": "2026-10-16",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.ine.es/dyngs/Prensa/en/adIPC0926.htm",
+              "medio": "INE",
+              "nivel": 1,
+              "fecha": "2026-09-29",
+              "idioma": "en",
+              "contexto_historico": true
+            }
+          ],
+          "cifras": []
+        },
+        {
+          "id": "2026-S43-europa-02",
+          "hilo_id": "actividad-eurozona-2026",
+          "titulo": "La actividad empresarial de la eurozona se enfría y Francia entra en contracción",
+          "texto": "El índice de directores de compras (PMI, una encuesta a empresas: por encima de 50 hay expansión) bajó a 51,9 en octubre desde 53,1 en septiembre, su nivel más bajo en cuatro meses y por debajo de lo previsto. Alemania sigue en 52,8, pero Francia cae a 48,4, es decir, contracción. Las empresas dicen que la energía y el transporte les encarecen los costes. El BCE (el banco central del euro) se reúne el 29 de octubre con el tipo de depósito en el 2,5 %. ⚠️",
+          "por_que_importa": "Menos actividad con precios altos es un dilema para el BCE: subir tipos frena los precios, pero también puede frenar más la economía.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.fxstreet.com/news/eurozone-hcob-composite-pmi-declines-to-519-in-october-vs-527-expected-202610230806",
+              "medio": "FXStreet",
+              "nivel": 2,
+              "fecha": "2026-10-23",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "2,5 %",
+              "ref_datos": "bce_tipo_deposito"
+            }
+          ]
+        }
+      ]
+    },
+    "asia_china": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-asia-01",
+          "hilo_id": "china-pib-2026",
+          "titulo": "China crece un 4,5 % en el tercer trimestre, gracias a las exportaciones",
+          "texto": "El PIB (todo lo que produce un país) de China subió un 4,5 % interanual entre julio y septiembre, algo más de lo previsto y por encima del 4,3 % del trimestre anterior. Lo tiran las exportaciones tecnológicas, sobre todo chips. Lo que flojea es el consumo (las ventas minoristas crecieron solo un 1,1 % en septiembre) y la inversión, con la vivienda aún en caída. En nueve meses lleva un 4,6 %, dentro del objetivo del Gobierno (4,5 %–5 %). ✅",
+          "por_que_importa": "China compra y vende a medio mundo: que crezca por exportar y no por consumir interno lo hace más dependiente de la demanda exterior.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.aljazeera.com/economy/2026/10/19/chinas-economy-grows-4-5-percent-in-q3-beating-forecasts",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-10-19",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.commerzbank.de/group/newsroom/publications/261019-eb-chinagrowth.html",
+              "medio": "Commerzbank",
+              "nivel": 2,
+              "fecha": "2026-10-19",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "emergentes": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-emergentes-01",
+          "hilo_id": "emergentes-mercados-2026",
+          "titulo": "Indonesia sufre su peor caída bursátil en casi tres décadas por una propuesta de MSCI",
+          "texto": "MSCI, el proveedor de índices que usan muchos fondos para decidir dónde invertir, propuso pasar a Indonesia de «emergente» a una categoría «independiente», más arriesgada. La bolsa tuvo su peor caída en casi 30 años y la rupia se acercó a su mínimo histórico (unas 18.000 por dólar). En paralelo, el banco central turco recortó los tipos 1 punto, al 36 %, con la inflación por debajo del 30 % por primera vez desde 2021. ⚠️",
+          "por_que_importa": "Muchos fondos indexados replican estos índices: un cambio de categoría obliga a vender o comprar sin que el país haya cambiado de la noche a la mañana.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.gramercy.com/2026/10/em-weekly-october-24-2026/",
+              "medio": "Gramercy",
+              "nivel": 3,
+              "fecha": "2026-10-24",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "energia_materias_primas": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-energia-01",
+          "hilo_id": "petroleo-ormuz-2026",
+          "titulo": "El Brent sube a máximos de seis meses ante el riesgo de Irán",
+          "texto": "El Brent (el crudo de referencia en Europa) valía 115,22 dólares el barril el 20 de octubre según FRED; la prensa lo sitúa por encima de 116 al cierre de la semana, su nivel más alto desde abril, con tres semanas seguidas de subidas. Se asocia con las informaciones sobre posibles nuevos ataques de EE. UU. e Israel a Irán y con el bloqueo del estrecho de Ormuz, por donde pasa cerca del 20 % del crudo marítimo mundial. Son dos fechas distintas: el dato oficial y el de prensa no se contradicen. ⚠️",
+          "por_que_importa": "Un petróleo caro encarece la gasolina y el transporte, y alimenta la inflación que el BCE intenta frenar.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/10/22/stock-market-today-live-update.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-10-22",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "115,22 USD/barril (20-oct)",
+              "ref_datos": "brent"
+            }
+          ]
+        }
+      ]
+    },
+    "tecnologia_ia": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-tecnologia-01",
+          "hilo_id": "ia-financiacion-2026",
+          "titulo": "Las grandes de la IA siguen bajo presión por el coste de financiarse",
+          "texto": "Esta semana no hubo un nuevo golpe, pero sigue el eco de la semana anterior: unas 20 de las mayores empresas de IA y chips perdieron más de un billón de dólares en bolsa el 15 de octubre. Un analista lo atribuyó a la preocupación por financiar tanta infraestructura con bonos al 5 %. Nvidia y otras reportan resultados en próximas semanas. 💬",
+          "por_que_importa": "Si financiarse cuesta más, las inversiones en IA que sostienen buena parte de la bolsa pueden revisarse.",
+          "confianza": "interpretacion",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/10/15/sk-hynix-samsung-softbank-stocks-asia-tech-rout-ai-funding-worries.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-10-15",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "geopolitica_riesgos": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S43-geopolitica-01",
+          "hilo_id": "iran-ormuz-2026",
+          "titulo": "Trump dice que habrá novedades con Irán «bastante pronto», pero todo apunta a después de las elecciones",
+          "texto": "El 21 de octubre Trump afirmó que EE. UU. no negocia con Irán y que «algo» ocurriría pronto, aunque añadió que mucha gente espera que sea tras las elecciones legislativas de noviembre. Medios estadounidenses informan de planes para nuevos ataques después de esa fecha; la Casa Blanca niega ataques antes de las elecciones. Irán amenaza con ampliar su respuesta si EE. UU. sigue escoltando petroleros por Ormuz. ⚠️",
+          "por_que_importa": "Cualquier escalada en Ormuz se nota rápido en el precio del petróleo y, por tanto, en la gasolina y la inflación.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://themedialine.org/headlines/president-trump-says-iran-outcome-coming-fairly-soon",
+              "medio": "The Media Line",
+              "nivel": 2,
+              "fecha": "2026-10-21",
+              "idioma": "en"
+            },
+            {
+              "url": "https://gulfnews.com/world/mena/us-could-strike-iran-this-weekend-envoy-says-2-1.500721685",
+              "medio": "Gulf News",
+              "nivel": 2,
+              "fecha": "2026-10-23",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    }
+  },
+  "concepto_semana": {
+    "id": "inflacion-subyacente",
+    "titulo": "Inflación subyacente",
+    "texto": "La inflación general mide todo lo que sube, incluida la energía y los alimentos frescos, que cambian mucho de un mes a otro. La subyacente los deja fuera para ver la tendencia de fondo. En España, la general fue del 4,9 % en septiembre y la subyacente del 3,1 %: la diferencia la pone sobre todo el carburante. Los bancos centrales la vigilan porque si también sube, significa que los precios altos se están extendiendo a toda la economía."
+  },
+  "perspectiva_largo_plazo": {
+    "estructural": [
+      "Una energía cara y un estrecho de Ormuz inestable mantienen la inflación alta y los tipos elevados más tiempo.",
+      "China depende cada vez más de exportar tecnología mientras su consumo y su vivienda siguen débiles."
+    ],
+    "ruido": [
+      "Los movimientos semanales del Nasdaq y del S&P 500.",
+      "Cada frase de Trump sobre Irán: el calendario ha cambiado varias veces desde julio."
+    ]
+  },
+  "fuentes_descartadas": [
+    {
+      "url": "https://intellectia.ai/blog/ai-stocks-selloff-october-2026",
+      "motivo": "contradictoria"
+    },
+    {
+      "url": "https://inflationtheguide.com/events/euro-area-inflation-final-september-2026/",
+      "motivo": "contradictoria"
+    }
+  ],
+  "cambios_verificador": [
+    {
+      "noticia_id": "2026-S43-eeuu-01",
+      "cambio": "Se eliminó la cifra de cierre diario del viernes y se dejó solo la variación semanal.",
+      "motivo": "Las fuentes no aclaraban la fecha exacta del cierre."
+    },
+    {
+      "noticia_id": "2026-S43-europa-01",
+      "cambio": "Se verificó 3,8 % y 5,0 % contra Eurostat y la nota del INE (29-sep), citada como contexto histórico.",
+      "motivo": "INE fecha anterior a la ventana de 10 días."
+    },
+    {
+      "noticia_id": "2026-S43-energia-01",
+      "cambio": "Se pasó de confirmado a una_fuente y se separaron las dos fechas (20-oct oficial, prensa al cierre).",
+      "motivo": "Solo una fuente de prensa respalda la cifra de cierre."
+    }
+  ]
+}
