@@ -5,11 +5,11 @@
     "fin": "2026-10-25"
   },
   "titular": {
-    "texto": "El Brent cae un 9 % pese al riesgo de ataques a Irán",
+    "texto": "El Brent toca máximos desde abril, pero el físico baja",
     "noticia_id": "2026-S43-energia-01"
   },
   "lo_esencial": [
-    "El Brent oficial cae casi un 9 % en la semana (115,22 $), aunque la prensa cita un precio mayor por el riesgo en Irán.",
+    "El Brent de futuros cerró en 116,72 $ el viernes, su nivel más alto desde abril, mientras el precio del crudo físico baja (115,22 $ el 20-oct).",
     "La inflación del euro subió al 3,8 % en septiembre (España, 5,0 %).",
     "Wall Street cerró la semana a la baja con el bono a 10 años cerca del 5 %.",
     "China creció un 4,5 % en el tercer trimestre, empujada por las exportaciones.",
@@ -188,24 +188,42 @@
         {
           "id": "2026-S43-energia-01",
           "hilo_id": "petroleo-ormuz-2026",
-          "titulo": "El Brent cae un 9 % en la semana pese al riesgo en Ormuz",
-          "texto": "El Brent (el crudo de referencia en Europa) cerró el 20 de octubre en 115,22 dólares el barril según FRED, un 8,95 % menos que los 126,55 de la semana anterior — la serie oficial cae, no sube. La prensa (CNBC) habla de un precio por encima de 116 y de una racha alcista, una cifra que no coincide con el dato oficial de esta semana: probablemente se refiere al futuro de Brent del mercado ICE, un instrumento distinto al precio spot que publica FRED y que puede moverse de forma diferente. Nos quedamos con el dato oficial, verificable y de fuente primaria. El trasfondo sigue siendo el riesgo de nuevos ataques de EE. UU. e Israel a Irán y un posible bloqueo del estrecho de Ormuz, por donde pasa cerca del 20 % del crudo marítimo mundial. ⚠️",
-          "por_que_importa": "Un petróleo volátil, al alza o a la baja según la fuente, complica la planificación de la gasolina y el transporte, y es justo lo que vigila el BCE de cara a la inflación.",
-          "confianza": "una_fuente",
+          "titulo": "El Brent toca máximos desde abril, pero el físico baja",
+          "texto": "Hay dos precios del Brent y esta semana se movieron en direcciones opuestas. El de futuros (contratos a un mes, el que sale en la prensa) cerró el viernes 23 de octubre en 116,72 dólares el barril: +3,1 % ese día, alrededor de un 6 % en la semana y su mayor cierre desde el 29 de abril. Pudo influir el temor a nuevos ataques de EE. UU. e Israel a Irán y los ataques hutíes a Arabia Saudí. El precio del crudo físico (el que se entrega de inmediato, publicado por la EIA a través de FRED) fue de 115,22 dólares el 20 de octubre, un 8,95 % menos que los 126,55 del 14 de octubre. Desde marzo el físico cotizaba muy por encima de los futuros, y esa prima se está cerrando: el físico baja y los futuros suben. Son fechas distintas (14 y 20 de octubre frente al cierre del viernes 23) y no hay contradicción. Por el estrecho de Ormuz pasa cerca del 20 % del crudo marítimo mundial. ✅",
+          "por_que_importa": "Los futuros marcan el precio que ven los mercados y el que acaba influyendo en la gasolina y el transporte, y alimentan la inflación que vigila el BCE.",
+          "confianza": "confirmado",
           "relevancia_espana_ue": "alta",
           "fuentes": [
             {
-              "url": "https://www.cnbc.com/2026/10/22/stock-market-today-live-update.html",
+              "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+              "medio": "FRED (EIA)",
+              "nivel": 1,
+              "fecha": "2026-10-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://cnbc.com/2026/10/23/oil-price-brent-wti-iran-war-saudi-arabia.html",
               "medio": "CNBC",
               "nivel": 2,
-              "fecha": "2026-10-22",
+              "fecha": "2026-10-23",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.riotimesonline.com/oil-markets-latam-friday-october-23-2026",
+              "medio": "Rio Times",
+              "nivel": 2,
+              "fecha": "2026-10-23",
               "idioma": "en"
             }
           ],
           "cifras": [
             {
-              "valor": "115,22 USD/barril (20-oct), -8,95 % semanal",
+              "valor": "115,22 USD/barril (20-oct)",
               "ref_datos": "brent"
+            },
+            {
+              "valor": "116,72 USD/barril (futuros, 23-oct)",
+              "ref_datos": null
             }
           ]
         }
@@ -310,8 +328,8 @@
     },
     {
       "noticia_id": "2026-S43-energia-01",
-      "cambio": "Corrección manual posterior: el titular, lo_esencial y el texto decían que el Brent subía a máximos de seis meses citando solo la prensa, cuando la serie oficial de datos duros cae un 8,95 % esa semana (126,55 -> 115,22). Se reescribió para reflejar la caída real y explicar que la cifra de prensa probablemente corresponde al futuro ICE Brent, no al spot oficial.",
-      "motivo": "El verificador automático descartó la diferencia como \"solo una fecha distinta\" sin comparar los números — detectado y corregido por revisión humana antes de enviar."
+      "cambio": "Segunda corrección: titular, lo_esencial y noticia pasan a presentar a la vez el Brent de futuros (116,72 $, máximo desde abril, 23-oct) y el spot oficial (115,22 $, 20-oct). Se retira «cae un 9 %» como titular.",
+      "motivo": "Nueva verificación: el spot (EIA/FRED) y los futuros ICE son instrumentos distintos con fechas distintas; el -8,95 % era del spot del 14 al 20 de octubre, no de la semana completa."
     }
   ]
 }
