@@ -33,7 +33,7 @@ _Semana del 19 al 25 de octubre de 2026_
 - **MSCI Europe (ETF):** 73.30 USD (<span style="color:#C23B2E">-1.07 %</span>)
 - **Nikkei 225:** 62,693 puntos (<span style="color:#C23B2E">-4.03 %</span>)
 - **Oro:** 4,007.90 USD/onza (<span style="color:#C23B2E">-4.14 %</span>)
-- **Brent:** 115.22 USD/barril (<span style="color:#C23B2E">-8.95 %</span>)
+- **Brent (físico):** 115.22 USD/barril (<span style="color:#C23B2E">-8.95 %</span>)
 - **EUR/USD:** 1.1193 USD (<span style="color:#C23B2E">-0.53 %</span>)
 
 

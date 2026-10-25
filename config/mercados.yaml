@@ -25,7 +25,7 @@
   nombre: "Oro"
   unidad: "USD/onza"
 - id: brent
-  nombre: "Brent"
+  nombre: "Brent (físico)"
   unidad: "USD/barril"
 - id: eur_usd
   nombre: "EUR/USD"
