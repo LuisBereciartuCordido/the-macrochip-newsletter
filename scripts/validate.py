@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -32,6 +33,31 @@ RAIZ = Path(__file__).resolve().parent.parent
 DATA_DIR = RAIZ / "data"
 CONFIG_DIR = RAIZ / "config"
 SCHEMA_PATH = RAIZ / "schema" / "informe.schema.json"
+
+_PATRON_SEMANA = re.compile(r"^\d{4}-S\d{2}$")
+MAX_SEMANAS_HISTORIAL = 8
+
+
+def _historial_de_semanas(data_dir: Path, semana_actual: str) -> dict[str, dict]:
+    """Hasta MAX_SEMANAS_HISTORIAL semanas con datos.json anteriores a semana_actual.
+
+    Usadas por avisos_tendencias_inconsistentes (sección 10) para contrastar
+    afirmaciones de tendencia contra la serie real. Compara por cadena
+    ("AAAA-Sww" ordena igual cronológicamente que como texto), sin asumir
+    que las semanas sean contiguas — puede haber huecos.
+    """
+    candidatas = sorted(
+        p.name
+        for p in data_dir.iterdir()
+        if p.is_dir()
+        and _PATRON_SEMANA.match(p.name)
+        and p.name < semana_actual
+        and (p / "datos.json").exists()
+    )
+    return {
+        nombre: json.loads((data_dir / nombre / "datos.json").read_text())
+        for nombre in candidatas[-MAX_SEMANAS_HISTORIAL:]
+    }
 
 
 def _errores_de_esquema(informe: dict, esquema: dict) -> list[str]:
@@ -74,6 +100,7 @@ def validar_informe(
     fuentes_cfg: dict,
     antiguedad_maxima_dias: int = 10,
     comprobar_enlaces: bool = True,
+    historial_semanas: Mapping[str, dict] | None = None,
 ) -> ResultadoValidacion:
     """Corre todas las comprobaciones de la sección 10 sobre un informe ya cargado."""
     resultado = ResultadoValidacion()
@@ -107,6 +134,9 @@ def validar_informe(
     resultado.avisos.extend(validacion.avisos_titular_largo(informe))
     resultado.avisos.extend(validacion.avisos_concepto_semana_largo(informe))
     resultado.avisos.extend(validacion.avisos_cifras_sin_verificar(informe))
+    resultado.avisos.extend(
+        validacion.avisos_tendencias_inconsistentes(informe, datos, historial_semanas or {})
+    )
 
     if comprobar_enlaces:
         errores_enlaces, avisos_enlaces = comprobar_enlaces_informe(informe)
@@ -155,6 +185,7 @@ def main(argv: list[str] | None = None) -> int:
     _validar_forma_de_palabras(palabras)
     modulos_cfg = yaml.safe_load((CONFIG_DIR / "modulos.yaml").read_text())
     fuentes_cfg = yaml.safe_load((CONFIG_DIR / "fuentes.yaml").read_text())
+    historial_semanas = _historial_de_semanas(DATA_DIR, args.semana)
 
     try:
         resultado = validar_informe(
@@ -163,6 +194,7 @@ def main(argv: list[str] | None = None) -> int:
             esquema=esquema,
             palabras=palabras,
             antiguedad_maxima_dias=fuentes_cfg["antiguedad_maxima_dias"],
+            historial_semanas=historial_semanas,
             modulos_cfg=modulos_cfg,
             fuentes_cfg=fuentes_cfg,
             comprobar_enlaces=not args.sin_comprobar_enlaces,

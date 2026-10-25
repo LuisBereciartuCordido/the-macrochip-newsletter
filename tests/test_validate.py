@@ -208,6 +208,30 @@ def test_forma_de_palabras_entrada_invalida_lanza_value_error() -> None:
         validate._validar_forma_de_palabras({"sensacionalismo": [{"algo": "x"}]})
 
 
+def test_main_lee_el_historial_y_avisa_de_tendencia_inconsistente(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(validate, "DATA_DIR", tmp_path)
+
+    (tmp_path / "2026-S42").mkdir()
+    (tmp_path / "2026-S42" / "datos.json").write_text(json.dumps({"brent": {"valor": 126.55}}))
+
+    informe = copy.deepcopy(_informe_minimo_valido())
+    informe["semana"] = "2026-S43"
+    informe["periodo"] = {"inicio": "2026-10-19", "fin": "2026-10-25"}
+    informe["macro_global"][0]["fuentes"][0]["fecha"] = "2026-10-20"
+    informe["macro_global"][0]["texto"] += " El Brent sube, dos semanas seguidas de subidas."
+    informe["macro_global"][0]["cifras"] = [{"valor": "115,22", "ref_datos": "brent"}]
+    carpeta = _escribir_semana(tmp_path, "2026-S43", informe, {"brent": {"valor": 115.22}})
+
+    codigo = validate.main(["--semana", "2026-S43", "--sin-comprobar-enlaces"])
+
+    assert codigo == 0  # es un aviso, no bloquea
+    log_contenido = json.loads((carpeta / "log.json").read_text())
+    avisos = " ".join(log_contenido["validacion"]["avisos"])
+    assert "brent" in avisos
+
+
 def _escribir_semana(tmp_path: Path, semana: str, informe: dict, datos: dict) -> Path:
     carpeta = tmp_path / semana
     carpeta.mkdir()

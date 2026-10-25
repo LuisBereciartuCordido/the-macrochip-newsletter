@@ -450,3 +450,99 @@ def avisos_modulo_sin_fuentes_fiables(informe: dict) -> list[str]:
         if niveles and niveles.issubset({3}):
             avisos.append(f"Módulo '{id_modulo}': ninguna fuente de nivel 1 o 2")
     return avisos
+
+
+_NUMEROS_ES = {
+    "dos": 2, "tres": 3, "cuatro": 4, "cinco": 5, "seis": 6,
+    "siete": 7, "ocho": 8, "nueve": 9, "diez": 10, "doce": 12,
+}
+
+_PATRON_SEMANAS_SEGUIDAS = re.compile(
+    r"(\d+|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\s+semanas?\s+(seguidas|consecutivas)"
+)
+_PATRON_MAXIMO_MESES = re.compile(r"\bmaximos?\b.{0,20}?(\d+|tres|seis|nueve|doce)\s+mes(es)?")
+_PATRON_MINIMO_MESES = re.compile(r"\bminimos?\b.{0,20}?(\d+|tres|seis|nueve|doce)\s+mes(es)?")
+
+_PALABRAS_ALZA = ("alza", "subida", "suben", "sube", "subiendo", "repunte", "repunta")
+_PALABRAS_BAJA = ("baja", "caida", "cae", "caen", "cayendo", "descenso", "desciende")
+
+
+def _a_entero(texto: str) -> int:
+    texto = texto.strip()
+    return int(texto) if texto.isdigit() else _NUMEROS_ES.get(texto, 0)
+
+
+def avisos_tendencias_inconsistentes(
+    informe: dict, datos: Mapping[str, dict], historial_semanas: Mapping[str, dict]
+) -> list[str]:
+    """Avisa si una noticia afirma una tendencia que la propia serie de datos
+    duros no respalda: "N semanas seguidas al alza/a la baja" cuando la
+    serie no sube/baja esas N semanas, o "máximo/mínimo de N meses" cuando
+    el valor actual no es, de hecho, el máximo/mínimo de las semanas
+    disponibles.
+
+    `datos` es el datos.json de esta semana (el mismo que usa
+    validar_cifras). `historial_semanas` es {semana_iso: datos.json de esa
+    semana} de semanas **anteriores**, en cualquier orden — se ordena aquí
+    por la clave (funciona porque "AAAA-Sww" ordena cronológicamente como
+    cadena) y se le añade al final el valor de esta semana, para que la
+    serie siempre termine en el dato que la noticia está citando ahora.
+
+    No bloquea: es texto libre, el patrón es aproximado por diseño (más
+    falsos negativos que falsos positivos). Hallazgo real (semana
+    2026-S43): una noticia sobre el Brent decía "tres semanas seguidas de
+    subidas" cuando la serie real de datos duros había caído la última
+    semana, y la regla previa del paquete de contexto permitía
+    descartarlo como "solo una diferencia de fecha" sin comprobar los
+    números.
+    """
+    semanas_ordenadas = sorted(historial_semanas)
+    avisos = []
+    for ubicacion, noticia in todas_las_noticias(informe):
+        texto = _normalizar(f"{noticia['titulo']} {noticia['texto']}")
+        for cifra in noticia.get("cifras", []):
+            ref = cifra["ref_datos"]
+            if ref is None or ref not in datos:
+                continue
+            serie = [
+                historial_semanas[semana][ref]["valor"]
+                for semana in semanas_ordenadas
+                if ref in historial_semanas[semana]
+            ]
+            serie.append(datos[ref]["valor"])
+            if len(serie) < 2:
+                continue
+
+            coincidencia = _PATRON_SEMANAS_SEGUIDAS.search(texto)
+            if coincidencia:
+                n = _a_entero(coincidencia.group(1))
+                if 2 <= n <= len(serie):
+                    ventana = serie[-n:]
+                    sube_siempre = all(b > a for a, b in zip(ventana, ventana[1:]))
+                    baja_siempre = all(b < a for a, b in zip(ventana, ventana[1:]))
+                    dice_alza = any(p in texto for p in _PALABRAS_ALZA)
+                    dice_baja = any(p in texto for p in _PALABRAS_BAJA)
+                    if dice_alza and not sube_siempre:
+                        avisos.append(
+                            f"[{ubicacion}] {noticia['id']}: dice \"{n} semanas seguidas\" al "
+                            f"alza sobre '{ref}', pero la serie real no sube esas {n} semanas "
+                            f"seguidas ({ventana})"
+                        )
+                    elif dice_baja and not baja_siempre:
+                        avisos.append(
+                            f"[{ubicacion}] {noticia['id']}: dice \"{n} semanas seguidas\" a la "
+                            f"baja sobre '{ref}', pero la serie real no baja esas {n} semanas "
+                            f"seguidas ({ventana})"
+                        )
+
+            if _PATRON_MAXIMO_MESES.search(texto) and serie[-1] != max(serie):
+                avisos.append(
+                    f"[{ubicacion}] {noticia['id']}: dice un máximo reciente sobre '{ref}', "
+                    f"pero no es el valor más alto del historial disponible ({serie})"
+                )
+            if _PATRON_MINIMO_MESES.search(texto) and serie[-1] != min(serie):
+                avisos.append(
+                    f"[{ubicacion}] {noticia['id']}: dice un mínimo reciente sobre '{ref}', "
+                    f"pero no es el valor más bajo del historial disponible ({serie})"
+                )
+    return avisos
