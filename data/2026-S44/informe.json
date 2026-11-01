@@ -1,0 +1,424 @@
+{
+  "semana": "2026-S44",
+  "periodo": {
+    "inicio": "2026-10-26",
+    "fin": "2026-11-01"
+  },
+  "titular": {
+    "texto": "Lagarde dejará el BCE en febrero, antes de tiempo",
+    "noticia_id": "2026-S44-macro-02"
+  },
+  "lo_esencial": [
+    "Lagarde dejará la presidencia del BCE en febrero de 2027, antes de acabar su mandato.",
+    "La Fed mantuvo los tipos en el 3,75-4 %, con dos votos a favor de subirlos.",
+    "La eurozona creció un 0,4 % en el tercer trimestre; Francia se contrajo.",
+    "Los futuros del Brent subieron un 13,6 % en octubre por Ormuz.",
+    "Alphabet, Microsoft y Amazon mantienen un gasto enorme en IA y la bolsa pide caja."
+  ],
+  "macro_global": [
+    {
+      "id": "2026-S44-macro-01",
+      "hilo_id": "fed-tipos-2026",
+      "titulo": "La Fed mantiene los tipos, pero dos miembros querían subirlos",
+      "texto": "La Reserva Federal (el banco central de EE. UU.) dejó el precio del dinero en el 3,75-4 % el 28 de octubre. La votación fue 10 a 2: dos miembros del comité pedían una subida de 0,25 puntos. El comunicado describe la economía como en expansión «a un ritmo fuerte» y la inflación como «elevada». Antes de la reunión, el mercado veía solo un 7 % de probabilidad de subida en octubre. ✅",
+      "por_que_importa": "Si el dinero sigue caro en EE. UU., arrastra al alza los tipos del resto del mundo, y eso acaba encareciendo hipotecas y préstamos también aquí.",
+      "confianza": "confirmado",
+      "relevancia_espana_ue": "media",
+      "fuentes": [
+        {
+          "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+          "medio": "Reserva Federal",
+          "nivel": 1,
+          "fecha": "2026-10-28",
+          "idioma": "en"
+        },
+        {
+          "url": "https://investinglive.com/central-banks/fomc-decision-oct-28/",
+          "medio": "investingLive",
+          "nivel": 2,
+          "fecha": "2026-10-28",
+          "idioma": "en"
+        }
+      ],
+      "cifras": []
+    },
+    {
+      "id": "2026-S44-macro-02",
+      "hilo_id": "bce-tipos-2026",
+      "titulo": "El BCE mantiene tipos y Lagarde anuncia que se marcha en febrero",
+      "texto": "El BCE (el banco central de la zona euro) dejó el tipo de depósito en el 2,5 % el 29 de octubre. Debatió una subida, pero decidió esperar a diciembre. La inflación de la eurozona fue del 3,8 % en septiembre, empujada por la energía. Christine Lagarde dejará la presidencia tras la reunión de febrero de 2027, unos ocho meses antes de que acabe su mandato. ✅",
+      "por_que_importa": "El BCE marca el precio del dinero en el euro: sus decisiones influyen en lo que pagas por la hipoteca variable y en lo que rinden los depósitos.",
+      "confianza": "confirmado",
+      "relevancia_espana_ue": "alta",
+      "fuentes": [
+        {
+          "url": "https://www.ecb.europa.eu/press/press_conference/monetary-policy-statement/2026/html/ecb.is261029~5c5ffe99e5.en.html",
+          "medio": "BCE",
+          "nivel": 1,
+          "fecha": "2026-10-29",
+          "idioma": "en"
+        },
+        {
+          "url": "https://www.euronews.com/2026/10/29/ecb-holds-rates-at-25-as-lagarde-announces-early-exit-with-inflation-near-double-the-targe",
+          "medio": "Euronews",
+          "nivel": 2,
+          "fecha": "2026-10-29",
+          "idioma": "en"
+        }
+      ],
+      "cifras": []
+    }
+  ],
+  "modulos": {
+    "eeuu": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-eeuu-01",
+          "hilo_id": "pib-eeuu-2026",
+          "titulo": "La economía de EE. UU. aceleró al 3,4 % anual en el tercer trimestre",
+          "texto": "El PIB (el valor de todo lo que produce un país) creció a un ritmo anualizado del 3,4 % entre julio y septiembre, frente al 2,2 % del trimestre anterior. Tiraron la inversión de las empresas, el consumo y el gasto público; las exportaciones restaron. Es una estimación avanzada y se revisará. ✅",
+          "por_que_importa": "Una economía fuerte da a la Fed motivos para no bajar tipos, lo que mantiene caro el crédito en dólares.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026",
+              "medio": "BEA",
+              "nivel": 1,
+              "fecha": "2026-10-29",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        },
+        {
+          "id": "2026-S44-eeuu-02",
+          "hilo_id": "bolsa-eeuu-2026",
+          "titulo": "El S&P 500 cierra el 29 de octubre en 7.720 puntos",
+          "texto": "El S&P 500 (índice de las 500 grandes empresas de EE. UU.) cerró el 29 de octubre en 7.720,39 puntos, frente a los 7.659,44 del 16 de octubre. El 27, la bolsa subió con el optimismo por la IA antes de los resultados de las grandes tecnológicas. ⚠️",
+          "por_que_importa": "Buena parte de la subida del año descansa en pocas tecnológicas, así que tu fondo indexado depende más de ellas de lo que parece.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://gvwire.com/2026/10/27/wall-street-rises-as-ai-momentum-holds-heading-into-key-earnings-fed-decision/",
+              "medio": "Reuters (vía GV Wire)",
+              "nivel": 2,
+              "fecha": "2026-10-27",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "7.720,39",
+              "ref_datos": "sp500"
+            }
+          ]
+        }
+      ]
+    },
+    "europa": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-europa-01",
+          "hilo_id": "europa-pib-2026",
+          "titulo": "La eurozona crece un 0,4 % y España destaca; Francia se contrae",
+          "texto": "La eurozona creció un 0,4 % trimestral entre julio y septiembre (1,3 % interanual), según la estimación preliminar de Eurostat. España avanzó un 0,6 % (2,7 % interanual) y Francia retrocedió un 0,1 %. ✅",
+          "por_que_importa": "España tira del crecimiento europeo, mientras Francia, segunda economía del euro, se frena.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/2-30102026-ap",
+              "medio": "Eurostat",
+              "nivel": 1,
+              "fecha": "2026-10-30",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        },
+        {
+          "id": "2026-S44-europa-02",
+          "hilo_id": "francia-deuda-2026",
+          "titulo": "La deuda francesa roza el 5 % de rentabilidad",
+          "texto": "El bono francés a 10 años superó el 5 % por primera vez desde 2002 la semana pasada y rondaba ese nivel el jueves, unos 1,55 puntos por encima del alemán. Moody's mantiene la nota, pero con perspectiva negativa. En la rueda de prensa del BCE se habló de la deuda francesa. ⚠️",
+          "por_que_importa": "Cuando a Francia le cuesta más endeudarse, se encarece el crédito en toda la zona euro, también para España.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.euronews.com/2026/10/29/ecb-holds-rates-at-25-as-lagarde-announces-early-exit-with-inflation-near-double-the-targe",
+              "medio": "Euronews",
+              "nivel": 2,
+              "fecha": "2026-10-29",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.ecb.europa.eu/press/press_conference/monetary-policy-statement/2026/html/ecb.is261029~5c5ffe99e5.en.html",
+              "medio": "BCE",
+              "nivel": 1,
+              "fecha": "2026-10-29",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "asia_china": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-asia-01",
+          "hilo_id": "china-pmi-2026",
+          "titulo": "La actividad industrial china se contrae en octubre",
+          "texto": "El PMI oficial de manufacturas (una encuesta a directivos de fábricas: por debajo de 50 indica contracción) bajó a 49,3 en octubre desde 50,1. Producción y pedidos nuevos cayeron. La estadística oficial lo atribuye en parte a compras adelantadas antes de la fiesta nacional. La alta tecnología siguió creciendo. ⚠️",
+          "por_que_importa": "China compra y vende a medio mundo: si su industria se enfría, se notan los precios de materias primas y las exportaciones europeas.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "http://global.chinadaily.com.cn/a/202610/31/WS6ae561fbe4b06d4aa05663b0.html",
+              "medio": "China Daily",
+              "nivel": 2,
+              "fecha": "2026-10-31",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        },
+        {
+          "id": "2026-S44-asia-02",
+          "hilo_id": "boj-japon-2026",
+          "titulo": "Japón mantiene tipos con un voto a favor de subir",
+          "texto": "El Banco de Japón dejó el tipo en el 1,25 % (8 votos a 1; el discrepante quería el 1,5 %) y abrió la puerta a subir en diciembre. El Nikkei 225 cerró el 30 de octubre en 63.290,11 puntos. ⚠️",
+          "por_que_importa": "Si Japón sube tipos, el dinero barato japonés que financia inversiones por el mundo se encarece.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.gramercy.com/2026/10/em-weekly-october-31-2026/",
+              "medio": "Gramercy",
+              "nivel": 3,
+              "fecha": "2026-10-31",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "63.290,11",
+              "ref_datos": "nikkei225"
+            }
+          ]
+        }
+      ]
+    },
+    "emergentes": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-emergentes-01",
+          "hilo_id": "brasil-elecciones-2026",
+          "titulo": "Brasil: tras ganar Lula, bolsa y real se desploman en un día",
+          "texto": "Lula ganó la segunda vuelta del 25 de octubre con el 51,8 % de los votos. El lunes siguiente, según Gramercy (gestora de inversión), el Ibovespa (bolsa brasileña) cayó casi un 14 % y el real perdió cerca de un 8 % frente al dólar, su peor día desde 1999. Es una sola fuente y no está contrastada con B3, la bolsa. ⚠️",
+          "por_que_importa": "Brasil pesa mucho en los fondos de emergentes, así que un movimiento así llega a carteras españolas.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.gramercy.com/2026/10/em-weekly-october-31-2026/",
+              "medio": "Gramercy",
+              "nivel": 3,
+              "fecha": "2026-10-31",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "energia_materias_primas": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-energia-01",
+          "hilo_id": "petroleo-ormuz-2026",
+          "titulo": "El Brent sube un 13,6 % en octubre con los futuros en máximos desde abril",
+          "texto": "Los futuros del Brent (el crudo de referencia en Europa) cerraron el 30 de octubre a 113,43 dólares (contrato de enero) y subieron un 13,6 % en el mes, tras un ataque a un petrolero en Ormuz. El dato oficial de FRED, un precio de contado distinto, marcó 123,1 dólares el 27 de octubre, por debajo de los 126,55 del 14 de octubre: no miden lo mismo ni el mismo día. ✅",
+          "por_que_importa": "El petróleo caro encarece gasolina y transporte, y alimenta la inflación.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.koreatimes.co.kr/world/20261031/oil-jumps-2-settles-at-6-month-highs-on-fears-of-escalation-in-iran",
+              "medio": "Reuters (vía Korea Times)",
+              "nivel": 2,
+              "fecha": "2026-10-31",
+              "idioma": "en"
+            },
+            {
+              "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+              "medio": "FRED (Fed de St. Louis)",
+              "nivel": 1,
+              "fecha": "2026-10-27",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "123,1",
+              "ref_datos": "brent"
+            }
+          ]
+        }
+      ]
+    },
+    "tecnologia_ia": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-tecnologia-01",
+          "hilo_id": "ia-capex-2026",
+          "titulo": "Las grandes tecnológicas gastan en IA y la bolsa pide caja",
+          "texto": "Alphabet mantuvo su gasto en inversión (capex) en 195.000-205.000 millones de dólares y cayó cerca de un 10 % fuera de horario por flujo de caja negativo. Microsoft lo recortó a 170.000 millones y superó previsiones (Azure +48 %). Amazon mantuvo 220.000 millones, con caja libre de -42.400 millones. ⚠️",
+          "por_que_importa": "Gran parte de la bolsa de EE. UU. depende de que esa inversión en IA se rentabilice.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-10-29",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/10/29/amazon-amzn-q3-earnings-report-2026.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-10-29",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        },
+        {
+          "id": "2026-S44-tecnologia-02",
+          "hilo_id": "ia-financiacion-2026",
+          "titulo": "Anthropic presenta su salida a bolsa",
+          "texto": "Anthropic registró el 26 de octubre su solicitud para cotizar en el Nasdaq. Aún no hay precio ni número de acciones, y las cifras de ingresos varían según el medio, así que no las damos. ⚠️",
+          "por_que_importa": "Una salida a bolsa de ese tamaño absorbe dinero que podría ir a otras acciones.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://gvwire.com/2026/10/27/wall-street-rises-as-ai-momentum-holds-heading-into-key-earnings-fed-decision/",
+              "medio": "Reuters (vía GV Wire)",
+              "nivel": 2,
+              "fecha": "2026-10-27",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "geopolitica_riesgos": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S44-geopolitica-01",
+          "hilo_id": "iran-ormuz-2026",
+          "titulo": "Irán y EE. UU. siguen hablando sin acuerdo en Ormuz",
+          "texto": "Trump dijo el 1 de noviembre que las negociaciones con Irán van «bien», pero que no tiene «tanta prisa». Irán amenaza con ataques contra buques de EE. UU. Mientras, un petrolero fue atacado con explosivos en Ormuz el 30 de octubre. ✅",
+          "por_que_importa": "El estrecho de Ormuz es clave para el petróleo mundial: mientras siga cerrado, la energía seguirá cara.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.aljazeera.com/news/liveblog/2026/11/1/iran-war-live-araghchi-says-talks-under-way-on-2-day-plan-to-reopen-hormuz?update=5106057",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-01",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.koreatimes.co.kr/world/20261031/oil-jumps-2-settles-at-6-month-highs-on-fears-of-escalation-in-iran",
+              "medio": "Reuters (vía Korea Times)",
+              "nivel": 2,
+              "fecha": "2026-10-31",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    }
+  },
+  "concepto_semana": {
+    "id": "prima-de-riesgo",
+    "titulo": "Prima de riesgo",
+    "texto": "Es la diferencia entre lo que paga un país por endeudarse y lo que paga Alemania, que se toma como referencia segura. Si el bono francés a 10 años rinde un 5 % y el alemán un 3,45 %, la diferencia es de 1,55 puntos. Cuanto mayor, más desconfianza del mercado hacia esa deuda. Importa porque sube el coste de financiarse y se contagia a otros países."
+  },
+  "perspectiva_largo_plazo": {
+    "estructural": [
+      "Los bancos centrales siguen en modo de subidas de tipos, lo que mantiene el crédito caro durante años.",
+      "La inversión en IA es enorme y su rentabilidad se está poniendo a prueba."
+    ],
+    "ruido": [
+      "Los movimientos diarios del petróleo ligados a cada ataque o declaración sobre Ormuz.",
+      "La caída de un día de una bolsa concreta tras unas elecciones."
+    ]
+  },
+  "fuentes_descartadas": [
+    {
+      "url": "https://www.rttnews.com/3379251/ecb-hikes-rates-again-as-lagarde-leaves-door-open-for-pause-ahead.aspx?type=alleco",
+      "motivo": "contradictoria"
+    },
+    {
+      "url": "https://www.goldprice.org/gold-price-today",
+      "motivo": "contradictoria"
+    },
+    {
+      "url": "https://www.usagold.com/daily-precious-metals-market-report-october-30-2026/",
+      "motivo": "otro"
+    },
+    {
+      "url": "https://qncnews.com/2026/10/31/nikkei-plunges-as-ai-selloff-overwhelms-bank-of-japan-rate-hold/",
+      "motivo": "otro"
+    },
+    {
+      "url": "https://www.babypips.com/analysis/financial-forex-market-weekly-recap-october-30-2026",
+      "motivo": "otro"
+    },
+    {
+      "url": "https://www.terradaily.com/reports/Chinas_factory_activity_shrinks_for_seventh_straight_month_999.html",
+      "motivo": "antigua"
+    }
+  ],
+  "cambios_verificador": [
+    {
+      "noticia_id": "2026-S44-emergentes-01",
+      "cambio": "Confianza fijada en una_fuente y atribuida la cifra a Gramercy.",
+      "motivo": "Solo una fuente abierta; búsqueda no verificó el cierre."
+    },
+    {
+      "noticia_id": "2026-S44-energia-01",
+      "cambio": "Aclarado que FRED (contado) y futuros miden cosas distintas con fechas distintas.",
+      "motivo": "El spot cae 14→27 oct mientras los futuros suben en el mes; no es contradicción."
+    },
+    {
+      "noticia_id": "2026-S44-tecnologia-01",
+      "cambio": "Cifras de Alphabet marcadas como movimiento fuera de horario.",
+      "motivo": "No es cierre confirmado."
+    },
+    {
+      "noticia_id": "2026-S44-asia-02",
+      "cambio": "Eliminada la causa de la caída del Nikkei.",
+      "motivo": "Las fuentes que la atribuían a la IA no se pudieron abrir."
+    }
+  ]
+}
