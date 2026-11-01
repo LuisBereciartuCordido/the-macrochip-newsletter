@@ -1,0 +1,62 @@
+{
+  "validacion_intentos": [
+    {
+      "errores": [],
+      "avisos": [
+        "Módulo 'eeuu': 170 palabras, supera el límite de 110",
+        "Módulo 'europa': 141 palabras, supera el límite de 110",
+        "Módulo 'asia_china': 148 palabras, supera el límite de 110",
+        "Módulo 'tecnologia_ia': 135 palabras, supera el límite de 110",
+        "[eeuu] 2026-S44-eeuu-01: 'BEA' es el 100% de sus fuentes (umbral: 50%)",
+        "[eeuu] 2026-S44-eeuu-02: 'Reuters (vía GV Wire)' es el 100% de sus fuentes (umbral: 50%)",
+        "[europa] 2026-S44-europa-01: 'Eurostat' es el 100% de sus fuentes (umbral: 50%)",
+        "[asia_china] 2026-S44-asia-01: 'China Daily' es el 100% de sus fuentes (umbral: 50%)",
+        "[asia_china] 2026-S44-asia-02: 'Gramercy' es el 100% de sus fuentes (umbral: 50%)",
+        "[emergentes] 2026-S44-emergentes-01: 'Gramercy' es el 100% de sus fuentes (umbral: 50%)",
+        "[tecnologia_ia] 2026-S44-tecnologia-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+        "[tecnologia_ia] 2026-S44-tecnologia-02: 'Reuters (vía GV Wire)' es el 100% de sus fuentes (umbral: 50%)",
+        "Módulo 'emergentes': ninguna fuente de nivel 1 o 2",
+        "investinglive.com: dominio no catalogado en fuentes.yaml",
+        "euronews.com: dominio no catalogado en fuentes.yaml",
+        "gvwire.com: dominio no catalogado en fuentes.yaml",
+        "global.chinadaily.com.cn: dominio no catalogado en fuentes.yaml",
+        "gramercy.com: dominio no catalogado en fuentes.yaml",
+        "koreatimes.co.kr: dominio no catalogado en fuentes.yaml",
+        "https://gvwire.com/2026/10/27/wall-street-rises-as-ai-momentum-holds-heading-into-key-earnings-fed-decision/ devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://investinglive.com/central-banks/fomc-decision-oct-28/ devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/10/29/amazon-amzn-q3-earnings-report-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.gramercy.com/2026/10/em-weekly-october-31-2026/ devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+      ]
+    }
+  ],
+  "validacion": {
+    "errores": [],
+    "avisos": [
+      "Módulo 'eeuu': 170 palabras, supera el límite de 110",
+      "Módulo 'europa': 141 palabras, supera el límite de 110",
+      "Módulo 'asia_china': 148 palabras, supera el límite de 110",
+      "Módulo 'tecnologia_ia': 135 palabras, supera el límite de 110",
+      "[eeuu] 2026-S44-eeuu-01: 'BEA' es el 100% de sus fuentes (umbral: 50%)",
+      "[eeuu] 2026-S44-eeuu-02: 'Reuters (vía GV Wire)' es el 100% de sus fuentes (umbral: 50%)",
+      "[europa] 2026-S44-europa-01: 'Eurostat' es el 100% de sus fuentes (umbral: 50%)",
+      "[asia_china] 2026-S44-asia-01: 'China Daily' es el 100% de sus fuentes (umbral: 50%)",
+      "[asia_china] 2026-S44-asia-02: 'Gramercy' es el 100% de sus fuentes (umbral: 50%)",
+      "[emergentes] 2026-S44-emergentes-01: 'Gramercy' es el 100% de sus fuentes (umbral: 50%)",
+      "[tecnologia_ia] 2026-S44-tecnologia-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+      "[tecnologia_ia] 2026-S44-tecnologia-02: 'Reuters (vía GV Wire)' es el 100% de sus fuentes (umbral: 50%)",
+      "Módulo 'emergentes': ninguna fuente de nivel 1 o 2",
+      "investinglive.com: dominio no catalogado en fuentes.yaml",
+      "euronews.com: dominio no catalogado en fuentes.yaml",
+      "gvwire.com: dominio no catalogado en fuentes.yaml",
+      "global.chinadaily.com.cn: dominio no catalogado en fuentes.yaml",
+      "gramercy.com: dominio no catalogado en fuentes.yaml",
+      "koreatimes.co.kr: dominio no catalogado en fuentes.yaml",
+      "https://gvwire.com/2026/10/27/wall-street-rises-as-ai-momentum-holds-heading-into-key-earnings-fed-decision/ devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://investinglive.com/central-banks/fomc-decision-oct-28/ devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/29/amazon-amzn-q3-earnings-report-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.gramercy.com/2026/10/em-weekly-october-31-2026/ devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+    ]
+  }
+}
