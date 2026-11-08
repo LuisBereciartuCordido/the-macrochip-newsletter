@@ -1,0 +1,80 @@
+{
+  "validacion_intentos": [
+    {
+      "errores": [
+        "https://finimize.com/content/china-stocks-jumped-as-us-election-results-sparked-bargain-hunting no respondió correctamente tras 2 intentos (HTTP 405)",
+        "https://leprivatebanker.com/2026/11/06/oil-swings-near-100-as-iran-studies-qatari-nuclear-proposals-and-offers-hormuz-reopening-within-two-days-on-sanctions-relief/ no respondió correctamente tras 2 intentos (HTTPSConnectionPool(host='leprivatebanker.com', port=443): Max retries exceeded with url: /2026/11/06/oil-swings-near-100-as-iran-studies-qatari-nuclear-proposals-and-offers-hormuz-reopening-within-two-days-on-sanctions-relief/ (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response'))))"
+      ],
+      "avisos": [
+        "Módulo 'eeuu': 256 palabras, supera el límite de 110",
+        "Módulo 'europa': 224 palabras, supera el límite de 110",
+        "Módulo 'asia_china': 248 palabras, supera el límite de 110",
+        "Módulo 'emergentes': 111 palabras, supera el límite de 110",
+        "Módulo 'energia_materias_primas': 127 palabras, supera el límite de 110",
+        "[europa] 2026-S45-europa-02: 'Banco de Inglaterra' es el 100% de sus fuentes (umbral: 50%)",
+        "[geopolitica_riesgos] 2026-S45-geopolitica-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+        "eurasiabusinessnews.com: dominio no catalogado en fuentes.yaml",
+        "cbsnews.com: dominio no catalogado en fuentes.yaml",
+        "brecorder.com: dominio no catalogado en fuentes.yaml",
+        "newsonjapan.com: dominio no catalogado en fuentes.yaml",
+        "finimize.com: dominio no catalogado en fuentes.yaml",
+        "hdfcsky.com: dominio no catalogado en fuentes.yaml",
+        "leprivatebanker.com: dominio no catalogado en fuentes.yaml",
+        "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026 devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.bls.gov/news.release/empsit.nr0.htm devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/10/16/india-rupee-rbi-dollar-iran-war.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/03/iran-us-vance-trump-strikes.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/04/euro-zone-cpi-inflation-october-ecb-rate-hike.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+      ]
+    },
+    {
+      "errores": [],
+      "avisos": [
+        "Módulo 'eeuu': 256 palabras, supera el límite de 110",
+        "Módulo 'europa': 224 palabras, supera el límite de 110",
+        "Módulo 'asia_china': 208 palabras, supera el límite de 110",
+        "Módulo 'emergentes': 111 palabras, supera el límite de 110",
+        "Módulo 'energia_materias_primas': 123 palabras, supera el límite de 110",
+        "[europa] 2026-S45-europa-02: 'Banco de Inglaterra' es el 100% de sus fuentes (umbral: 50%)",
+        "[asia_china] 2026-S45-asia-02: 'Business Recorder (Reuters)' es el 100% de sus fuentes (umbral: 50%)",
+        "[geopolitica_riesgos] 2026-S45-geopolitica-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+        "eurasiabusinessnews.com: dominio no catalogado en fuentes.yaml",
+        "cbsnews.com: dominio no catalogado en fuentes.yaml",
+        "brecorder.com: dominio no catalogado en fuentes.yaml",
+        "newsonjapan.com: dominio no catalogado en fuentes.yaml",
+        "hdfcsky.com: dominio no catalogado en fuentes.yaml",
+        "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026 devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.bls.gov/news.release/empsit.nr0.htm devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/10/16/india-rupee-rbi-dollar-iran-war.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/03/iran-us-vance-trump-strikes.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/04/euro-zone-cpi-inflation-october-ecb-rate-hike.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+      ]
+    }
+  ],
+  "validacion": {
+    "errores": [],
+    "avisos": [
+      "Módulo 'eeuu': 256 palabras, supera el límite de 110",
+      "Módulo 'europa': 224 palabras, supera el límite de 110",
+      "Módulo 'asia_china': 208 palabras, supera el límite de 110",
+      "Módulo 'emergentes': 111 palabras, supera el límite de 110",
+      "Módulo 'energia_materias_primas': 123 palabras, supera el límite de 110",
+      "[europa] 2026-S45-europa-02: 'Banco de Inglaterra' es el 100% de sus fuentes (umbral: 50%)",
+      "[asia_china] 2026-S45-asia-02: 'Business Recorder (Reuters)' es el 100% de sus fuentes (umbral: 50%)",
+      "[geopolitica_riesgos] 2026-S45-geopolitica-01: 'CNBC' es el 100% de sus fuentes (umbral: 50%)",
+      "eurasiabusinessnews.com: dominio no catalogado en fuentes.yaml",
+      "cbsnews.com: dominio no catalogado en fuentes.yaml",
+      "brecorder.com: dominio no catalogado en fuentes.yaml",
+      "newsonjapan.com: dominio no catalogado en fuentes.yaml",
+      "hdfcsky.com: dominio no catalogado en fuentes.yaml",
+      "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026 devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bls.gov/news.release/empsit.nr0.htm devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/10/16/india-rupee-rbi-dollar-iran-war.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/03/iran-us-vance-trump-strikes.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/04/euro-zone-cpi-inflation-october-ecb-rate-hike.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+    ]
+  }
+}

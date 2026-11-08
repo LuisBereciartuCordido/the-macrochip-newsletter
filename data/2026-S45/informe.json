@@ -1,0 +1,430 @@
+{
+ "semana": "2026-S45",
+ "periodo": {
+  "inicio": "2026-11-02",
+  "fin": "2026-11-08"
+ },
+ "titular": {
+  "texto": "El Brent firma su mayor caída semanal desde 2020",
+  "noticia_id": "2026-S45-energia-01"
+ },
+ "lo_esencial": [
+  "El Brent bajó entre un 13 % y un 16 % en la semana por las esperanzas de acuerdo entre EE. UU. e Irán.",
+  "Wall Street tuvo su peor semana desde abril de 2025, con el Nasdaq en corrección.",
+  "EE. UU. creó 165.000 empleos en octubre; sube la apuesta por una subida de tipos en diciembre.",
+  "La inflación de la eurozona llegó al 4 % y el Banco de Inglaterra subió tipos al 4 %.",
+  "El Nikkei cayó un 6 % el viernes y entró en mercado bajista."
+ ],
+ "macro_global": [
+  {
+   "id": "2026-S45-macro-01",
+   "hilo_id": "bancos-centrales-tipos-2026",
+   "titulo": "Tres bancos centrales miran hacia subidas de tipos",
+   "texto": "Los mercados dan en torno a un 77 % de probabilidad a que la Reserva Federal suba un cuarto de punto en su reunión del 8-9 de diciembre, tras el buen dato de empleo. El BCE ronda el 72 % para diciembre, y el Banco de Inglaterra ya subió esta semana al 4 %. El rendimiento del bono de EE. UU. a 10 años llegó al 4,87 % y el euro cotizaba a 1,1165 dólares el 6 de noviembre. ✅",
+   "por_que_importa": "Tipos más altos encarecen hipotecas y préstamos, y suelen pesar sobre las bolsas de empresas tecnológicas.",
+   "confianza": "confirmado",
+   "relevancia_espana_ue": "alta",
+   "fuentes": [
+    {
+     "url": "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html",
+     "medio": "CNBC",
+     "nivel": 2,
+     "fecha": "2026-11-06",
+     "idioma": "en"
+    },
+    {
+     "url": "https://www.cnbc.com/2026/11/04/euro-zone-cpi-inflation-october-ecb-rate-hike.html",
+     "medio": "CNBC",
+     "nivel": 2,
+     "fecha": "2026-11-04",
+     "idioma": "en"
+    },
+    {
+     "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+     "medio": "Banco de Inglaterra",
+     "nivel": 1,
+     "fecha": "2026-11-05",
+     "idioma": "en"
+    },
+    {
+     "url": "https://eurasiabusinessnews.com/2026/11/07/stock-market-today-ai-stocks-rebound-after-brutal-nasdaq-selloff/",
+     "medio": "Eurasia Business News",
+     "nivel": 2,
+     "fecha": "2026-11-07",
+     "idioma": "en"
+    }
+   ],
+   "cifras": [
+    {
+     "valor": "1.1165",
+     "ref_datos": "eur_usd"
+    }
+   ]
+  }
+ ],
+ "modulos": {
+  "eeuu": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-eeuu-01",
+     "hilo_id": "bolsa-eeuu-2026",
+     "titulo": "Wall Street, en su peor semana desde abril de 2025",
+     "texto": "El jueves 5 de noviembre las bolsas de EE. UU. sufrieron una caída fuerte, liderada por los valores tecnológicos: el Nasdaq (el índice de las grandes tecnológicas) entró en «corrección», es decir, cayó más de un 10 % desde su máximo reciente. El S&P 500 (las 500 mayores empresas del país) cerró ese día en 7.353,73 puntos. El viernes rebotó algo, pero la semana acabó con el S&P 500 un 2,7 % abajo y el Nasdaq un 3,4 %. Las fuentes no coinciden en el tamaño exacto de la caída del jueves. Los inversores temían que el nuevo reparto de poder en el Congreso frene la construcción de centros de datos. ✅",
+     "por_que_importa": "Muchos planes de pensiones y fondos indexados tienen un gran peso en estas empresas, así que una semana así se nota en las carteras de ahorro a largo plazo.",
+     "confianza": "confirmado",
+     "relevancia_espana_ue": "media",
+     "fuentes": [
+      {
+       "url": "https://www.cbsnews.com/news/stocks-tech-sell-off-nasdaq-correction-dow/",
+       "medio": "CBS News",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      },
+      {
+       "url": "https://fred.stlouisfed.org/series/SP500",
+       "medio": "FRED (Fed de St. Louis)",
+       "nivel": 1,
+       "fecha": "2026-11-05",
+       "idioma": "en"
+      },
+      {
+       "url": "https://eurasiabusinessnews.com/2026/11/07/stock-market-today-ai-stocks-rebound-after-brutal-nasdaq-selloff/",
+       "medio": "Eurasia Business News",
+       "nivel": 2,
+       "fecha": "2026-11-07",
+       "idioma": "en"
+      }
+     ],
+     "cifras": [
+      {
+       "valor": "7353.73",
+       "ref_datos": "sp500"
+      }
+     ]
+    },
+    {
+     "id": "2026-S45-eeuu-02",
+     "hilo_id": "empleo-eeuu-2026",
+     "titulo": "El empleo de EE. UU. sorprende: 165.000 puestos nuevos en octubre",
+     "texto": "La economía estadounidense creó 165.000 empleos en octubre, frente a unos 59.000 que esperaban los analistas. El paro bajó al 4,1 % y los salarios subieron un 3,1 % respecto a hace un año. Además, agosto y septiembre se corrigieron al alza en 84.000 puestos. Un dato así reduce la urgencia de bajar tipos y sostiene la idea de que la Reserva Federal (el banco central de EE. UU.) puede subirlos en diciembre. ✅",
+     "por_que_importa": "Si el mercado laboral aguanta, los tipos altos duran más: eso encarece hipotecas y préstamos también fuera de EE. UU.",
+     "confianza": "confirmado",
+     "relevancia_espana_ue": "media",
+     "fuentes": [
+      {
+       "url": "https://www.bls.gov/news.release/empsit.nr0.htm",
+       "medio": "BLS (Oficina de Estadísticas Laborales)",
+       "nivel": 1,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      },
+      {
+       "url": "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html",
+       "medio": "CNBC",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      }
+     ],
+     "cifras": []
+    }
+   ]
+  },
+  "europa": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-europa-01",
+     "hilo_id": "inflacion-eurozona-2026",
+     "titulo": "La inflación de la eurozona llega al 4 %, el nivel más alto en tres años",
+     "texto": "La estimación preliminar de Eurostat (la oficina de estadística de la UE) sitúa la inflación de octubre en el 4,0 %, frente al 3,8 % de septiembre. La energía fue el motor: sus precios subieron un 20,8 % en un año. Sin energía, alimentos, alcohol ni tabaco, la inflación se queda en el 2,5 %, igual que el mes anterior. El BCE (el banco central de la zona euro) mantiene el tipo de depósito en el 2,5 % y los mercados dan cerca de un 72 % de probabilidad a una subida en diciembre. ✅",
+     "por_que_importa": "Una inflación más alta come poder adquisitivo y empuja al BCE a encarecer el crédito, lo que afecta a las hipotecas variables.",
+     "confianza": "confirmado",
+     "relevancia_espana_ue": "alta",
+     "fuentes": [
+      {
+       "url": "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-04112026-ap",
+       "medio": "Eurostat",
+       "nivel": 1,
+       "fecha": "2026-11-04",
+       "idioma": "en"
+      },
+      {
+       "url": "https://www.cnbc.com/2026/11/04/euro-zone-cpi-inflation-october-ecb-rate-hike.html",
+       "medio": "CNBC",
+       "nivel": 2,
+       "fecha": "2026-11-04",
+       "idioma": "en"
+      }
+     ],
+     "cifras": [
+      {
+       "valor": "2.5",
+       "ref_datos": "bce_tipo_deposito"
+      }
+     ]
+    },
+    {
+     "id": "2026-S45-europa-02",
+     "hilo_id": "boe-tipos-2026",
+     "titulo": "El Banco de Inglaterra sube los tipos al 4 %",
+     "texto": "El banco central británico subió el tipo de interés oficial un cuarto de punto, hasta el 4 %, con ocho votos a favor y uno que quería subir medio punto. El banco avisa de que la inflación británica, que fue del 3,5 % en septiembre, podría rondar el 5 % a mediados del año que viene. ✅",
+     "por_que_importa": "Que un banco central grande suba tipos refuerza la tendencia de dinero más caro en Europa, aunque el Reino Unido no use el euro.",
+     "confianza": "confirmado",
+     "relevancia_espana_ue": "media",
+     "fuentes": [
+      {
+       "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+       "medio": "Banco de Inglaterra",
+       "nivel": 1,
+       "fecha": "2026-11-05",
+       "idioma": "en"
+      }
+     ],
+     "cifras": []
+    }
+   ]
+  },
+  "asia_china": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-asia-01",
+     "hilo_id": "nikkei-japon-2026",
+     "titulo": "El Nikkei cae un 6 % en un día y entra en mercado bajista",
+     "texto": "El viernes 6 de noviembre el Nikkei 225 (la bolsa de Tokio) perdió un 5,96 % y cerró en 57.435 puntos. Está ya más de un 20 % por debajo de su récord, lo que se llama «mercado bajista». Las caídas más fuertes fueron en empresas ligadas a la IA y a los chips, como SoftBank y Advantest. Las cifras exactas varían algo según la fuente. Se asocia con los temores por el gasto en IA tras las elecciones de EE. UU. ✅",
+     "por_que_importa": "Japón es uno de los grandes mercados del mundo y los fondos globales de renta variable suelen tener algo de él.",
+     "confianza": "confirmado",
+     "relevancia_espana_ue": "media",
+     "fuentes": [
+      {
+       "url": "https://www.brecorder.com/news/40447732/japans-nikkei-slumps-more-than-5-as-market-rout-deepens-on-ai-worries",
+       "medio": "Business Recorder (Reuters)",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      },
+      {
+       "url": "https://newsonjapan.com/article/151274.php",
+       "medio": "News On Japan",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      }
+     ],
+     "cifras": [
+      {
+       "valor": "57435",
+       "ref_datos": "nikkei225"
+      }
+     ]
+    },
+    {
+     "id": "2026-S45-asia-02",
+     "hilo_id": "china-estimulo-2026",
+     "titulo": "China frena la subida del yuan",
+     "texto": "El banco central chino (Banco Popular de China) frenó esta semana la subida del yuan: fijó el cambio de referencia en 6,7168 por dólar, bastante más débil de lo que esperaba el mercado, y subió las reservas obligatorias en divisas de las entidades. El yuan cotizaba cerca de 6,67 por dólar el viernes 6, camino de su primera caída semanal en seis semanas. ⚠️",
+     "por_que_importa": "China pesa mucho en la economía mundial y su bolsa y su moneda influyen en los fondos de mercados emergentes.",
+     "confianza": "una_fuente",
+     "relevancia_espana_ue": "baja",
+     "fuentes": [
+      {
+       "url": "https://www.brecorder.com/news/40447735/chinas-yuan-slips-looks-set-to-snap-five-week-winning-streak",
+       "medio": "Business Recorder (Reuters)",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      }
+     ],
+     "cifras": []
+    }
+   ]
+  },
+  "emergentes": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-emergentes-01",
+     "hilo_id": "emergentes-rupia-2026",
+     "titulo": "La rupia india sube con el abaratamiento del petróleo",
+     "texto": "La rupia india cerró el viernes 6 de noviembre en 93,91 por dólar, su mayor subida semanal del año (cerca de un 1,2 %), según un medio indio de información financiera. Influyeron el petróleo más barato —India importa casi el 85 % de su combustible—, la vuelta de inversores extranjeros y las medidas del banco central indio (RBI) contra apuestas especulativas. En octubre el RBI ya había tenido que intervenir porque la rupia llegó a caer hacia 96,8 por dólar. ⚠️",
+     "por_que_importa": "Cuando el petróleo baja, los países que lo importan, como India, respiran; es la otra cara del encarecimiento que sufre Europa.",
+     "confianza": "una_fuente",
+     "relevancia_espana_ue": "baja",
+     "fuentes": [
+      {
+       "url": "https://hdfcsky.com/news/rupee-surges-1-2percent-to-93-91-as-3-billion-fpi-flood-and-16percent-crude-crash-break-six-month-barrier",
+       "medio": "HDFC Sky",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      },
+      {
+       "url": "https://www.cnbc.com/2026/10/16/india-rupee-rbi-dollar-iran-war.html",
+       "medio": "CNBC",
+       "nivel": 2,
+       "fecha": "2026-10-16",
+       "idioma": "en",
+       "contexto_historico": true
+      }
+     ],
+     "cifras": []
+    }
+   ]
+  },
+  "energia_materias_primas": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-energia-01",
+     "hilo_id": "petroleo-ormuz-2026",
+     "titulo": "El Brent firma su mayor caída semanal desde 2020",
+     "texto": "El Brent (el petróleo de referencia en Europa) cerró la semana cerca de 98 dólares tras bajar en torno a un 16 % según Reuters y LSEG, la mayor caída semanal desde 2020 (otras fuentes dan un 13 %, según el contrato que se mida). Se asocia con las expectativas de un acuerdo entre EE. UU. e Irán que reabra el estrecho de Ormuz, por donde pasa buena parte del petróleo mundial. El dato oficial de FRED, un precio de contado distinto, marcó 107,03 dólares el 3 de noviembre, frente a 123,1 el 27 de octubre. ✅",
+     "por_que_importa": "El petróleo más barato alivia gasolina y transporte, pero depende de un acuerdo que aún no existe.",
+     "confianza": "confirmado",
+     "relevancia_espana_ue": "alta",
+     "fuentes": [
+      {
+       "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+       "medio": "FRED (Fed de St. Louis)",
+       "nivel": 1,
+       "fecha": "2026-11-03",
+       "idioma": "en"
+      },
+      {
+       "url": "https://eurasiabusinessnews.com/2026/11/07/stock-market-today-ai-stocks-rebound-after-brutal-nasdaq-selloff/",
+       "medio": "Eurasia Business News",
+       "nivel": 2,
+       "fecha": "2026-11-07",
+       "idioma": "en"
+      }
+     ],
+     "cifras": [
+      {
+       "valor": "107.03",
+       "ref_datos": "brent"
+      }
+     ]
+    }
+   ]
+  },
+  "tecnologia_ia": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-tecnologia-01",
+     "hilo_id": "ia-capex-2026",
+     "titulo": "Las elecciones de EE. UU. ponen en duda el ritmo de los centros de datos de IA",
+     "texto": "Tras las elecciones legislativas, los inversores temen que el Congreso, ahora con mayoría demócrata, frene la construcción de centros de datos, la infraestructura que sustenta la IA. Un análisis cita más de 40 votaciones locales que los restringen, aunque el veto presidencial limitaría las leyes federales. Pudo influir en la caída del jueves del Nasdaq. El viernes los chips rebotaron: el índice de semiconductores de Filadelfia subió un 4,2 %. 💬",
+     "por_que_importa": "Si el gasto en IA se frena, afecta a las grandes tecnológicas que pesan mucho en los fondos de bolsa.",
+     "confianza": "interpretacion",
+     "relevancia_espana_ue": "media",
+     "fuentes": [
+      {
+       "url": "https://www.cbsnews.com/news/stocks-tech-sell-off-nasdaq-correction-dow/",
+       "medio": "CBS News",
+       "nivel": 2,
+       "fecha": "2026-11-06",
+       "idioma": "en"
+      },
+      {
+       "url": "https://eurasiabusinessnews.com/2026/11/07/stock-market-today-ai-stocks-rebound-after-brutal-nasdaq-selloff/",
+       "medio": "Eurasia Business News",
+       "nivel": 2,
+       "fecha": "2026-11-07",
+       "idioma": "en"
+      }
+     ],
+     "cifras": []
+    }
+   ]
+  },
+  "geopolitica_riesgos": {
+   "sin_novedades": false,
+   "noticias": [
+    {
+     "id": "2026-S45-geopolitica-01",
+     "hilo_id": "iran-ormuz-2026",
+     "titulo": "EE. UU. golpea la isla iraní de Qeshm mientras Qatar media",
+     "texto": "El lunes 2 de noviembre, EE. UU. atacó la isla de Qeshm, junto al estrecho de Ormuz, según CNBC; un funcionario dijo que fue una respuesta defensiva. El vicepresidente Vance dijo que no hay plazo fijado y se mostró optimista sobre un acuerdo. Mediadores de Qatar negocian un borrador. Un alto cargo iraní dijo que primero deben cumplirse sus condiciones. ⚠️",
+     "por_que_importa": "Ormuz es una ruta clave del petróleo: cualquier novedad mueve el precio de la energía y la inflación.",
+     "confianza": "una_fuente",
+     "relevancia_espana_ue": "alta",
+     "fuentes": [
+      {
+       "url": "https://www.cnbc.com/2026/11/03/iran-us-vance-trump-strikes.html",
+       "medio": "CNBC",
+       "nivel": 2,
+       "fecha": "2026-11-03",
+       "idioma": "en"
+      }
+     ],
+     "cifras": []
+    }
+   ]
+  }
+ },
+ "concepto_semana": {
+  "id": "mercado-bajista",
+  "titulo": "Mercado bajista",
+  "texto": "Se llama mercado bajista a una caída de más del 20 % desde el último máximo de un índice. Es una convención, no una ley: sirve para poner nombre a las caídas largas. El Nikkei entró esta semana en esa zona. Las caídas del 10 % se llaman «correcciones», como la del Nasdaq. No predicen lo que ocurrirá después: solo describen lo que ya pasó."
+ },
+ "perspectiva_largo_plazo": {
+  "estructural": [
+   "Los bancos centrales avanzan hacia tipos más altos por una inflación persistente ligada a la energía.",
+   "La IA exige inversiones enormes en centros de datos y su ritmo depende de factores políticos y financieros."
+  ],
+  "ruido": [
+   "El movimiento diario del Brent según cada ataque o declaración sobre Ormuz.",
+   "La caída de un solo día de una bolsa concreta."
+  ]
+ },
+ "fuentes_descartadas": [
+  {
+   "url": "https://finimize.com/content/china-stocks-jumped-as-us-election-results-sparked-bargain-hunting",
+   "motivo": "otro"
+  },
+  {
+   "url": "https://leprivatebanker.com/2026/11/06/oil-swings-near-100-as-iran-studies-qatari-nuclear-proposals-and-offers-hormuz-reopening-within-two-days-on-sanctions-relief/",
+   "motivo": "otro"
+  },
+  {
+   "url": "https://www.gmt8press.com/flash/detail/1412304",
+   "motivo": "contradictoria"
+  }
+ ],
+ "cambios_verificador": [
+  {
+   "noticia_id": "2026-S45-asia-02",
+   "cambio": "Reducida a la actuación del banco central sobre el yuan; retirado el rebote bursátil.",
+   "motivo": "La fuente de las cifras bursátiles no respondió en la comprobación de enlaces."
+  },
+  {
+   "noticia_id": "2026-S45-energia-01",
+   "cambio": "Eliminada la oferta iraní de reabrir Ormuz en dos días y la caída del 9 % del miércoles.",
+   "motivo": "La única fuente era un enlace que no respondió; la causa se redacta como asociación."
+  },
+  {
+   "noticia_id": "2026-S45-europa-02",
+   "cambio": "Eliminada la afirmación «primera subida desde 2023».",
+   "motivo": "Solo aparecía en una fuente secundaria y no figura en el comunicado del Banco de Inglaterra."
+  },
+  {
+   "noticia_id": "2026-S45-asia-01",
+   "cambio": "Quitada la referencia al máximo de junio y matizado que las cifras exactas varían.",
+   "motivo": "El cierre difiere entre fuentes (57.435 frente a 57.333) y la fecha del récord no se pudo contrastar."
+  },
+  {
+   "noticia_id": "2026-S45-macro-01",
+   "cambio": "Añadidas las fuentes que respaldan la probabilidad del BCE y el bono a 10 años.",
+   "motivo": "Esas cifras no estaban cubiertas por las fuentes citadas."
+  },
+  {
+   "noticia_id": "2026-S45-eeuu-01",
+   "cambio": "Indicado que las fuentes no coinciden en el tamaño exacto de la caída del jueves.",
+   "motivo": "Unas fuentes dan un Nasdaq en torno a -4 % y otras -5,4 %."
+  }
+ ]
+}
