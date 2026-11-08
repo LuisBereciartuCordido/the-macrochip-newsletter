@@ -1,6 +1,6 @@
 <img src="https://assets.buttondown.email/images/543450fd-12be-44f2-af01-706df1710fda.png" alt="The Macrochip" width="220">
 
-# El Brent firma su mayor caída semanal desde 2020
+# Wall Street, en su peor semana desde abril de 2025
 
 _Semana del 2 al 8 de noviembre de 2026_
 
