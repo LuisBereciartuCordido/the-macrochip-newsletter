@@ -1,0 +1,500 @@
+{
+  "semana": "2026-S46",
+  "periodo": {
+    "inicio": "2026-11-09",
+    "fin": "2026-11-15"
+  },
+  "titular": {
+    "texto": "Jensen Huang dimite como consejero delegado de Nvidia",
+    "noticia_id": "2026-S46-tecnologia-01"
+  },
+  "lo_esencial": [
+    "Jensen Huang, cofundador de Nvidia, dimitió como consejero delegado; la acción cayó un 12,75 % en la semana.",
+    "Aun así, el S&P 500 ganó un 2,5 % y las bolsas emergentes y el Nikkei rebotaron.",
+    "Los precios en EE. UU. subieron un 0,4 % en octubre y el mercado da por hecha una subida de la Fed en diciembre.",
+    "La inflación española se mantuvo en el 4,9 % y la eurozona creció un 0,4 % en el tercer trimestre.",
+    "El petróleo bajó otra semana y la AIE ve ya más oferta que demanda."
+  ],
+  "macro_global": [
+    {
+      "id": "2026-S46-macro-01",
+      "hilo_id": "bancos-centrales-tipos-2026",
+      "titulo": "La Fed y el BCE miran a diciembre para subir tipos",
+      "texto": "Tras el dato de precios de EE. UU., el mercado da por hecho que la Fed (el banco central estadounidense) subirá un cuarto de punto el 8-9 de diciembre, desde el rango actual del 3,75-4 %, y da un 13,6 % de opciones a medio punto, según CME FedWatch. El tipo efectivo medio de octubre fue el 3,88 %. En Europa, Lagarde dijo el 5 de noviembre que las nuevas previsiones de diciembre decidirán si el BCE sube su tipo de depósito, hoy en el 2,5 %. El euro cerró el 13 de noviembre a 1,1052 dólares. ✅",
+      "por_que_importa": "Tipos más altos encarecen hipotecas variables y préstamos, y suelen restar atractivo a las bolsas.",
+      "confianza": "confirmado",
+      "relevancia_espana_ue": "alta",
+      "fuentes": [
+        {
+          "url": "https://www.cnbc.com/2026/11/10/cpi-inflation-report-october-2026.html",
+          "medio": "CNBC",
+          "nivel": 2,
+          "fecha": "2026-11-10",
+          "idioma": "en"
+        },
+        {
+          "url": "https://www.bloomberg.com/news/articles/2026-11-05/lagarde-says-new-projections-will-help-ecb-decide-if-hike-needed",
+          "medio": "Bloomberg",
+          "nivel": 2,
+          "fecha": "2026-11-05",
+          "idioma": "en"
+        },
+        {
+          "url": "https://fred.stlouisfed.org/series/FEDFUNDS",
+          "medio": "FRED (Fed de St. Louis)",
+          "nivel": 1,
+          "fecha": "2026-11-15",
+          "idioma": "en"
+        },
+        {
+          "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A",
+          "medio": "BCE",
+          "nivel": 1,
+          "fecha": "2026-11-13",
+          "idioma": "en"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "3.88",
+          "ref_datos": "fed_tipo"
+        },
+        {
+          "valor": "2.5",
+          "ref_datos": "bce_tipo_deposito"
+        },
+        {
+          "valor": "1.1052",
+          "ref_datos": "eur_usd"
+        }
+      ]
+    }
+  ],
+  "modulos": {
+    "eeuu": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-eeuu-01",
+          "hilo_id": "inflacion-eeuu-2026",
+          "titulo": "Los precios en EE. UU. suben un 0,4 % en octubre, más de lo previsto",
+          "texto": "El IPC (el índice que mide el coste de la cesta de la compra) subió un 0,4 % en el mes, frente al 0,3 % esperado; sin energía ni alimentos, un 0,3 %. Esta vez no hay tasa anual oficial: el cierre del Gobierno de 2025 impidió recoger los precios de octubre de 2025. La última tasa anual disponible, de septiembre, fue del 3,72 %. ✅",
+          "por_que_importa": "Una inflación terca empuja a la Fed a subir tipos, y eso se nota en el dólar y en las bolsas de todo el mundo.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.bls.gov/news.release/cpi.nr0.htm",
+              "medio": "BLS",
+              "nivel": 1,
+              "fecha": "2026-11-10",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/10/cpi-inflation-report-october-2026.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-10",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "3.72",
+              "ref_datos": "ipc_eeuu"
+            }
+          ]
+        },
+        {
+          "id": "2026-S46-eeuu-02",
+          "hilo_id": "bolsa-eeuu-2026",
+          "titulo": "Wall Street rebota pese al tropiezo de Nvidia",
+          "texto": "El S&P 500 cerró el viernes 13 en 7.561,67 puntos y ganó un 2,5 % en la semana, según CNBC, su mejor semana desde agosto. ✅",
+          "por_que_importa": "Tu fondo indexado global tiene a EE. UU. como mayor peso, así que su semana se nota en tu cartera.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/13/nvidia-stock-jensen-affair-ai.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            },
+            {
+              "url": "https://fred.stlouisfed.org/series/SP500",
+              "medio": "FRED (Fed de St. Louis)",
+              "nivel": 1,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "7.561,67",
+              "ref_datos": "sp500"
+            }
+          ]
+        }
+      ]
+    },
+    "europa": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-europa-01",
+          "hilo_id": "inflacion-eurozona-2026",
+          "titulo": "La inflación española se mantiene en el 4,9 % en octubre",
+          "texto": "El INE confirmó el 13 de noviembre que los precios en España suben un 4,9 % interanual, igual que en septiembre. La subyacente (sin energía ni alimentos frescos) sigue en el 3,1 %. Empujan la vivienda, por el gas, y los viajes organizados; el transporte modera algo por el combustible. ✅",
+          "por_que_importa": "Una inflación cercana al 5 % hace que los ahorros parados en una cuenta pierdan poder de compra cada mes.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.ine.es/dyngs/Prensa/IPC1026.htm",
+              "medio": "INE",
+              "nivel": 1,
+              "fecha": "2026-11-13",
+              "idioma": "es"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "4,9",
+              "ref_datos": null
+            }
+          ]
+        },
+        {
+          "id": "2026-S46-europa-02",
+          "hilo_id": "europa-pib-2026",
+          "titulo": "La eurozona crece un 0,4 %; España, un 0,6 %",
+          "texto": "Eurostat confirmó el 13 de noviembre que el PIB (el valor de todo lo que produce la economía) de la eurozona creció un 0,4 % en el tercer trimestre. España creció un 0,6 %, Alemania un 0,2 % y Francia cayó un 0,1 %. El empleo se quedó estable. ✅",
+          "por_que_importa": "España sigue creciendo más que sus vecinos, algo que sostiene el empleo.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-13112026-ap",
+              "medio": "Eurostat",
+              "nivel": 1,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "0,4",
+              "ref_datos": null
+            }
+          ]
+        }
+      ]
+    },
+    "asia_china": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-asia-01",
+          "hilo_id": "china-precios-2026",
+          "titulo": "Los precios de fábrica en China suben al ritmo más alto desde 2022",
+          "texto": "Los precios de producción (lo que cobran las fábricas) subieron un 5,7 % interanual en octubre, el mayor ritmo desde junio de 2022, por la energía y las materias primas. En cambio, el IPC bajó al 0,7 %, una señal de consumo interno débil. ✅",
+          "por_que_importa": "China fabrica gran parte de lo que compramos: si sus costes suben, podrían acabar llegando a nuestros precios.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/09/china-wholesale-inflation-rises-consumer.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-08",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.caixinglobal.com/2026-11-09/chinas-factory-gate-inflation-hits-highest-in-more-than-four-years-102502680.html",
+              "medio": "Caixin",
+              "nivel": 2,
+              "fecha": "2026-11-09",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "5,7",
+              "ref_datos": null
+            }
+          ]
+        },
+        {
+          "id": "2026-S46-asia-02",
+          "hilo_id": "nikkei-japon-2026",
+          "titulo": "El Nikkei recupera un 6,5 % tras entrar en mercado bajista",
+          "texto": "La bolsa de Tokio cerró el 13 de noviembre en 61.142,35 puntos, frente a los 57.434,77 del día 6. Se asocia con el petróleo más barato, que favorece a sus fabricantes de coches. ✅",
+          "por_que_importa": "Un rebote no borra la caída previa: las bolsas pueden moverse mucho en pocos días.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/12/stock-market-today-live-updates.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.bloomberg.com/news/articles/2026-11-11/japan-auto-stocks-eye-rebound-as-cheaper-oil-brightens-outlook",
+              "medio": "Bloomberg",
+              "nivel": 2,
+              "fecha": "2026-11-11",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "61.142,35",
+              "ref_datos": "nikkei225"
+            }
+          ]
+        }
+      ]
+    },
+    "emergentes": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-emergentes-01",
+          "hilo_id": "emergentes-mercados-2026",
+          "titulo": "Las bolsas emergentes, camino de su primera semana al alza desde septiembre",
+          "texto": "El índice MSCI de mercados emergentes subía casi un 4 % en la semana el día 13, según Bloomberg, tirado por las tecnológicas de Corea del Sur y Taiwán. El ETF que usamos como referencia (en dólares) pasó de 72,2 a 74,15 entre el 6 y el 13 de noviembre. Las divisas emergentes apenas se movieron. ⚠️",
+          "por_que_importa": "Muchos fondos globales tienen una parte en emergentes; Corea y Taiwán pesan mucho por sus fabricantes de chips.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.bloomberg.com/news/articles/2026-11-13/em-stocks-eye-first-weekly-gain-since-september-as-tech-rebounds",
+              "medio": "Bloomberg",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "74,15",
+              "ref_datos": "msci_em"
+            }
+          ]
+        }
+      ]
+    },
+    "energia_materias_primas": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-energia-01",
+          "hilo_id": "petroleo-ormuz-2026",
+          "titulo": "El petróleo baja otra semana y la AIE ve exceso de oferta",
+          "texto": "La AIE (la agencia internacional de la energía) dijo el 13 de noviembre que la oferta ya supera a la demanda por primera vez desde que empezó la guerra con Irán. El Brent de futuros cerró ese día en 95,84 dólares, según Bloomberg, y encadena su segunda semana de bajadas. El dato oficial de FRED (precio físico, con días de retraso) marcó 92,14 dólares el 11 de noviembre, frente a 107,03 el 3 de noviembre. ✅",
+          "por_que_importa": "Un crudo más barato alivia la gasolina y la factura del transporte.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.iea.org/reports/oil-market-report-november-2026",
+              "medio": "AIE",
+              "nivel": 1,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.rigzone.com/news/wire/crude_fluctuates_as_iran_tensions_persist-13-nov-2026-185085-article/",
+              "medio": "Rigzone (Bloomberg)",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            },
+            {
+              "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+              "medio": "FRED (Fed de St. Louis)",
+              "nivel": 1,
+              "fecha": "2026-11-11",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "92.14",
+              "ref_datos": "brent"
+            }
+          ]
+        },
+        {
+          "id": "2026-S46-energia-02",
+          "hilo_id": "oro-2026",
+          "titulo": "El oro, en su peor semana desde junio",
+          "texto": "El oro perdió más de un 4 % en la semana, según CNBC, por la expectativa de tipos más altos (el oro no da intereses). Cerró en 3.886,30 dólares la onza el día 13. ✅",
+          "por_que_importa": "El oro no siempre sube cuando hay tensión: los tipos también le pesan.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/13/gold-rises-on-bargain-hunting-but-heads-for-weekly-decline.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            },
+            {
+              "url": "https://finance.yahoo.com/quote/GC=F",
+              "medio": "Yahoo Finance",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "3.886,30",
+              "ref_datos": "oro"
+            }
+          ]
+        }
+      ]
+    },
+    "tecnologia_ia": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-tecnologia-01",
+          "hilo_id": "nvidia-liderazgo-2026",
+          "titulo": "Jensen Huang dimite como consejero delegado de Nvidia",
+          "texto": "El cofundador de Nvidia dejó el cargo el 12 de noviembre, tras hacerse públicas relaciones extramatrimoniales. La directora financiera, Colette Kress, es consejera delegada interina. La acción cayó un 12,75 % en la semana, su sexta semana de caídas, y bajó de 4 billones de dólares de valor. ✅",
+          "por_que_importa": "Nvidia es una de las mayores empresas de los índices mundiales: lo que le pasa se nota en casi cualquier fondo.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvidiaannouncesceotransiti.htm",
+              "medio": "Nvidia (SEC)",
+              "nivel": 1,
+              "fecha": "2026-11-12",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/13/nvidia-stock-jensen-affair-ai.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-13",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.nbcnews.com/tech/tech-news/nvidia-ceo-jensen-huang-resigns-reports-extramarital-relationships-rcna608402",
+              "medio": "NBC News",
+              "nivel": 2,
+              "fecha": "2026-11-12",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "12,75",
+              "ref_datos": null
+            }
+          ]
+        },
+        {
+          "id": "2026-S46-tecnologia-02",
+          "hilo_id": "ia-financiacion-2026",
+          "titulo": "Anthropic fija precio para salir a bolsa la próxima semana",
+          "texto": "Anthropic ofrece 825 millones de acciones a entre 70 y 78 dólares, lo que la valoraría en hasta 1,4 billones. Prevé cotizar en el Nasdaq desde el 19 de noviembre. ✅",
+          "por_que_importa": "Será una de las mayores salidas a bolsa de la historia y un test del apetito por la IA.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/10/anthropic-sets-price-range-of-70-to-78-in-upcoming-ipo.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-10",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.aljazeera.com/economy/2026/11/10/anthropic-targets-1-4-trillion-valuation-in-massive-stock-market-debut",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-10",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "825",
+              "ref_datos": null
+            }
+          ]
+        }
+      ]
+    },
+    "geopolitica_riesgos": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S46-geopolitica-01",
+          "hilo_id": "iran-ormuz-2026",
+          "titulo": "Irán dice haber atacado radares de EE. UU. en Baréin",
+          "texto": "La Guardia Revolucionaria iraní afirma haber lanzado drones contra radares estadounidenses en Baréin el 13 y el 15 de noviembre; EE. UU. y Baréin dicen que los interceptaron. Irán también asegura que varios petroleros chocaron con minas en Ormuz, algo sin confirmar de forma independiente. Las negociaciones, con Catar como mediador, siguen estancadas. ✅",
+          "por_que_importa": "Cada incidente en Ormuz puede mover el precio del petróleo, y con él la gasolina y la inflación.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.aljazeera.com/news/2026/11/15/iran-says-it-targets-us-radar-in-bahrain-what-do-we-know",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-15",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/15/bahrain-iran-drone-attacks-tehran-us-base.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-15",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    }
+  },
+  "concepto_semana": {
+    "id": "tasa-interanual",
+    "titulo": "Tasa interanual",
+    "texto": "La tasa interanual compara un precio con el del mismo mes del año anterior: por ejemplo, octubre de 2026 frente a octubre de 2025. Es la cifra de inflación que suele salir en las noticias. Este mes EE. UU. no ha podido publicarla porque en octubre de 2025 no se recogieron precios por el cierre del Gobierno. Sin ese punto de partida, solo se puede dar el cambio frente al mes anterior."
+  },
+  "perspectiva_largo_plazo": {
+    "estructural": [
+      "La inflación ligada a la energía mantiene a los bancos centrales en modo de subir tipos.",
+      "La IA concentra mucho valor de bolsa en pocas empresas, y eso hace que sus sobresaltos pesen en todo el mercado."
+    ],
+    "ruido": [
+      "Cada declaración o incidente diario sobre Ormuz.",
+      "El vaivén de la acción de Nvidia en los días posteriores a la dimisión."
+    ]
+  },
+  "fuentes_descartadas": [
+    {
+      "url": "https://www.cnbc.com/2026/10/26/brazil-lula-win-presidential-election-runoff-vote.html",
+      "motivo": "antigua"
+    },
+    {
+      "url": "https://247wallst.com/investing/2026/11/09/does-nvidia-cfo-colette-kress-take-over-if-jensen-huang-leaves/",
+      "motivo": "otro"
+    },
+    {
+      "url": "https://financefeeds.com/brent-crude-oil-price-95-84-sunday-futures-open-week-ahead-iran-mine-claims-bull-98-bear-91/",
+      "motivo": "otro"
+    }
+  ],
+  "cambios_verificador": []
+}
