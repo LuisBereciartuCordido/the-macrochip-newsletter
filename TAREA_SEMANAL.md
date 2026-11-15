@@ -7,8 +7,10 @@ Se ejecuta el **domingo hacia mediodía (hora de Madrid)**, para que el dueño d
 El entorno de la Routine no trae las dependencias preinstaladas (es efímero, se reconstruye en cada ejecución). Antes de cualquier otro paso:
 
 ```
-pip install -e .
+python -m pip install -e .
 ```
+
+No uses `pip install -e .` a secas: en este entorno `pip` y `python` han apuntado más de una vez a instalaciones de Python distintas (hallazgo real, semanas 2026-S44 y 2026-S46), dejando el paquete `briefing` instalado para un intérprete y ejecutándose con otro (`ModuleNotFoundError: briefing`). `python -m pip` instala siempre para el mismo intérprete que luego ejecuta los scripts.
 
 ## 0. Calcula la semana
 

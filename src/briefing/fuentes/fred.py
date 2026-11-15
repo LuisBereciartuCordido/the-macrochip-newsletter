@@ -24,7 +24,21 @@ class FredApiKeyFaltante(RuntimeError):
 
 
 class SinObservaciones(ValueError):
-    """FRED no devolvió ninguna observación válida para la serie pedida."""
+    """FRED no devolvió ninguna observación con valor real para la serie pedida."""
+
+
+# Cuántas observaciones recientes se piden para buscar la última con valor
+# real. FRED marca una observación sin dato como "." en vez de omitirla —
+# hallazgo real: en noviembre de 2026, el IPC de EE. UU. (CPIAUCSL con
+# units=pc1, variación interanual) devolvía "." para octubre de 2026 porque
+# la comparación interanual necesita el índice de octubre de 2025, mes que
+# el BLS nunca llegó a publicar por el cierre del Gobierno federal de ese
+# año. Con limit=1 (pedir solo la más reciente) el pipeline entero se
+# paraba en fetch_data.py. El mismo fallo podría darse en cualquiera de las
+# otras series de FRED (p. ej. SP500 o DCOILBRENTEU un día festivo en el
+# que FRED aún no haya publicado el último cierre), así que el margen vive
+# en el helper compartido, no solo en el caso del IPC.
+MAX_OBSERVACIONES_A_REVISAR = 10
 
 
 def _clave_api() -> str:
@@ -37,27 +51,35 @@ def _clave_api() -> str:
 
 
 def _ultima_observacion(serie: str, **parametros_extra: str) -> tuple[str, float]:
+    """Último dato con valor real de `serie`, retrocediendo si hace falta.
+
+    No fabrica una comparación distinta cuando falta un punto (p. ej. no
+    compara contra un mes distinto para "rellenar" un IPC interanual sin
+    dato): simplemente usa la fecha real anterior en la que esa misma
+    comparación sí existe, y la devuelve con su fecha real — el criterio de
+    si presentarlo como noticia o como referencia es del redactor
+    (prompts/redactor.md), no de este cliente.
+    """
     parametros = {
         "series_id": serie,
         "api_key": _clave_api(),
         "file_type": "json",
         "sort_order": "desc",
-        "limit": 1,
+        "limit": MAX_OBSERVACIONES_A_REVISAR,
         **parametros_extra,
     }
     log.info("Consultando FRED: serie %s", serie)
     respuesta = requests.get(BASE_URL, params=parametros, timeout=TIMEOUT_SEGUNDOS)
     respuesta.raise_for_status()
     observaciones = respuesta.json().get("observations") or []
-    if not observaciones:
-        raise SinObservaciones(f"FRED no devolvió observaciones para la serie {serie}")
+    for observacion in observaciones:
+        if observacion["value"] != ".":
+            return observacion["date"], float(observacion["value"])
 
-    observacion = observaciones[0]
-    if observacion["value"] == ".":
-        raise SinObservaciones(
-            f"FRED devolvió un valor vacío para la serie {serie} en {observacion['date']}"
-        )
-    return observacion["date"], float(observacion["value"])
+    raise SinObservaciones(
+        f"FRED no devolvió ninguna observación con valor real para la serie {serie} "
+        f"en las últimas {MAX_OBSERVACIONES_A_REVISAR} disponibles"
+    )
 
 
 def _url_serie(serie: str) -> str:
