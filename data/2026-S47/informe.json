@@ -1,0 +1,565 @@
+{
+  "semana": "2026-S47",
+  "periodo": {
+    "inicio": "2026-11-16",
+    "fin": "2026-11-22"
+  },
+  "titular": {
+    "texto": "El S&P 500 entra en corrección en la semana de Anthropic",
+    "noticia_id": "2026-S47-eeuu-01"
+  },
+  "lo_esencial": [
+    "Wall Street vivió su peor semana desde abril de 2025: el S&P 500 cayó un 8,6 % y entró en corrección.",
+    "Anthropic debutó en bolsa con la mayor salida a bolsa de la historia, pero terminó la semana cerca de su precio inicial.",
+    "Nvidia cayó un 23 % en la semana pese a batir previsiones, tras informaciones de una investigación de la SEC.",
+    "El oro cayó cerca de un 9,5 % y las bolsas emergentes entraron en mercado bajista.",
+    "Bruselas mejora su previsión de crecimiento para España (2,6 %) pero eleva la de inflación (3,9 %)."
+  ],
+  "macro_global": [
+    {
+      "id": "2026-S47-macro-01",
+      "hilo_id": "bancos-centrales-tipos-2026",
+      "titulo": "La Fed se plantea subir medio punto en diciembre",
+      "texto": "Christopher Waller, gobernador de la Fed (el banco central de EE. UU.), dijo el día 18 que probablemente haga falta subir los tipos medio punto en la reunión del 8-9 de diciembre; es una voz aislada, y el mercado sigue esperando un cuarto de punto. Las actas de octubre muestran que varios miembros ya querían subir entonces. El tipo efectivo medio de octubre fue el 3,88 %. En Europa, el tipo de depósito del BCE sigue en el 2,5 %, y la Comisión Europea recoge que el mercado espera tres o cuatro subidas más hasta mediados de 2027. El euro cerró el día 20 a 1,099 dólares, algo más débil que la semana pasada.",
+      "por_que_importa": "Subidas de tipos encarecen hipotecas variables y préstamos, y suelen pesar sobre bolsas y oro.",
+      "confianza": "confirmado",
+      "relevancia_espana_ue": "alta",
+      "fuentes": [
+        {
+          "url": "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html",
+          "medio": "CNBC",
+          "nivel": 2,
+          "fecha": "2026-11-18",
+          "idioma": "en"
+        },
+        {
+          "url": "https://www.cnbc.com/2026/11/18/fed-minutes-october-2026.html",
+          "medio": "CNBC",
+          "nivel": 2,
+          "fecha": "2026-11-18",
+          "idioma": "en"
+        },
+        {
+          "url": "https://fred.stlouisfed.org/series/FEDFUNDS",
+          "medio": "FRED (Fed de St. Louis)",
+          "nivel": 1,
+          "fecha": "2026-11-22",
+          "idioma": "en"
+        },
+        {
+          "url": "https://economy-finance.ec.europa.eu/economic-forecast-and-surveys/economic-forecasts/autumn-2026-economic-forecast-shows-continued-growth-amid-higher-inflation_en",
+          "medio": "Comisión Europea",
+          "nivel": 1,
+          "fecha": "2026-11-17",
+          "idioma": "en"
+        },
+        {
+          "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A",
+          "medio": "BCE",
+          "nivel": 1,
+          "fecha": "2026-11-20",
+          "idioma": "en"
+        }
+      ],
+      "cifras": [
+        {
+          "valor": "3.88",
+          "ref_datos": "fed_tipo"
+        },
+        {
+          "valor": "2.5",
+          "ref_datos": "bce_tipo_deposito"
+        },
+        {
+          "valor": "1.099",
+          "ref_datos": "eur_usd"
+        }
+      ]
+    }
+  ],
+  "modulos": {
+    "eeuu": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-eeuu-01",
+          "hilo_id": "bolsa-eeuu-2026",
+          "titulo": "El S&P 500 entra en corrección: −8,6 % en la semana",
+          "texto": "El viernes 20 el S&P 500 cayó un 3,7 % y cerró en 6.910 puntos: un 8,6 % menos en la semana y más de un 10 % por debajo de su récord, lo que se llama corrección. El Nasdaq perdió cerca de un 10 %. El dato oficial más reciente de la lista de mercados es del jueves 19 (7.175,83). Se asocia con dudas sobre la IA y con el temor a más subidas de tipos.",
+          "por_que_importa": "Muchos fondos indexados y planes de pensiones tienen mucho peso en bolsa de EE. UU.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/19/stock-market-today-live-updates.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.nbcnews.com/business/markets/anthropic-shares-markets-selloff-nasdaq-rcna610394",
+              "medio": "NBC News",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://fred.stlouisfed.org/series/SP500",
+              "medio": "FRED (Fed de St. Louis)",
+              "nivel": 1,
+              "fecha": "2026-11-19",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "7175.83",
+              "ref_datos": "sp500"
+            },
+            {
+              "valor": "6.910",
+              "ref_datos": null
+            },
+            {
+              "valor": "8,6",
+              "ref_datos": null
+            }
+          ]
+        }
+      ]
+    },
+    "europa": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-europa-01",
+          "hilo_id": "europa-pib-2026",
+          "titulo": "Bruselas sube su previsión para España: 2,6 % de crecimiento",
+          "texto": "La Comisión Europea publicó el día 17 sus previsiones de otoño. España crecería un 2,6 % en 2026, más del doble que la eurozona (1,2 %), con una inflación del 3,9 % este año y del 3,3 % en 2027, por la energía. Para la eurozona, la inflación tocaría techo por encima del 4 % a caballo entre 2026 y 2027.",
+          "por_que_importa": "Más crecimiento sostiene el empleo; la inflación alta resta poder de compra.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://economy-finance.ec.europa.eu/economic-surveillance-eu-member-states/country-pages-including-country-reports/spain/economic-forecast-spain_en",
+              "medio": "Comisión Europea",
+              "nivel": 1,
+              "fecha": "2026-11-17",
+              "idioma": "en"
+            },
+            {
+              "url": "https://commission.europa.eu/news-and-media/news/autumn-economic-forecast-continued-growth-amid-higher-inflation-2026-11-17_en",
+              "medio": "Comisión Europea",
+              "nivel": 1,
+              "fecha": "2026-11-17",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.bloomberg.com/news/articles/2026-11-17/euro-zone-to-grow-robustly-as-it-shrugs-off-inflation-eu-says",
+              "medio": "Bloomberg",
+              "nivel": 2,
+              "fecha": "2026-11-17",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "2,6",
+              "ref_datos": null
+            },
+            {
+              "valor": "3,9",
+              "ref_datos": null
+            }
+          ]
+        },
+        {
+          "id": "2026-S47-europa-02",
+          "hilo_id": "bce-estabilidad-financiera-2026",
+          "titulo": "El BCE avisa del riesgo de las valoraciones de la IA",
+          "texto": "En su informe de estabilidad financiera, el BCE advierte de que la bolsa descuenta beneficios extraordinarios de las empresas de IA y de un posible ajuste brusco. Ve a los bancos bien preparados.",
+          "por_que_importa": "Señalar un riesgo no lo hace inevitable, pero lo pone en el radar.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://www.ecb.europa.eu/press/financial-stability-publications/fsr/html/ecb.fsr202611~e03b919d36.en.html",
+              "medio": "BCE",
+              "nivel": 1,
+              "fecha": "2026-11-18",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    },
+    "asia_china": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-asia-01",
+          "hilo_id": "nikkei-japon-2026",
+          "titulo": "El Nikkei cae un 5,1 % el viernes; SoftBank, un 14,5 %",
+          "texto": "El Nikkei 225 cerró el día 20 en 56.436,65 puntos tras caer un 5,1 %, arrastrado por las tecnológicas. SoftBank, muy expuesto a la IA, perdió un 14,48 %, su peor día desde agosto de 2024. La inflación subyacente japonesa subió al 2,2 % en octubre, y el mercado da un 72 % de opciones a una subida de tipos en diciembre.",
+          "por_que_importa": "Japón pesa mucho en los fondos globales.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/20/softbank-ai-tech-stocks-slide-anthropic-debut.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.aljazeera.com/economy/2026/11/20/asias-stock-markets-dive-as-anthropic-debut-fails-to-allay-ai-bubble-fears",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/20/japan-inflation-cpi-october.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-19",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "56436.65",
+              "ref_datos": "nikkei225"
+            }
+          ]
+        },
+        {
+          "id": "2026-S47-asia-02",
+          "hilo_id": "china-pib-2026",
+          "titulo": "China se frena en octubre",
+          "texto": "Las ventas minoristas chinas subieron solo un 0,4 % interanual en octubre y la producción industrial un 4,8 %, ambas por debajo de lo previsto.",
+          "por_que_importa": "Una China más débil compra menos al resto del mundo.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.stats.gov.cn/english/PressRelease/202611/t20261116_1965843.html",
+              "medio": "Oficina Nacional de Estadística de China",
+              "nivel": 1,
+              "fecha": "2026-11-16",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/16/china-retail-sales-october-industrial-output-investment.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-16",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "0,4",
+              "ref_datos": null
+            },
+            {
+              "valor": "4,8",
+              "ref_datos": null
+            }
+          ]
+        }
+      ]
+    },
+    "emergentes": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-emergentes-01",
+          "hilo_id": "emergentes-mercados-2026",
+          "titulo": "Las bolsas emergentes entran en mercado bajista",
+          "texto": "Según Bloomberg, el índice MSCI de bolsas emergentes cayó un 3,1 % el viernes y ya está un 21 % por debajo de su máximo de junio: un mercado bajista (caída de más del 20 %). Ese día el Kospi coreano cedió un 5,2 % y el Taiex de Taiwán, un 6,2 %. El ETF de emergentes de la lista de mercados cerró a 65,69 dólares, un 11,4 % menos en la semana.",
+          "por_que_importa": "Las bolsas asiáticas con mucho peso en chips sufren más cuando se duda de la IA.",
+          "confianza": "una_fuente",
+          "relevancia_espana_ue": "baja",
+          "fuentes": [
+            {
+              "url": "https://www.bloomberg.com/news/articles/2026-11-20/emerging-market-stocks-set-for-bear-market-on-ai-led-tech-slide",
+              "medio": "Bloomberg",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.aljazeera.com/economy/2026/11/20/asias-stock-markets-dive-as-anthropic-debut-fails-to-allay-ai-bubble-fears",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/20/softbank-ai-tech-stocks-slide-anthropic-debut.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "65.69",
+              "ref_datos": "msci_em"
+            },
+            {
+              "valor": "21",
+              "ref_datos": null
+            }
+          ]
+        }
+      ]
+    },
+    "energia_materias_primas": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-energia-01",
+          "hilo_id": "oro-2026",
+          "titulo": "El oro cae un 9,5 % en la semana",
+          "texto": "El oro cerró el viernes en 3.515,4 dólares la onza, su nivel más bajo desde septiembre de 2025. Se asocia con la expectativa de subidas de tipos, un dólar más fuerte y ventas para cubrir pérdidas en bolsa.",
+          "por_que_importa": "Con tipos al alza, el oro no siempre protege en las caídas de bolsa.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.cnbc.com/2026/11/20/gold-federal-reserve-price-dollar-metals.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.bloomberg.com/news/articles/2026-11-19/gold-set-for-worst-week-since-march-on-hawkish-fed-ai-selloff",
+              "medio": "Bloomberg",
+              "nivel": 2,
+              "fecha": "2026-11-19",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "3515.4",
+              "ref_datos": "oro"
+            }
+          ]
+        },
+        {
+          "id": "2026-S47-energia-02",
+          "hilo_id": "petroleo-ormuz-2026",
+          "titulo": "El petróleo, casi plano pese a Ormuz",
+          "texto": "El Brent físico oficial marcó 92,94 dólares el día 17, algo por encima del día 11. Los futuros bajaron a 91,95 el día 18 por el aumento de reservas en EE. UU.: son fechas e instrumentos distintos.",
+          "por_que_importa": "El petróleo marca el precio de la gasolina y de la luz.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "alta",
+          "fuentes": [
+            {
+              "url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+              "medio": "FRED (Fed de St. Louis)",
+              "nivel": 1,
+              "fecha": "2026-11-17",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/18/oil-prices-fall-as-higher-us-crude-stocks-temper-supply-risks.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-18",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "92.94",
+              "ref_datos": "brent"
+            }
+          ]
+        }
+      ]
+    },
+    "tecnologia_ia": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-tecnologia-01",
+          "hilo_id": "ia-financiacion-2026",
+          "titulo": "Anthropic, la mayor salida a bolsa de la historia",
+          "texto": "Anthropic empezó a cotizar el día 19 tras fijar un precio de 83 dólares y captar 81.300 millones, la mayor salida a bolsa de la historia según la prensa. Abrió a 111,50 dólares, pero cerró la semana en 88,91. Declara pérdidas de 104.000 millones en nueve meses.",
+          "por_que_importa": "Su debut se ha convertido en un termómetro del apetito por la IA.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.aljazeera.com/economy/2026/11/19/anthropic-starts-trading-in-the-us-after-blockbuster-ipo",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-19",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/20/sp-500-correction-market-sell-off.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "83",
+              "ref_datos": null
+            },
+            {
+              "valor": "88,91",
+              "ref_datos": null
+            }
+          ]
+        },
+        {
+          "id": "2026-S47-tecnologia-02",
+          "hilo_id": "nvidia-liderazgo-2026",
+          "titulo": "Nvidia cae un 23 % pese a batir previsiones",
+          "texto": "Nvidia ingresó 115.800 millones de dólares en el trimestre, un 103 % más. Aun así, perdió un 23 % en la semana, tras publicar Reuters que la SEC (el supervisor bursátil) investiga su contabilidad, y con nuevas restricciones de EE. UU. al acceso remoto a chips.",
+          "por_que_importa": "Nvidia pesa mucho en los índices mundiales.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27pr.htm",
+              "medio": "Nvidia (SEC)",
+              "nivel": 1,
+              "fecha": "2026-11-17",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.cnbc.com/2026/11/20/sp-500-correction-market-sell-off.html",
+              "medio": "CNBC",
+              "nivel": 2,
+              "fecha": "2026-11-20",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.bloomberg.com/news/articles/2026-11-16/us-moves-to-limit-remote-access-to-advanced-ai-chips",
+              "medio": "Bloomberg",
+              "nivel": 2,
+              "fecha": "2026-11-16",
+              "idioma": "en"
+            }
+          ],
+          "cifras": [
+            {
+              "valor": "115.800",
+              "ref_datos": null
+            },
+            {
+              "valor": "23",
+              "ref_datos": null
+            }
+          ]
+        }
+      ]
+    },
+    "geopolitica_riesgos": {
+      "sin_novedades": false,
+      "noticias": [
+        {
+          "id": "2026-S47-geopolitica-01",
+          "hilo_id": "iran-ormuz-2026",
+          "titulo": "Irán amplía sus ataques en el Golfo",
+          "texto": "Tras un ataque a un radar estadounidense en Baréin, EE. UU. bombardeó el día 17 una base de misiles en la isla de Qeshm. Irán respondió atacando una base aérea en Kuwait y objetivos en Baréin, sin víctimas declaradas. Un petrolero de ADNOC fue atacado en Ormuz. Irán mantiene siete condiciones para reabrir el estrecho, y EE. UU. sancionó a cuatro iraníes el día 20.",
+          "por_que_importa": "Ormuz sigue siendo el gran riesgo para el precio de la energía.",
+          "confianza": "confirmado",
+          "relevancia_espana_ue": "media",
+          "fuentes": [
+            {
+              "url": "https://www.nbcnews.com/world/iran/iran-widens-gulf-attacks-targeting-us-air-base-kuwait-sites-bahrain-rcna610128",
+              "medio": "NBC News",
+              "nivel": 2,
+              "fecha": "2026-11-18",
+              "idioma": "en"
+            },
+            {
+              "url": "https://www.aljazeera.com/news/2026/11/21/irans-irgc-downs-us-drone-over-hormuz-as-efforts-to-end-war-remain-stalled",
+              "medio": "Al Jazeera",
+              "nivel": 2,
+              "fecha": "2026-11-21",
+              "idioma": "en"
+            }
+          ],
+          "cifras": []
+        }
+      ]
+    }
+  },
+  "concepto_semana": {
+    "id": "correccion-y-mercado-bajista",
+    "titulo": "Corrección y mercado bajista",
+    "texto": "Son etiquetas para medir una caída desde el máximo más reciente. Si un índice cae más de un 10 %, se dice que está en corrección, como el S&P 500 esta semana. Si cae más de un 20 %, se habla de mercado bajista, como las bolsas emergentes. No predicen lo que pasará después: solo describen cuánto se ha caído ya."
+  },
+  "perspectiva_largo_plazo": {
+    "estructural": [
+      "La duda de fondo es si la enorme inversión en IA dará los beneficios que el mercado espera; eso se resolverá en años, no en semanas.",
+      "La inflación ligada a la energía mantiene a la Fed, el BCE y el Banco de Japón en modo de subir tipos."
+    ],
+    "ruido": [
+      "El vaivén diario de la acción de Anthropic en sus primeros días de cotización.",
+      "Cada incidente aislado en Ormuz."
+    ]
+  },
+  "fuentes_descartadas": [
+    {
+      "url": "https://www.bloomberg.com/news/articles/2026-11-19/latest-oil-market-news-and-analysis-for-nov-20",
+      "motivo": "paywall"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Jensen_Huang_spying_scandal",
+      "motivo": "otro"
+    },
+    {
+      "url": "https://stocktwits.com/news-articles/markets/equity/anthropic-stock-jumps-38-in-nasdaq-debut-after-record-107-3-b-ipo/cNbihePR900",
+      "motivo": "otro"
+    }
+  ],
+  "cambios_verificador": [
+    {
+      "noticia_id": "2026-S47-macro-01",
+      "cambio": "Fuente de Waller sustituida por CNBC; añadido que es una voz aislada y que el mercado espera un cuarto de punto; la cita de 'tres o cuatro subidas' se atribuye a la página de Economía y Finanzas de la Comisión.",
+      "motivo": "El artículo de Bloomberg devuelve 403; el comunicado de commission.europa.eu no recoge las expectativas de tipos, la página de economy-finance sí."
+    },
+    {
+      "noticia_id": "2026-S47-europa-01",
+      "cambio": "Eliminado el dato de paro y recortado el texto.",
+      "motivo": "Módulo por encima del límite de palabras; el paro no aportaba al mensaje principal."
+    },
+    {
+      "noticia_id": "2026-S47-asia-01",
+      "cambio": "Caída del Nikkei precisada al 5,1 %, fuente de Bloomberg sustituida por Al Jazeera y fecha del artículo de IPC de CNBC corregida al 19.",
+      "motivo": "Bloomberg devuelve 403 y el 5 % aproximado venía solo de un resumen de búsqueda; Al Jazeera da 5,1 %; el artículo de CNBC se publicó el 19 (hora de EE. UU.)."
+    },
+    {
+      "noticia_id": "2026-S47-emergentes-01",
+      "cambio": "Confianza rebajada a una_fuente, cifra del 21 % atribuida a Bloomberg, añadido el Taiex y eliminada la mención a Hong Kong.",
+      "motivo": "Bloomberg devuelve 403 al reabrirlo y ninguna otra fuente da la cifra del índice MSCI; Kospi (−5,2 %) y Taiex (−6,2 %) sí aparecen en Al Jazeera/CNBC; lo de Hong Kong solo venía de un resumen de búsqueda."
+    },
+    {
+      "noticia_id": "2026-S47-energia-02",
+      "cambio": "Sustituida la referencia genérica a la caída semanal de los futuros por el cierre concreto del día 18 (91,95 $).",
+      "motivo": "La caída semanal del 3,4 % venía de Bloomberg (403, no reabrible); comparación numérica: físico 92,14 (11-nov) → 92,94 (17-nov), +0,9 %; los futuros de CNBC caen el 18, después de la fecha del dato oficial."
+    },
+    {
+      "noticia_id": "2026-S47-tecnologia-02",
+      "cambio": "La investigación de la SEC se atribuye explícitamente a una información de Reuters.",
+      "motivo": "Ninguna fuente abierta confirma la investigación de forma oficial; CNBC y NBC la citan a partir de Reuters."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "validacion_intentos": [
+    {
+      "errores": [],
+      "avisos": [
+        "Módulo 'europa': 140 palabras, supera el límite de 110",
+        "Módulo 'asia_china': 121 palabras, supera el límite de 110",
+        "Módulo 'energia_materias_primas': 117 palabras, supera el límite de 110",
+        "Módulo 'tecnologia_ia': 131 palabras, supera el límite de 110",
+        "[europa] 2026-S47-europa-01: 'Comisión Europea' es el 67% de sus fuentes (umbral: 50%)",
+        "[europa] 2026-S47-europa-02: 'BCE' es el 100% de sus fuentes (umbral: 50%)",
+        "[asia_china] 2026-S47-asia-01: 'CNBC' es el 67% de sus fuentes (umbral: 50%)",
+        "11 cifra(s) sin ref_datos, no comprobadas contra datos.json",
+        "https://www.bloomberg.com/news/articles/2026-11-16/us-moves-to-limit-remote-access-to-advanced-ai-chips devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.bloomberg.com/news/articles/2026-11-17/euro-zone-to-grow-robustly-as-it-shrugs-off-inflation-eu-says devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.bloomberg.com/news/articles/2026-11-19/gold-set-for-worst-week-since-march-on-hawkish-fed-ai-selloff devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.bloomberg.com/news/articles/2026-11-20/emerging-market-stocks-set-for-bear-market-on-ai-led-tech-slide devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/16/china-retail-sales-october-industrial-output-investment.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/18/fed-minutes-october-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/18/oil-prices-fall-as-higher-us-crude-stocks-temper-supply-risks.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/19/stock-market-today-live-updates.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/20/gold-federal-reserve-price-dollar-metals.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/20/japan-inflation-cpi-october.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/20/softbank-ai-tech-stocks-slide-anthropic-debut.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.cnbc.com/2026/11/20/sp-500-correction-market-sell-off.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+        "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27pr.htm devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+      ]
+    }
+  ],
+  "validacion": {
+    "errores": [],
+    "avisos": [
+      "Módulo 'europa': 140 palabras, supera el límite de 110",
+      "Módulo 'asia_china': 121 palabras, supera el límite de 110",
+      "Módulo 'energia_materias_primas': 117 palabras, supera el límite de 110",
+      "Módulo 'tecnologia_ia': 131 palabras, supera el límite de 110",
+      "[europa] 2026-S47-europa-01: 'Comisión Europea' es el 67% de sus fuentes (umbral: 50%)",
+      "[europa] 2026-S47-europa-02: 'BCE' es el 100% de sus fuentes (umbral: 50%)",
+      "[asia_china] 2026-S47-asia-01: 'CNBC' es el 67% de sus fuentes (umbral: 50%)",
+      "11 cifra(s) sin ref_datos, no comprobadas contra datos.json",
+      "https://www.bloomberg.com/news/articles/2026-11-16/us-moves-to-limit-remote-access-to-advanced-ai-chips devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bloomberg.com/news/articles/2026-11-17/euro-zone-to-grow-robustly-as-it-shrugs-off-inflation-eu-says devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bloomberg.com/news/articles/2026-11-19/gold-set-for-worst-week-since-march-on-hawkish-fed-ai-selloff devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.bloomberg.com/news/articles/2026-11-20/emerging-market-stocks-set-for-bear-market-on-ai-led-tech-slide devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/16/china-retail-sales-october-industrial-output-investment.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/18/fed-minutes-october-2026.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/18/oil-prices-fall-as-higher-us-crude-stocks-temper-supply-risks.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/19/stock-market-today-live-updates.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/20/gold-federal-reserve-price-dollar-metals.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/20/japan-inflation-cpi-october.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/20/softbank-ai-tech-stocks-slide-anthropic-debut.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.cnbc.com/2026/11/20/sp-500-correction-market-sell-off.html devolvió HTTP 403 (posible bloqueo de bots o paywall)",
+      "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27pr.htm devolvió HTTP 403 (posible bloqueo de bots o paywall)"
+    ]
+  }
+}
