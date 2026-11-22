@@ -29,13 +29,19 @@ def _parchear_fuentes(monkeypatch) -> None:
             "msci_europe": _dato("2026-10-03"),
         },
     )
+    # Misma fecha que fred.sp500(): por defecto, el respaldo de Yahoo no
+    # tiene nada más reciente que ofrecer, así que sp500 se queda tal cual
+    # vino de FRED. Los tests del respaldo en sí mockean esto aparte.
+    monkeypatch.setattr(
+        fetch_data.mercados, "historial_cierres", lambda ticker: [("2026-10-03", 1.0)]
+    )
 
 
 def test_descargar_junta_los_13_instrumentos(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr(fetch_data, "DATA_DIR", tmp_path)
     _parchear_fuentes(monkeypatch)
 
-    datos = fetch_data.descargar()
+    datos = fetch_data.descargar(semana="2026-S41")
 
     assert set(datos) == {
         "bce_tipo_deposito",
@@ -69,7 +75,7 @@ def test_descargar_incluye_mensuales_aunque_no_hayan_cambiado(
     )
     _parchear_fuentes(monkeypatch)  # ine.ipc_espana sigue devolviendo "2026-09-01"
 
-    datos = fetch_data.descargar()
+    datos = fetch_data.descargar(semana="2026-S41")
 
     assert datos["ipc_espana"]["fecha"] == "2026-09-01"
 
@@ -89,7 +95,7 @@ def test_descargar_con_variacion_semanal_plausible_no_avisa(monkeypatch) -> None
     _parchear_fuentes(monkeypatch)  # msci_world queda en 1.0 (ver _parchear_fuentes)
     datos_previos = {"msci_world": {"valor": 1.01}}
 
-    datos = fetch_data.descargar(datos_semana_anterior=datos_previos)
+    datos = fetch_data.descargar(semana="2026-S41", datos_semana_anterior=datos_previos)
 
     assert "aviso" not in datos["msci_world"]
 
@@ -100,7 +106,7 @@ def test_descargar_con_variacion_semanal_sospechosa_no_aborta_pero_avisa(monkeyp
     _parchear_fuentes(monkeypatch)
     datos_previos = {"msci_world": {"valor": 100.0}}  # 1.0 vs 100.0: variación absurda
 
-    datos = fetch_data.descargar(datos_semana_anterior=datos_previos)
+    datos = fetch_data.descargar(semana="2026-S41", datos_semana_anterior=datos_previos)
 
     assert "aviso" in datos["msci_world"]
     assert "100.0%" in datos["msci_world"]["aviso"] or "variación" in datos["msci_world"]["aviso"]
@@ -110,7 +116,7 @@ def test_descargar_sin_semana_anterior_no_comprueba_variacion(monkeypatch) -> No
     _parchear_fuentes(monkeypatch)
     # Sin dato de la semana anterior (primera semana, o se borró el
     # histórico), no hay nada contra lo que comparar — no debe avisar.
-    datos = fetch_data.descargar(datos_semana_anterior=None)
+    datos = fetch_data.descargar(semana="2026-S41", datos_semana_anterior=None)
 
     assert "aviso" not in datos["msci_world"]
 
@@ -130,6 +136,78 @@ def test_main_lee_la_semana_anterior_y_escribe_el_aviso_en_datos_json(
     assert codigo == 0
     contenido = json.loads((tmp_path / "2026-S41" / "datos.json").read_text())
     assert "aviso" in contenido["msci_world"]
+
+
+# --- _sp500_con_respaldo_yahoo ------------------------------------------
+#
+# Hallazgo real (semana 2026-S47): FRED publicó el cierre del S&P 500 con
+# un día de retraso (jueves 19, 7.175,83) mientras la prensa ya citaba el
+# del viernes 20 (6.910, -8,6% semanal) — dos cifras distintas del mismo
+# instrumento en el mismo informe, sin ningún aviso de la discrepancia.
+# periodo_de_semana("2026-S47") = (2026-11-16 lunes, 2026-11-22 domingo).
+
+_DATO_FRED_AL_DIA = {
+    "valor": 6910.0, "unidad": "puntos", "fecha": "2026-11-20",  # viernes
+    "fuente": "FRED", "url": "https://fred.stlouisfed.org/series/SP500",
+}
+_DATO_FRED_RETRASADO = {
+    "valor": 7175.83, "unidad": "puntos", "fecha": "2026-11-19",  # jueves
+    "fuente": "FRED", "url": "https://fred.stlouisfed.org/series/SP500",
+}
+
+
+def test_sp500_fred_al_dia_no_consulta_yahoo(monkeypatch) -> None:
+    def _no_deberia_llamarse(ticker):
+        raise AssertionError("no debería consultar Yahoo si FRED ya tiene el cierre del viernes")
+
+    monkeypatch.setattr(fetch_data.mercados, "historial_cierres", _no_deberia_llamarse)
+
+    resultado = fetch_data._sp500_con_respaldo_yahoo(dict(_DATO_FRED_AL_DIA), "2026-S47")
+
+    assert resultado == _DATO_FRED_AL_DIA
+
+
+def test_sp500_fred_retrasado_y_yahoo_ok_usa_yahoo(monkeypatch) -> None:
+    monkeypatch.setattr(
+        fetch_data.mercados,
+        "historial_cierres",
+        lambda ticker: [("2026-11-20", 6910.0), ("2026-11-19", 7176.0)],  # viernes, jueves
+    )
+
+    resultado = fetch_data._sp500_con_respaldo_yahoo(dict(_DATO_FRED_RETRASADO), "2026-S47")
+
+    assert resultado["valor"] == 6910.0
+    assert resultado["fecha"] == "2026-11-20"
+    assert resultado["fuente"] == "Yahoo Finance (no oficial)"
+    assert "aviso" not in resultado
+
+
+def test_sp500_fred_retrasado_y_yahoo_caido_se_queda_con_fred(monkeypatch) -> None:
+    def _falla(ticker):
+        raise fetch_data.mercados.SinCotizacion("Yahoo Finance no responde")
+
+    monkeypatch.setattr(fetch_data.mercados, "historial_cierres", _falla)
+
+    resultado = fetch_data._sp500_con_respaldo_yahoo(dict(_DATO_FRED_RETRASADO), "2026-S47")
+
+    assert resultado == _DATO_FRED_RETRASADO
+
+
+def test_sp500_discrepancia_entre_fred_y_yahoo_avisa(monkeypatch) -> None:
+    # El jueves de Yahoo (7000.0) no coincide con el de FRED (7175.83) -
+    # una diferencia del 2,45%, muy por encima del 0,5% esperado entre dos
+    # fuentes del mismo cierre oficial.
+    monkeypatch.setattr(
+        fetch_data.mercados,
+        "historial_cierres",
+        lambda ticker: [("2026-11-20", 6910.0), ("2026-11-19", 7000.0)],
+    )
+
+    resultado = fetch_data._sp500_con_respaldo_yahoo(dict(_DATO_FRED_RETRASADO), "2026-S47")
+
+    assert resultado["valor"] == 6910.0  # sigue usando el viernes, más reciente
+    assert "aviso" in resultado
+    assert "2026-11-19" in resultado["aviso"]
 
 
 def test_main_no_escribe_nada_si_falla_una_fuente(tmp_path: Path, monkeypatch) -> None:

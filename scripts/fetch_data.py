@@ -20,7 +20,7 @@ from pathlib import Path
 
 from briefing.fuentes import ecb, eurostat, fred, ine, mercados
 from briefing.modelos import Dato
-from briefing.semanas import semana_anterior, semana_iso
+from briefing.semanas import periodo_de_semana, semana_anterior, semana_iso
 
 log = logging.getLogger("fetch_data")
 
@@ -38,6 +38,78 @@ DATA_DIR = RAIZ / "data"
 # módulo y, contrastando con las noticias reales, decide si el dato tiene
 # sentido o es probablemente un fallo del endpoint.
 UMBRAL_VARIACION_SEMANAL_SOSPECHOSA = 0.35
+
+# 0,5%: FRED y Yahoo deberían coincidir casi exacto para el mismo día (son,
+# en teoría, el mismo cierre oficial del S&P 500) — una discrepancia mayor
+# es una señal de que algo no cuadra entre las dos fuentes, no un redondeo
+# normal.
+UMBRAL_DISCREPANCIA_SP500 = 0.005
+
+TICKER_SP500_YAHOO = "^GSPC"
+URL_SP500_YAHOO = "https://finance.yahoo.com/quote/%5EGSPC"
+
+
+def _sp500_con_respaldo_yahoo(dato_fred: dict, semana: str) -> dict:
+    """Usa el cierre de Yahoo Finance si FRED va retrasado respecto al
+    último día hábil de la semana — nunca al revés.
+
+    Hallazgo real (semana 2026-S47): FRED publica el cierre del S&P 500
+    con uno o más días de retraso, y la Routine corre el domingo. La
+    noticia citaba el cierre real del viernes (prensa, -8,6% semanal)
+    mientras la tabla de mercados, calculada solo con el dato de FRED
+    (jueves), mostraba -5,10% — dos cifras distintas sobre el mismo
+    instrumento en el mismo informe, sin que nada avisara de la discrepancia.
+
+    No renuncia a FRED como fuente por defecto: solo recurre a Yahoo si de
+    verdad hace falta (FRED no llega al viernes), y solo sustituye el dato
+    si el cierre de Yahoo es más reciente que el de FRED. Si Yahoo falla,
+    se queda con el de FRED — sigue siendo válido, solo más antiguo, no un
+    motivo para parar el pipeline (sección 6 de CLAUDE.md).
+    """
+    lunes, _ = periodo_de_semana(semana)
+    viernes = lunes + datetime.timedelta(days=4)
+    fecha_fred = datetime.date.fromisoformat(dato_fred["fecha"])
+
+    if fecha_fred >= viernes:
+        return dato_fred
+
+    try:
+        historial_yahoo = mercados.historial_cierres(TICKER_SP500_YAHOO)
+    except Exception:
+        log.warning(
+            "No se pudo consultar Yahoo Finance como respaldo del S&P 500; se usa el dato "
+            "de FRED (%s), más antiguo pero válido",
+            dato_fred["fecha"],
+        )
+        return dato_fred
+
+    aviso = None
+    valor_yahoo_mismo_dia = dict(historial_yahoo).get(dato_fred["fecha"])
+    if valor_yahoo_mismo_dia is not None:
+        discrepancia = abs(valor_yahoo_mismo_dia - dato_fred["valor"]) / dato_fred["valor"]
+        if discrepancia > UMBRAL_DISCREPANCIA_SP500:
+            aviso = (
+                f"FRED ({dato_fred['valor']}) y Yahoo Finance ({valor_yahoo_mismo_dia}) "
+                f"difieren un {discrepancia:.2%} para el {dato_fred['fecha']}, por encima "
+                f"del {UMBRAL_DISCREPANCIA_SP500:.1%} esperado entre dos fuentes del mismo "
+                "cierre oficial"
+            )
+            log.warning("sp500: %s", aviso)
+
+    fecha_yahoo, valor_yahoo = historial_yahoo[0]
+    if fecha_yahoo <= dato_fred["fecha"]:
+        resultado = dict(dato_fred)  # Yahoo tampoco llega más lejos que FRED
+    else:
+        resultado = {
+            "valor": valor_yahoo,
+            "unidad": dato_fred["unidad"],
+            "fecha": fecha_yahoo,
+            "fuente": "Yahoo Finance (no oficial)",
+            "url": URL_SP500_YAHOO,
+        }
+    if aviso:
+        resultado["aviso"] = aviso
+    return resultado
 
 
 def _avisar_variaciones_sospechosas(
@@ -61,7 +133,7 @@ def _avisar_variaciones_sospechosas(
             dato["aviso"] = aviso
 
 
-def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
+def descargar(*, semana: str, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
     """Descarga todos los datos duros y devuelve el dict listo para datos.json.
 
     Las series mensuales (IPC/IPCA) se incluyen siempre, con su fecha real
@@ -81,6 +153,14 @@ def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
     un campo "aviso" a esa entrada de datos.json para que el redactor lo
     vea al investigar (sección 6: Yahoo es un endpoint no oficial y sin
     fuente de respaldo).
+
+    `semana` también sirve para el respaldo del S&P 500
+    (`_sp500_con_respaldo_yahoo`): FRED suele publicar su cierre con uno o
+    más días de retraso respecto al viernes, y la Routine corre el
+    domingo — sin esto, la tabla de mercados podía mostrar el cierre del
+    jueves mientras una noticia de prensa citaba el del viernes, dos
+    cifras distintas del mismo instrumento en el mismo informe (hallazgo
+    real, semana 2026-S47).
     """
     datos: dict[str, Dato] = {}
 
@@ -105,6 +185,7 @@ def descargar(*, datos_semana_anterior: dict | None = None) -> dict[str, dict]:
     datos.update(datos_yahoo)
 
     resultado = {clave: dato.to_dict() for clave, dato in datos.items()}
+    resultado["sp500"] = _sp500_con_respaldo_yahoo(resultado["sp500"], semana)
     _avisar_variaciones_sospechosas(
         {clave: resultado[clave] for clave in datos_yahoo}, datos_semana_anterior
     )
@@ -128,7 +209,7 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     try:
-        datos = descargar(datos_semana_anterior=datos_semana_anterior)
+        datos = descargar(semana=semana, datos_semana_anterior=datos_semana_anterior)
     except Exception:
         log.exception("Fallo al descargar los datos duros; no se escribe datos.json")
         return 1
