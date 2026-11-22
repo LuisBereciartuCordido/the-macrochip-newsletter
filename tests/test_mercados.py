@@ -37,6 +37,27 @@ def test_ultimo_cierre_ignora_el_ultimo_valor_si_es_nulo() -> None:
 
 
 @responses.activate
+def test_historial_cierres_devuelve_varios_dias_mas_reciente_primero() -> None:
+    responses.add(
+        responses.GET,
+        URL_URTH,
+        json=_fixture(
+            [1759276800, 1759363200, 1759449600, 1759536000],
+            [207.0, 208.5, 209.5, None],  # el último, sin cerrar todavía
+        ),
+        status=200,
+    )
+
+    historial = mercados.historial_cierres("URTH")
+
+    assert historial == [
+        ("2025-10-03", 209.5),
+        ("2025-10-02", 208.5),
+        ("2025-10-01", 207.0),
+    ]
+
+
+@responses.activate
 def test_sin_resultado_lanza_error_explicito() -> None:
     responses.add(
         responses.GET,

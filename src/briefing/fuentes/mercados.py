@@ -74,12 +74,21 @@ def _comprobar_frescura(ticker: str, fecha: str, hoy: datetime.date) -> None:
         )
 
 
-def _ultimo_cierre(ticker: str, *, hoy: datetime.date | None = None) -> tuple[str, float]:
+def historial_cierres(ticker: str, *, rango: str = "5d") -> list[tuple[str, float]]:
+    """[(fecha, cierre), ...] del historial reciente de `ticker`, más reciente
+    primero, sin sesiones sin cerrar (cierre nulo).
+
+    Pública (no `_privada`) porque, además de usarla `_ultimo_cierre` para
+    quedarse con el primer elemento, `fetch_data.py` la usa directamente
+    para el respaldo del S&P 500 (sección 6 de CLAUDE.md): necesita ver
+    varios días, no solo el último, para poder cruzar una fecha concreta
+    contra el cierre que FRED ya tiene de ese mismo día.
+    """
     url = f"{BASE_URL}/{ticker}"
     log.info("Consultando Yahoo Finance: %s", ticker)
     respuesta = requests.get(
         url,
-        params={"range": "5d", "interval": "1d"},
+        params={"range": rango, "interval": "1d"},
         headers=CABECERAS,
         timeout=TIMEOUT_SEGUNDOS,
     )
@@ -96,17 +105,24 @@ def _ultimo_cierre(ticker: str, *, hoy: datetime.date | None = None) -> tuple[st
     marcas_tiempo = resultado["timestamp"]
     cierres = resultado["indicators"]["quote"][0]["close"]
 
-    # El último elemento puede venir sin cerrar (sesión del día en curso),
-    # así que se busca desde el final el último cierre que no sea nulo.
-    for marca, cierre in zip(reversed(marcas_tiempo), reversed(cierres)):
-        if cierre is not None:
-            fecha = (
-                datetime.datetime.fromtimestamp(marca, tz=datetime.timezone.utc).date().isoformat()
-            )
-            _comprobar_frescura(ticker, fecha, hoy or datetime.date.today())
-            return fecha, float(cierre)
+    # El último elemento puede venir sin cerrar (sesión del día en curso,
+    # cierre nulo) — se descarta junto con cualquier otro hueco nulo, no
+    # solo el final.
+    historial = [
+        (datetime.datetime.fromtimestamp(marca, tz=datetime.timezone.utc).date().isoformat(), float(cierre))
+        for marca, cierre in zip(marcas_tiempo, cierres)
+        if cierre is not None
+    ]
+    if not historial:
+        raise SinCotizacion(f"Yahoo Finance no devolvió ningún cierre válido para {ticker}")
+    historial.reverse()  # más reciente primero
+    return historial
 
-    raise SinCotizacion(f"Yahoo Finance no devolvió ningún cierre válido para {ticker}")
+
+def _ultimo_cierre(ticker: str, *, hoy: datetime.date | None = None) -> tuple[str, float]:
+    fecha, valor = historial_cierres(ticker)[0]
+    _comprobar_frescura(ticker, fecha, hoy or datetime.date.today())
+    return fecha, valor
 
 
 def cierres_semanales(*, hoy: datetime.date | None = None) -> dict[str, Dato]:
